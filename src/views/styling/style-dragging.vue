@@ -1,0 +1,32 @@
+<template>
+  <div class="view-box">
+    <div id="toolbar"></div>
+    <div class="container">
+      <vdrr class-name-dragging="my-dragging-class" class-name="my-class">
+        <p>
+          你也可以设置组件处于拖拽式的类名
+          <b>class-name-dragging</b>
+        </p>
+      </vdrr>
+    </div>
+  </div>
+</template>
+
+<script>
+export default {
+
+}
+</script>
+
+<style scoped>
+.my-class {
+  border: 1px solid red;
+  -webkit-transition: background-color 200ms linear;
+  -ms-transition: background-color 200ms linear;
+  transition: background-color 200ms linear;
+}
+.my-dragging-class {
+  background-color: red;
+  border: 1px solid black;
+}
+</style>
