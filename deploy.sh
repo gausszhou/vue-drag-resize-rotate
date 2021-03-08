@@ -3,7 +3,7 @@ npm run build
 cd dist
 git init 
 git add .
-time=$(date "+%Y%m%d%H%M%S")
+time=$(date "+%Y-%m-%d-%H")
 git commit -m "$time deploy"
 git branch gh-pages
 git checkout  gh-pages
