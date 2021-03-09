@@ -8,10 +8,10 @@ Vue.use(ElementUI)
 import 'element-ui/lib/theme-chalk/index.css'
 
 // 引入公共样式
-import "./style/common.scss"
-import "./style/customize.scss"
-import "./style/markdown.scss"
-import "./style/highlight.scss"
+import "./style/common.less"
+import "./style/customize.less"
+import "./style/markdown.less"
+import "./style/highlight.less"
 
 // 引入HTTP接口
 import http from "./request/http"

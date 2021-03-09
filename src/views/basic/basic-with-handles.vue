@@ -44,7 +44,7 @@ export default {
 }
 </script>
 
-<style lang='scss' scoped>
+<style lang='less' scoped>
 .vdr ul,
 .vdrr ul {
   margin: 0 0 0 25px;
