@@ -2,6 +2,7 @@
   <div class="view-box">
     <div id="toolbar">
       <label>
+        同时拖动多个内部元素
         <input type="checkbox" name="sync" v-model="sync" /> Synchronize (Use
         <b>ctrl</b> Key)
       </label>

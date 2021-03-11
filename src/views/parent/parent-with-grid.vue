@@ -1,6 +1,6 @@
 <template>
   <div class="view-box">
-    <div id="toolbar"></div>
+    <div id="toolbar">父级+网格</div>
     <div class="container">
       <div :style="style">
         <vdrr :parent="true" :grid="[20,20]">

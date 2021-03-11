@@ -8,9 +8,7 @@ __记得为句柄类设置`position：absolute`__
 <vdrr class-name-handle="my-handle-class">
   <p>You can provide a default class name for handle using the <b>class-name-handle</b> prop.</p>
 </vdrr>
-~~~
-
-~~~css
+<style>
 .my-handle-class {
     position: absolute;
     background-color: pink;
@@ -83,4 +81,5 @@ __记得为句柄类设置`position：absolute`__
     background-color: red;
     transform: scale(1.4);
 }
+</style>
 ~~~
