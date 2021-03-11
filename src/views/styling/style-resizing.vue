@@ -1,6 +1,6 @@
 <template>
   <div class="view-box">
-    <div id="toolbar"></div>
+    <div id="toolbar">调整大小时具有自定义类名的组件</div>
     <div class="container">
       <vdrr class-name-resizing="my-resizing-class" class-name="my-class">
         <p>

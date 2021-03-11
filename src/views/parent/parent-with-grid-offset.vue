@@ -1,6 +1,6 @@
 <template>
   <div class="view-box">
-    <div id="toolbar"></div>
+    <div id="toolbar">父级限制+网格+偏移</div>
     <div class="container">
       <div :style="style">
         <vdrr :parent="true" :grid="[20,20]" :x="10" :y="10" :h="400" :w="400">

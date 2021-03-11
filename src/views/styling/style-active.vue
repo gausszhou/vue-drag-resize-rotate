@@ -1,6 +1,6 @@
 <template>
   <div class="view-box">
-    <div id="toolbar"></div>
+    <div id="toolbar">活动状态下具有自定义类名的组件</div>
     <div class="container">
       <vdrr class-name-active="my-active-class" class-name="my-class">
         <p>

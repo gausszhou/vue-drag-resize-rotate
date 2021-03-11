@@ -60,7 +60,7 @@ export default {
           ]
         },
         {
-          label: '网格',
+          label: '网格对齐 不支持旋转',
           icon: 'el-icon-s-grid',
           children: [
             { route: 'grid-20x20', label: '网格20x20' },
@@ -71,7 +71,7 @@ export default {
           ]
         },
         {
-          label: '父级',
+          label: '父级限制',
           icon: 'el-icon-c-scale-to-original',
           children: [
             { route: 'parent-basic-case', label: '父级容器基本案例' },
@@ -84,16 +84,16 @@ export default {
           ]
         },
         {
-          label: '纵横比',
+          label: '纵横比  不建议使用',
           icon: 'el-icon-picture',
           children: [
-            { route: 'aspect-ratio-basic', label: '锁定纵横比 *bug' },
-            { route: 'aspect-ratio-with-min', label: '纵横比+最小限制 *bug' },
-            { route: 'aspect-ratio-with-max', label: '纵横比+最大限制 *bug' },
-            { route: 'aspect-ratio-costrained-in-parent', label: '纵横比+父级容器限制 *bug' },
-            { route: 'aspect-ratio-with-grid', label: '纵横比+对齐网格 *bug' },
-            { route: 'aspect-ratio-with-grid-offset', label: '在偏移的网格上对齐 *bug' },
-            { route: 'aspect-ratio-with-grid-parent', label: '在父级中对齐网格 *bug' },
+            { route: 'aspect-ratio-basic', label: '锁定纵横比 ' },
+            { route: 'aspect-ratio-with-min', label: '纵横比+最小限制 ' },
+            { route: 'aspect-ratio-with-max', label: '纵横比+最大限制 ' },
+            { route: 'aspect-ratio-costrained-in-parent', label: '纵横比+父级容器限制 ' },
+            { route: 'aspect-ratio-with-grid', label: '纵横比+对齐网格 ' },
+            { route: 'aspect-ratio-with-grid-offset', label: '在偏移的网格上对齐 ' },
+            { route: 'aspect-ratio-with-grid-parent', label: '在父级中对齐网格 ' },
           ]
         },
         {
@@ -105,7 +105,7 @@ export default {
             { route: 'style-resizing', label: 'Style拉伸' },
             { route: 'style-active', label: 'Style活跃' },
             { route: 'style-handles', label: 'Style句柄' },
-            { route: 'style-handle-slots', label: 'Style 手柄插槽' },
+            { route: 'style-handles-with-slots', label: 'Style 手柄插槽' },
           ]
         },
 
@@ -132,9 +132,7 @@ export default {
           label: '应用',
           icon: 'el-icon-star-off',
           children: [
-            { route: 'application-multiple-drag', label: '同时拖动多个元素' },
-            { route: 'application-not-rotatable', label: '综合应用，无旋转' },
-            { route: 'application-with-rotatable', label: '综合应用，带旋转' },
+            { route: 'application-multiple-drag', label: '同时拖动多个元素' }
           ]
         },
       ],

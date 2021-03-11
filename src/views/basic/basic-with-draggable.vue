@@ -5,7 +5,8 @@
     </div>
     <div class="container">
       <vdrr :draggable="draggable">
-        <p>Basic component that is {{ draggable ? 'also' : 'not' }} draggable.</p>
+        <p v-if="draggable">现在可以被拖动位置了，走起!!!</p>
+        <p v-else>虽然不能拖动位置，但是可以调整大小(默认开启)</p>
       </vdrr>
     </div>
   </div>

@@ -1,6 +1,6 @@
 <template>
   <div class="view-box">
-    <div id="toolbar"></div>
+    <div id="toolbar">对齐时出现辅助线</div>
     <div class="container">
       <vdrr
         :w="200"

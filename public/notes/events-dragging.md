@@ -2,11 +2,12 @@
 
 拖动组件时会发出`dragging(x,y)`事件。 拖动停止时会发生`dragstop(x,y)`事件。
 
-~~~js
+```html
 <vdrr :w="200" :h="200" @dragging="onDrag" @dragstop="onDragStop">
   <p>{{ dragging ? 'You are dragging me crazy' : 'Standing still' }}</p>
 </vdrr>
 
+<script>
 export default () => ({
   [...]
 
@@ -21,5 +22,6 @@ export default () => ({
     }
   }
 })
-~~~
+</script>
+```
 

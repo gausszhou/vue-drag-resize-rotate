@@ -6,9 +6,7 @@
 <vdrr class-name-dragging="my-dragging-class" class-name="my-class">
   <p>You can provide a default class name for the component when it's dragging using the <b>class-name-dragging</b> prop.</p>
 </vdrr>
-~~~
-
-~~~css
+<style>
 .my-class {
     background-color: green;
     border: 1px solid red;
@@ -21,5 +19,6 @@
     background-color: red;
     border: 1px solid black;
 }
+</style>
 ~~~
 

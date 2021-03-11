@@ -1,6 +1,6 @@
 <template>
   <div class="view-box">
-    <div id="toolbar"></div>
+    <div id="toolbar">位置冲突检测</div>
     <div class="container">
       <vdrr
         :w="200"

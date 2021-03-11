@@ -7,6 +7,8 @@
   <p v-if="active">The component has been activated.</p>
 </vdrr>
 
+
+<script>
 export default () => ({
   [...]
 
@@ -19,5 +21,6 @@ export default () => ({
     }
   }
 })
+</script>
 ~~~
 
