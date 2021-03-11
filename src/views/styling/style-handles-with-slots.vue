@@ -1,6 +1,6 @@
 <template>
   <div class="view-box">
-    <div id="toolbar"></div>
+    <div id="toolbar">具有句柄自定义标记的组件</div>
     <div class="container">
       <vdrr class-name-handle="my-handle-class">
         <p>The first child will populate the default slot.</p>

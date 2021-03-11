@@ -4,8 +4,9 @@
       <input type="checkbox" v-model="resizable" /> Toggle resizable
     </div>
     <div class="container">
-      <vdrr :resizable.sync="resizable">
-        <p>Basic component that is {{ resizable ? 'also' : 'not' }} resizable.</p>
+      <vdrr :resizable="resizable">
+        <p v-if="resizable">现在可以调整大小了</p>
+        <p v-else>现在不可以调整大小</p>
       </vdrr>
     </div>
   </div>

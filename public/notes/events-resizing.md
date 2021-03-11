@@ -2,11 +2,11 @@
 
 调整组件大小时会发出`resizing(x,y,width,height)`事件。 调整大小停止时会发出`resizestop(x,y,width,height)`事件。
 
-~~~js
+```html
 <vdrr :w="200" :h="200" :x="0" :y="0" @resizing="onResize" @resizestop="onResizeStop">
   <p>{{ resizing ? 'You are resizing me crazy' : 'This is my favourite shape' }}</p>
 </vdrr>
-
+<script>
 export default () => ({
   [...]
 
@@ -23,5 +23,6 @@ export default () => ({
     }
   }
 })
-~~~
+</script>
+```
 

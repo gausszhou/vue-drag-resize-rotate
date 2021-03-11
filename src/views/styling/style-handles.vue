@@ -1,6 +1,6 @@
 <template>
   <div class="view-box">
-    <div id="toolbar"></div>
+    <div id="toolbar">具有自定义类名称句柄的组件</div>
     <div class="container">
       <vdrr class-name-handle="my-handle-class">
         <p>

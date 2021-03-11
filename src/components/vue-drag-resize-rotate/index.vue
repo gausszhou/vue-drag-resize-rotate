@@ -605,7 +605,6 @@ export default {
       let maxW = this.maxW;
       let maxH = this.maxH;
 
-      const aspectFactor = this.aspectFactor;
       const [gridX, gridY] = this.grid;
       // 获取矩形信息
       const width = this.width;
@@ -614,23 +613,7 @@ export default {
       const top = this.top;
       const right = this.right;
       const bottom = this.bottom;
-      // 开启锁定纵横比时，同步修改最大最小限制
-      if (this.lockAspectRatio) {
-        if (minW / minH > aspectFactor) {
-          minH = minW / aspectFactor;
-        } else {
-          minW = aspectFactor * minH;
-        }
 
-        if (maxW && maxH) {
-          maxW = Math.min(maxW, aspectFactor * maxH);
-          maxH = Math.min(maxH, maxW / aspectFactor);
-        } else if (maxW) {
-          maxH = maxW / aspectFactor;
-        } else if (maxH) {
-          maxW = aspectFactor * maxH;
-        }
-      }
       // 对齐网格
       maxW = maxW - (maxW % gridX);
       maxH = maxH - (maxH % gridY);
@@ -647,14 +630,14 @@ export default {
       }
       // 边界限制
       if (this.parent) {
-        limits.minLeft = left % gridX;
-        limits.maxLeft = left + Math.floor((width - minW) / gridX) * gridX;
-        limits.minTop = top % gridY;
-        limits.maxTop = top + Math.floor((height - minH) / gridY) * gridY;
-        limits.minRight = right % gridX;
-        limits.maxRight = right + Math.floor((width - minW) / gridX) * gridX;
-        limits.minBottom = bottom % gridY;
-        limits.maxBottom = bottom + Math.floor((height - minH) / gridY) * gridY;
+        limits.minLeft = left;
+        limits.maxLeft = left + Math.floor((width - minW) / gridX)
+        limits.minTop = top
+        limits.maxTop = top + Math.floor((height - minH) / gridY)
+        limits.minRight = right
+        limits.maxRight = right + Math.floor((width - minW) / gridX)
+        limits.minBottom = bottom
+        limits.maxBottom = bottom + Math.floor((height - minH) / gridY)
 
 
         if (maxW) {
@@ -668,22 +651,15 @@ export default {
           limits.minBottom = Math.max(limits.minBottom, this.parentHeight - top - maxH);
 
         }
-
-        if (this.lockAspectRatio) {
-          limits.minLeft = Math.max(limits.minLeft, left - top * aspectFactor)
-          limits.minTop = Math.max(limits.minTop, top - left / aspectFactor)
-          limits.minRight = Math.max(limits.minRight, right - bottom * aspectFactor)
-          limits.minBottom = Math.max(limits.minBottom, bottom - right / aspectFactor)
-        }
       } else {
         limits.minLeft = null
-        limits.maxLeft = left + Math.floor((width - minW) / gridX) * gridX
+        limits.maxLeft = left + Math.floor((width - minW))
         limits.minTop = null
-        limits.maxTop = top + Math.floor((height - minH) / gridY) * gridY
+        limits.maxTop = top + Math.floor((height - minH))
         limits.minRight = null
-        limits.maxRight = right + Math.floor((width - minW) / gridX) * gridX
+        limits.maxRight = right + Math.floor((width - minW))
         limits.minBottom = null
-        limits.maxBottom = bottom + Math.floor((height - minH) / gridY) * gridY
+        limits.maxBottom = bottom + Math.floor((height - minH))
 
         if (maxW) {
           limits.minLeft = -(right + maxW)
@@ -707,6 +683,7 @@ export default {
     // 移动
     move(e) {
       if (this.resizing) {
+        console.log('resizing');
         this.handleResize(e)
       } else if (this.dragging) {
         this.handleDrag(e)
@@ -917,11 +894,13 @@ export default {
         newH = Math.sqrt(Math.pow(Vh.x, 2) + Math.pow(Vh.y, 2))
       }
 
-      // 边界限制
+      // 边界限制(矩形的外接圆不能超出父盒子)
       let bounds = this.bounds
       if (this.rotatable) {
         this.left = newX - newW / 2
         this.top = newY - newH / 2
+        this.width = newW
+        this.height = newH
       } else {
         this.left = restrictToBounds(newX - newW / 2, bounds.minLeft, bounds.maxLeft);
         this.top = restrictToBounds(newY - newH / 2, bounds.minTop, bounds.maxTop);
@@ -931,7 +910,6 @@ export default {
         }
         this.width = restrictToBounds(newW, this.minW, this.maxW);
         this.height = restrictToBounds(newH, this.minH, this.maxH);
-
       }
 
       this.$emit('resizing', this.left, this.top, this.width, this.height)
@@ -1423,18 +1401,8 @@ export default {
     lockAspectRatio(val) {
       if (val) {
         this.aspectFactor = this.width / this.height;
-        // 新增，外部传入纵横比
-        if (this.outsideAspectRatio != 0) {
-          this.aspectFactor = this.outsideAspectRatio;
-        }
       } else {
         this.aspectFactor = undefined;
-      }
-    },
-    // 新增，外部传入纵横比
-    outsideAspectRatio(val) {
-      if (this.lockAspectRatio) {
-        this.aspectFactor = val
       }
     },
     minWidth(val) {
