@@ -24,7 +24,7 @@ https://github.com/mauricius/vue-draggable-resizable
 
 ### 在线示例
 
-[在线演示地址](https://gausszhou.github.io/vue-drag-resize-rotate/)
+[在线演示地址](https://gausszhou.github.io/vue-drag-resize-rotate/#/basic/basic-with-rotatable)
 
 
 ### 特性说明
