@@ -333,7 +333,10 @@ export default {
       zIndex: this.z,
       // 新增 保存中心点位置，用于计算旋转的方向矢量
       lastCenterX: 0,
-      lastCenterY: 0
+      lastCenterY: 0,
+      // 
+      parentX: 0,
+      parentY: 0
     }
   },
 
@@ -424,6 +427,9 @@ export default {
     getParentSize() {
       if (this.parent === true) {
         const style = window.getComputedStyle(this.$el.parentNode, null)
+        const rect = this.$el.parentNode.getBoundingClientRect()
+        this.parentX = rect.x;
+        this.parentY = rect.y;
         return [Math.round(parseFloat(style.getPropertyValue('width'), 10)), Math.round(parseFloat(style.getPropertyValue('height'), 10))]
       }
       if (typeof this.parent === 'string') {
@@ -683,12 +689,11 @@ export default {
     // 移动
     move(e) {
       if (this.resizing) {
-        console.log('resizing');
-        this.handleResize(e)
+        this.handleResize(e);
       } else if (this.dragging) {
-        this.handleDrag(e)
+        this.handleDrag(e);
       } else if (this.rotating) {
-        this.handleRotate(e)
+        this.handleRotate(e);
       }
     },
     // 获取鼠标或者触摸点的坐标
@@ -776,7 +781,12 @@ export default {
     handleResize(e) {
       const handle = this.handle
       const { TL, TR, BL, BR } = this
-      const { x: mouseX, y: mouseY } = this.getMouseCoordinate(e)
+      let { x: mouseX, y: mouseY } = this.getMouseCoordinate(e);
+      // 在非旋转且有父容器限制的时候，直接限制mouse参与计算的坐标值
+      if (!this.rotatable && this.parent) {
+        mouseX = restrictToBounds(mouseX, this.parentX, this.parentX + this.parentWidth)
+        mouseY = restrictToBounds(mouseY, this.parentY, this.parentY + this.parentHeight)
+      }
       // 获取鼠标移动的坐标差
       let deltaX = mouseX - this.mouseClickPosition.mouseX
       let deltaY = mouseY - this.mouseClickPosition.mouseY
@@ -786,10 +796,12 @@ export default {
       let CX = {}     //  宽度边选点
       let Va = {}      // 固定点到鼠标 向量
       let Vb = {}      // 固定点到投影边  向量
-      let Vc = {}     //  另一边投影
+      let Vc = {}     // 另一边投影
       let Vw = {};    // 宽度向量
       let Vh = {}     // 高度向量
       // 拖动中点
+
+
       if (handle.includes('m')) {
         switch (handle) {
           case 'tm':
@@ -893,25 +905,15 @@ export default {
         newW = Math.sqrt(Math.pow(Vw.x, 2) + Math.pow(Vw.y, 2))
         newH = Math.sqrt(Math.pow(Vh.x, 2) + Math.pow(Vh.y, 2))
       }
-
-      // 边界限制(矩形的外接圆不能超出父盒子)
-      let bounds = this.bounds
-      if (this.rotatable) {
-        this.left = newX - newW / 2
-        this.top = newY - newH / 2
-        this.width = newW
-        this.height = newH
-      } else {
-        this.left = restrictToBounds(newX - newW / 2, bounds.minLeft, bounds.maxLeft);
-        this.top = restrictToBounds(newY - newH / 2, bounds.minTop, bounds.maxTop);
-        if (this.parent) {
-          newW = newW <= this.parentWidth ? newW : this.parentWidth
-          newH = newH <= this.parentHeight ? newH : this.parentHeight
-        }
-        this.width = restrictToBounds(newW, this.minW, this.maxW);
-        this.height = restrictToBounds(newH, this.minH, this.maxH);
+      this.left = newX - newW / 2
+      this.top = newY - newH / 2
+      // 存在父容器，内部元素大小不允许超过父容器
+      if (this.parent) {
+        newW = restrictToBounds(newW, 0, this.parentWidth);
+        newH = restrictToBounds(newH, 0, this.parentHeight);
       }
-
+      this.width = newW
+      this.height = newH
       this.$emit('resizing', this.left, this.top, this.width, this.height)
     },
 
