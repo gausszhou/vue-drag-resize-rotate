@@ -11,6 +11,7 @@
         :min-width="200"
         :min-height="200"
         :isConflictCheck="true"
+        :rotatable="true"
         style="background-color: rgb(174, 213, 129);"
       ></vdrr>
       <vdrr
@@ -22,6 +23,7 @@
         :min-width="200"
         :min-height="200"
         :isConflictCheck="true"
+        :rotatable="true"
         style="background-color: rgb(129, 212, 250);"
       ></vdrr>
     </div>
