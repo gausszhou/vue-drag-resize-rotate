@@ -912,6 +912,11 @@ export default {
         newW = restrictToBounds(newW, 0, this.parentWidth);
         newH = restrictToBounds(newH, 0, this.parentHeight);
       }
+      // 外部传参限制大小
+      newW = restrictToBounds(newW, this.minW || 0, this.maxW);
+      newH = restrictToBounds(newH, this.minH || 0, this.maxH);
+
+
       this.width = newW
       this.height = newH
       this.$emit('resizing', this.left, this.top, this.width, this.height)
