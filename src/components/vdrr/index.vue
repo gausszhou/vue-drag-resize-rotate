@@ -32,7 +32,7 @@
 
 <script>
 import { matchesSelectorToParentElements, getComputedSize, addEvent, removeEvent } from './dom'
-import { computeWidth, computeHeight, restrictToBounds, snapToGrid } from './fns'
+import { computeWidth, computeHeight, restrictToBounds, snapToGrid, rotatedPoint, getAngle } from './fns'
 
 const events = {
   mouse: {
@@ -373,12 +373,18 @@ export default {
 
     const [width, height] = getComputedSize(this.$el)
     this.aspectFactor = (this.w !== 'auto' ? this.w : width) / (this.h !== 'auto' ? this.h : height)
+     if(this.outsideAspectRatio){
+      this.aspectFactor =  this.outsideAspectRatio
+    }
     this.width = this.w !== 'auto' ? this.w : width
     this.height = this.h !== 'auto' ? this.h : height
     this.right = this.parentWidth - this.width - this.left
     this.bottom = this.parentHeight - this.height - this.top
+    
     // 绑定data-*属性
     this.settingAttribute()
+
+
     // 监听取消操作
     addEvent(document.documentElement, 'mousedown', this.deselect)
     addEvent(document.documentElement, 'touchend touchcancel', this.deselect)
@@ -584,10 +590,10 @@ export default {
       let centerX = oleft + owidth / 2
       let centerY = otop + oheight / 2
       let rotate = this.rotate
-      this.TL = this.rotatedPoint(centerX, centerY, oleft, otop, rotate);
-      this.TR = this.rotatedPoint(centerX, centerY, oleft + owidth, otop, rotate);
-      this.BL = this.rotatedPoint(centerX, centerY, oleft, otop + oheight, rotate);
-      this.BR = this.rotatedPoint(centerX, centerY, oleft + owidth, otop + oheight, rotate);
+      this.TL = rotatedPoint(centerX, centerY, oleft, otop, rotate);
+      this.TR = rotatedPoint(centerX, centerY, oleft + owidth, otop, rotate);
+      this.BL = rotatedPoint(centerX, centerY, oleft, otop + oheight, rotate);
+      this.BR = rotatedPoint(centerX, centerY, oleft + owidth, otop + oheight, rotate);
 
       //  保存鼠标按下时的当前状态
       this.mouseClickPosition.mouseX = e.touches ? e.touches[0].pageX : e.pageX;
@@ -715,30 +721,12 @@ export default {
       const { x: mouseX, y: mouseY } = this.getMouseCoordinate(e)
       const x = mouseX - this.lastCenterX
       const y = mouseY - this.lastCenterY
-      this.rotate = (this.getAngle(x, y) + 90) % 360
+      this.rotate = (getAngle(x, y) + 90) % 360
       this.$emit('rotating', this.rotate)
       // 元素移动
     },
 
-    // 返回相对于参考点旋转后的坐标
-    rotatedPoint(originX, originY, offsetX, offsetY, rotate) {
-      const rad = (Math.PI / 180) * rotate
-      const cos = Math.cos(rad)
-      const sin = Math.sin(rad)
-      let x = offsetX - originX
-      let y = offsetY - originY
-      return {
-        x: x * cos - y * sin + originX,
-        y: x * sin + y * cos + originY
-      }
-    },
-    // 根据相对坐标返回角度，正方形为顺时针
-    getAngle(x, y) {
-      let theta = Math.atan2(y, x) // 正切转弧度
-      theta = Math.round((180 / Math.PI) * theta) // 弧度转角度
-      if (theta < 0) theta = 360 + theta // 控制角度在0~360度
-      return theta // 返回角度
-    },
+  
 
     // 元素移动
     async handleDrag(e) {
@@ -746,7 +734,9 @@ export default {
       const grid = this.grid
       const bounds = this.bounds
       const mouseClickPosition = this.mouseClickPosition
+      // 水平移动
       const tmpDeltaX = axis && axis !== 'y' ? mouseClickPosition.mouseX - (e.touches ? e.touches[0].pageX : e.pageX) : 0
+      // 垂直移动
       const tmpDeltaY = axis && axis !== 'x' ? mouseClickPosition.mouseY - (e.touches ? e.touches[0].pageY : e.pageY) : 0
       const [deltaX, deltaY] = snapToGrid(grid, tmpDeltaX, tmpDeltaY, this.scaleRatio)
       const left = restrictToBounds(mouseClickPosition.left - deltaX, bounds.minLeft, bounds.maxLeft)
@@ -764,12 +754,14 @@ export default {
       await this.snapCheck()
       this.$emit('dragging', this.left, this.top)
     },
+    // 外部传参改动x
     moveHorizontally(val) {
       const [deltaX, _] = snapToGrid(this.grid, val, this.top, this.scale)
       const left = restrictToBounds(deltaX, this.bounds.minLeft, this.bounds.maxLeft)
       this.left = left
       this.right = this.parentWidth - this.width - left
     },
+    // 外部传参改动y
     moveVertically(val) {
       const [_, deltaY] = snapToGrid(this.grid, this.left, val, this.scale)
       const top = restrictToBounds(deltaY, this.bounds.minTop, this.bounds.maxTop)
@@ -800,8 +792,6 @@ export default {
       let Vw = {};    // 宽度向量
       let Vh = {}     // 高度向量
       // 拖动中点
-
-
       if (handle.includes('m')) {
         switch (handle) {
           case 'tm':
@@ -907,6 +897,7 @@ export default {
       }
       this.left = newX - newW / 2
       this.top = newY - newH / 2
+
       // 存在父容器，内部元素大小不允许超过父容器
       if (this.parent) {
         newW = restrictToBounds(newW, 0, this.parentWidth);
@@ -915,8 +906,15 @@ export default {
       // 外部传参限制大小
       newW = restrictToBounds(newW, this.minW || 0, this.maxW);
       newH = restrictToBounds(newH, this.minH || 0, this.maxH);
-
-
+      // 纵横比
+      if(this.lockAspectRatio){
+        console.log(this.lockAspectRatio,this.aspectFactor)
+        if(newW/newH >this.aspectFactor){
+          newW = newH *this.aspectFactor
+        }else{
+          newH = newW/this.aspectFactor
+        }
+      }
       this.width = newW
       this.height = newH
       this.$emit('resizing', this.left, this.top, this.width, this.height)
@@ -1007,7 +1005,7 @@ export default {
             item.getAttribute('data-is-check') !== null &&
             item.getAttribute('data-is-check') !== 'false'
           ) {
-            const tw = item.offsetWidth
+            const tw = item.offsetWidth   
             const th = item.offsetHeight
             // 正则获取left与right
             const [tl, tt] = this.formatTransformVal(item.style.transform)
@@ -1046,7 +1044,6 @@ export default {
         let activeRight = this.left + width
         let activeTop = this.top
         let activeBottom = this.top + height
-
         // 初始化辅助线数据
         const temArr = new Array(3).fill({ display: false, position: '', origin: '', lineLength: '' });
         const refLine = { vLine: [], hLine: [] };
@@ -1087,24 +1084,18 @@ export default {
               // 计算得到right和bottom
               const r = l + w // 对齐目标right
               const b = t + h // 对齐目标的bottom
-
               const hc = Math.abs((activeTop + height / 2) - (t + h / 2)) <= this.snapTolerance // 水平中线
               const vc = Math.abs((activeLeft + width / 2) - (l + w / 2)) <= this.snapTolerance // 垂直中线
-
               const ts = Math.abs(t - activeBottom) <= this.snapTolerance; // 从上到下
               const TS = Math.abs(b - activeBottom) <= this.snapTolerance; // 从上到下
-
               const bs = Math.abs(t - activeTop) <= this.snapTolerance // 从下到上 上边共线
               const BS = Math.abs(b - activeTop) <= this.snapTolerance // 从下到上
-
               const ls = Math.abs(l - activeRight) <= this.snapTolerance // 外左
               const LS = Math.abs(r - activeRight) <= this.snapTolerance // 外左
               const rs = Math.abs(l - activeLeft) <= this.snapTolerance // 外右
               const RS = Math.abs(r - activeLeft) <= this.snapTolerance // 外右
-
               tem.display = [ts, TS, bs, BS, hc, hc, ls, LS, rs, RS, vc, vc];
               tem.position = [t, b, t, b, t + h / 2, t + h / 2, l, r, l, r, l + w / 2, l + w / 2];
-
               // 单个可激活元素与其他元素对齐
               if (bln) {
                 if (ts) {
@@ -1184,7 +1175,6 @@ export default {
               this.top = restrictToBounds(this.top, bounds.minTop, bounds.maxTop);
               this.right = restrictToBounds(this.right, bounds.minRight, bounds.maxRight);
               this.bottom = restrictToBounds(this.bottom, bounds.minBottom, bounds.maxBottom);
-
               // 辅助线坐标与是否显示(display)对应的数组,易于循环遍历
               const arrTem = [0, 1, 0, 1, 2, 2, 0, 1, 0, 1, 2, 2];
               for (let i = 0; i <= arrTem.length; i++) {
@@ -1259,7 +1249,6 @@ export default {
         const size = (this.handleInfo.size / this.scaleRatio).toFixed(2);
         const offset = (this.handleInfo.offset / this.scaleRatio).toFixed(2);
         const center = (size / 2).toFixed(2);
-
         const styleMap = {
           tl: {
             top: `${offset}px`,
@@ -1349,24 +1338,11 @@ export default {
       }
       return this.height + 'px';
     },
-    // 表示只修改宽度
-    resizingOnX() {
-      return Boolean(this.handle) && (this.handle.includes('l') || this.handle.includes('r'));
-    },
-    // 表示只修改高度
-    resizingOnY() {
-      return Boolean(this.handle) && (this.handle.includes('t') || this.handle.includes('b'));
-    },
-    // 表示正在调整边角
-    isCornerHandle() {
-      return Boolean(this.handle) && ['tl', 'tr', 'br', 'bl'].includes(this.handle);
-    }
   },
 
   watch: {
     active(val) {
       this.enabled = val;
-
       if (val) {
         this.$emit('activated');
       } else {
@@ -1385,18 +1361,15 @@ export default {
       if (this.parent) {
         this.bounds = this.calcDragLimits();
       }
-
       this.moveHorizontally(val);
     },
     y(val) {
       if (this.resizing || this.dragging) {
         return;
       }
-
       if (this.parent) {
         this.bounds = this.calcDragLimits();
       }
-
       this.moveVertically(val);
     },
     // 新增 监听外部传入参数  旋转角度
@@ -1405,12 +1378,22 @@ export default {
         this.rotate = val % 360;
       }
     },
+
     lockAspectRatio(val) {
       if (val) {
-        this.aspectFactor = this.width / this.height;
+        if(this.outsideAspectRatio){
+          this.aspectFactor = this.outsideAspectRatio
+        }else{
+          this.aspectFactor = this.width / this.height;
+        }
       } else {
         this.aspectFactor = undefined;
       }
+    },
+    outsideAspectRatio(val){
+        if(val){
+          this.aspectFactor = val;
+        }
     },
     minWidth(val) {
       if (val > 0 && val <= this.width) {
@@ -1432,22 +1415,18 @@ export default {
       if (this.resizing || this.dragging) {
         return;
       }
-
       if (this.parent) {
         this.bounds = this.calcResizeLimits();
       }
-
       this.changeWidth(val);
     },
     h(val) {
       if (this.resizing || this.dragging) {
         return;
       }
-
       if (this.parent) {
         this.bounds = this.calcResizeLimits();
       }
-
       this.changeHeight(val);
     }
   }

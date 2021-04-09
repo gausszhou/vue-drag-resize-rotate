@@ -74,7 +74,7 @@ export default {
   },
   methods: {
     getRefLineParams(params) {
-      console.log(params)
+      // console.log(params)
       const { vLine, hLine } = params
       this.vLine = vLine
       this.hLine = hLine

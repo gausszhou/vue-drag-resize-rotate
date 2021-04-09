@@ -37,7 +37,7 @@ export default {
     return {
       menuData: [
         {
-          label: '基本',
+          label: '基本 (新增)',
           icon: 'el-icon-menu',
           children: [
             { route: 'basic-basic-component', label: '基本组件' },
@@ -49,7 +49,7 @@ export default {
             { route: 'basic-prevent-deactivation', label: ':prevent-deactivation阻止失活' },
             { route: 'basic-with-draggable', label: '是否允许拖动位置' },
             { route: 'basic-with-resizable', label: '是否允许调整大小' },
-            { route: 'basic-with-rotatable', label: '是否允许旋转角度' },
+            { route: 'basic-with-rotatable', label: '是否允许旋转角度  (新增)' },
             { route: 'basic-enable-native-drag', label: '是否允许内部元素拖拽 ' },
             { route: 'basic-with-drag-handle', label: '限制允许拖动的范围 ' },
             { route: 'basic-with-drag-cancel', label: '限制禁止拖动的范围 ' },
@@ -60,7 +60,7 @@ export default {
           ]
         },
         {
-          label: '网格对齐 不支持旋转',
+          label: '网格对齐',
           icon: 'el-icon-s-grid',
           children: [
             { route: 'grid-20x20', label: '网格20x20' },
@@ -84,7 +84,7 @@ export default {
           ]
         },
         {
-          label: '纵横比  不建议使用',
+          label: '纵横比',
           icon: 'el-icon-picture',
           children: [
             { route: 'aspect-ratio-basic', label: '锁定纵横比 ' },
@@ -94,6 +94,7 @@ export default {
             { route: 'aspect-ratio-with-grid', label: '纵横比+对齐网格 ' },
             { route: 'aspect-ratio-with-grid-offset', label: '在偏移的网格上对齐 ' },
             { route: 'aspect-ratio-with-grid-parent', label: '在父级中对齐网格 ' },
+            { route: 'aspect-outside', label: '外部传入纵横比参数 ' },
           ]
         },
         {
@@ -120,12 +121,13 @@ export default {
           ]
         },
         {
-          label: '高级',
+          label: '高级  (新增)',
           icon: 'el-icon-star-on',
           children: [
             { route: 'advanced-conflict-detection', label: '位置冲突检测' },
             { route: 'advanced-position-adsorption', label: '元素位置吸附' },
-            { route: 'advanced-reference-line', label: '元素对齐辅助线' },
+            { route: 'advanced-position-exact', label: '更高精度的对齐  (新增)' },
+            { route: 'advanced-reference-line', label: '对齐时有辅助线' },
           ]
         },
         {
@@ -154,7 +156,7 @@ export default {
     '$route'(to, from) {
       let index = localStorage.getItem('index')
       if (index) this.active = index
-      this.getMarkdown(to.name)
+      this.getMarkdown(to.path)
     }
   },
   created() {
@@ -215,8 +217,8 @@ export default {
         localStorage.setItem('index', val.index)
       }
     },
-    getMarkdown(name) {
-      let params = name;
+    getMarkdown(path) {
+      let params = path.slice(1);
       this.$http.getMarkdown(params).then(res => {
         this.markdownHTML = this.markdownRender.render(res.data)
       })
