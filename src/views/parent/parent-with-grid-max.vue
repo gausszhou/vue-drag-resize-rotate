@@ -28,7 +28,6 @@ export default {
         backgroundSize: '10px 20px, 10px 20px',
         width: '100%',
         height: '100%',
-        border: '1px solid blue',
         boxSizing: 'border-box'
       }
     }
