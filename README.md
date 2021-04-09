@@ -21,6 +21,9 @@ https://github.com/mauricius/vue-draggable-resizable
   - [x] 旋转式手柄样式跟随角度变化
 - [x] 修复纵横比
   - [x] 允许外部传入纵横比 Type: Number
+- [ ] 高精度对齐
+
+> 提示:开启旋转后 网格对齐和父容器限制将失效
 
 ## 在线示例
 
@@ -34,9 +37,7 @@ https://github.com/mauricius/vue-draggable-resizable
 
 ```js
 // 引入全局自定义组件
-import vdrr from "./components/vue-drag-resize-rotate"
-import vdr from "./components/vue-drag-resize"
-Vue.component('vdr', vdr) 
+import vdrr from "./components/vdrr"
 Vue.component('vdrr', vdrr) 
 ```
 

@@ -25,19 +25,24 @@
       <router-view />
       <div class="markdown-render" id="write" v-html="markdownHTML"></div>
     </div>
+    <githubWidget></githubWidget>
   </div>
 </template>
 
 <script>
+import githubWidget from "@/widgets/github/index.vue"
 import MarkdownIt from "markdown-it";
 import hljs from "highlight.js"
 export default {
   name: 'app',
+  components:{
+    githubWidget
+  },
   data() {
     return {
       menuData: [
         {
-          label: '基本 (新增)',
+          label: '基本  (新增)',
           icon: 'el-icon-menu',
           children: [
             { route: 'basic-basic-component', label: '基本组件' },
@@ -78,13 +83,14 @@ export default {
             { route: 'parent-with-auto-size', label: '父级+自适应' },
             { route: 'parent-with-max', label: '父级+最大限制' },
             { route: 'parent-with-grid', label: '父级+网格' },
+            // { route: 'parent-with-rotate', label: '父级+旋转  (新增)' },
             { route: 'parent-with-grid-offset', label: '父级+网格+偏移' },
             { route: 'parent-with-grid-max', label: '父级+网格+最大限制' },
             { route: 'parent-with-outside-controlled', label: '父级+控制组件' },
           ]
         },
         {
-          label: '纵横比',
+          label: '纵横比  (新增)',
           icon: 'el-icon-picture',
           children: [
             { route: 'aspect-ratio-basic', label: '锁定纵横比 ' },
@@ -94,39 +100,39 @@ export default {
             { route: 'aspect-ratio-with-grid', label: '纵横比+对齐网格 ' },
             { route: 'aspect-ratio-with-grid-offset', label: '在偏移的网格上对齐 ' },
             { route: 'aspect-ratio-with-grid-parent', label: '在父级中对齐网格 ' },
-            { route: 'aspect-outside', label: '外部传入纵横比参数 ' },
+            { route: 'aspect-outside', label: '外部传入纵横比参数  (新增)' },
           ]
         },
         {
           label: '样式',
           icon: 'el-icon-s-goods',
           children: [
-            { route: 'style-component', label: 'Style组件' },
-            { route: 'style-dragging', label: 'Style拖动' },
-            { route: 'style-resizing', label: 'Style拉伸' },
-            { route: 'style-active', label: 'Style活跃' },
-            { route: 'style-handles', label: 'Style句柄' },
+            { route: 'style-component', label: 'Style 组件' },
+            { route: 'style-dragging', label: 'Style 拖动' },
+            { route: 'style-resizing', label: 'Style 拉伸' },
+            { route: 'style-active', label: 'Style 活跃' },
+            { route: 'style-handles', label: 'Style 句柄' },
             { route: 'style-handles-with-slots', label: 'Style 手柄插槽' },
           ]
         },
 
         {
-          label: '事件',
+          label: '事件  (新增)',
           icon: 'el-icon-warning',
           children: [
             { route: 'events-activated', label: '激活组件事件' },
             { route: 'events-dragging', label: '拖动位置事件' },
             { route: 'events-resizing', label: '调整大小事件' },
-            { route: 'events-rotating', label: '旋转角度事件' },
+            { route: 'events-rotating', label: '旋转角度事件  (新增)' },
           ]
         },
         {
-          label: '高级  (新增)',
+          label: '高级  (计划)',
           icon: 'el-icon-star-on',
           children: [
             { route: 'advanced-conflict-detection', label: '位置冲突检测' },
             { route: 'advanced-position-adsorption', label: '元素位置吸附' },
-            { route: 'advanced-position-exact', label: '更高精度的对齐  (新增)' },
+            { route: 'advanced-position-exact', label: '更高精度的对齐  (计划)' },
             { route: 'advanced-reference-line', label: '对齐时有辅助线' },
           ]
         },
