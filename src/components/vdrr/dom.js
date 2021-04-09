@@ -1,7 +1,7 @@
 import { isFunction } from './fns'
 
 // 将选择器与父元素匹配
-export function matchesSelectorToParentElements (el, selector, baseNode) {
+export function matchesSelectorToParentElements(el, selector, baseNode) {
   let node = el
 
   const matchesSelectorFunc = [
@@ -23,7 +23,7 @@ export function matchesSelectorToParentElements (el, selector, baseNode) {
   return false
 }
 
-export function getComputedSize ($el) {
+export function getComputedSize($el) {
   const style = window.getComputedStyle($el)
 
   return [
@@ -32,7 +32,7 @@ export function getComputedSize ($el) {
   ]
 }
 // 添加事件
-export function addEvent (el, event, handler) {
+export function addEvent(el, event, handler) {
   if (!el) {
     return
   }
@@ -46,7 +46,7 @@ export function addEvent (el, event, handler) {
 }
 
 // 删除事件
-export function removeEvent (el, event, handler) {
+export function removeEvent(el, event, handler) {
   if (!el) {
     return
   }

@@ -2,18 +2,7 @@
  
 [![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE.md)
 
-## 提示
 
-目前不开启旋转时的限制策略为，不能超出父容器边界，大小不能超过父容器大小  
-开启旋转时，中心点不能超出父容器边界，大小不能超过父容器大小  
-如果要修改策略请调整`calcResizeLimits()` 和 `calcDragLimits()`
-
-
-## 计划
-
-- [x] 修复bug，稳定一个版本
-- [ ] 添加测试
-- [ ] 优化演示界面
 
 ## 代码历史
 ```
@@ -23,9 +12,19 @@ https://github.com/mauricius/vue-draggable-resizable
   |-https://github.com/gausszhou/vue-drag-resize-rotate
 ```
 
+## 我的计划
+
+- [x] 修复部分正则判断问题和容器大小的1px误差问题
+- [x] 整合自动对齐功能
+- [x] 整合并重构旋转功能
+  - [x] 实现旋转，旋转时可拉伸大小，且对顶点不动
+  - [x] 旋转式手柄样式跟随角度变化
+- [x] 修复纵横比
+  - [x] 允许外部传入纵横比 Type: Number
+
 ## 在线示例
 
-[在线演示地址](https://gausszhou.github.io/vue-drag-resize-rotate/#/basic/basic-with-rotatable)
+[在线演示地址](https://gausszhou.github.io/vue-drag-resize-rotate)
 
 
 ## 特性说明
@@ -49,12 +48,12 @@ Vue.component('vdrr', vdrr)
     </div>
     <div class="container">
       <vdrr
-        :rotatable="rotatable"
-        :r="angle"
-        @rotating="rotating"
+        :parent="true"
         :resizable="true"
         @resizing="resizing"
-        :parent="true"
+        :rotatable="rotatable"
+        @rotating="rotating"
+        :r="angle"
       >
         <p v-if="rotatable">现在可以旋转，旋转角度为{{angle}}</p>
         <p v-else>现在不可以旋转</p>
@@ -64,6 +63,7 @@ Vue.component('vdrr', vdrr)
 </template>
 
 <script>
+// 当然你也可以在需要的时候在单个组件内引入
 export default {
   data() {
     return {
@@ -79,10 +79,11 @@ export default {
   },
 }
 </script>
-
 ```
-## 新增 Porps 
-### rotatable
+
+### 新增 Porps
+
+#### rotatable
 类型: `Boolean`  
 必须: `false`  
 默认: `true`  
@@ -92,7 +93,7 @@ export default {
 ```html
 <vdrr :rotatable="true">
 ```
-### r
+#### r
 类型: `Number`  
 必须: `false`  
 默认: `0`  
@@ -103,7 +104,7 @@ export default {
 <vdrr :r="0">
 ```
 
-### snapBorder
+#### snapBorder
 
 类型: `Boolean`  
 必需: `false`  
@@ -114,9 +115,17 @@ export default {
 ```html
 <vdrr :snap-border="true" />
 ```
+#### outsideAspectRatio
 
+类型: `Number`  
+必需: `false`  
+默认: `false`  
 
+定义组件的纵横比
 
+```html
+<vdrr :lock-aspect-ratio="true" :outsideAspectRatio="1.7777" />
+```
 
 
 ### 新增 Events
@@ -142,9 +151,9 @@ export default {
 <vdrr :rotatestop="onRotateStop">
 ```
 
-## 不太重要的
+### 不太重要的
 
-###  classNameRotatable 
+####  classNameRotatable 
 类型: `String`  
 必须: `false`  
 默认: `rotatable`  
@@ -153,7 +162,7 @@ export default {
 ```html
 <vdrr class-name-rotatable="my-rotatable-class">
 ```
-### classNameRotating
+#### classNameRotating
 类型: `String`  
 必须: `false`  
 默认: `rotating`  
@@ -163,4 +172,3 @@ export default {
 ```html
 <vdrr class-name-rotating="my-rotating-class">
 ```
-

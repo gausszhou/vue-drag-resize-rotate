@@ -18,10 +18,8 @@ import http from "./request/http"
 Vue.prototype.$http = http
 
 // 引入全局自定义组件
-// import vdrr from "./components/vue-drag-resize"
-import vdrr from "./components/vue-drag-resize-rotate"
+import vdrr from "./components/vdrr"
 Vue.component('vdrr', vdrr)
-
 
 Vue.config.productionTip = false
 
