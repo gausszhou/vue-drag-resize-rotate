@@ -35,7 +35,7 @@ import MarkdownIt from "markdown-it";
 import hljs from "highlight.js"
 export default {
   name: 'app',
-  components:{
+  components: {
     githubWidget
   },
   data() {
@@ -62,6 +62,7 @@ export default {
             { route: 'basic-with-handles', label: '控制拉伸手柄的数量' },
             { route: 'basic-with-axis', label: '限制运动轴' },
             { route: 'basic-with-user-select', label: '限制用户选择' },
+            { route: 'basic-scale', label: '放缩  (新增)' },
           ]
         },
         {
@@ -83,7 +84,6 @@ export default {
             { route: 'parent-with-auto-size', label: '父级+自适应' },
             { route: 'parent-with-max', label: '父级+最大限制' },
             { route: 'parent-with-grid', label: '父级+网格' },
-            // { route: 'parent-with-rotate', label: '父级+旋转  (新增)' },
             { route: 'parent-with-grid-offset', label: '父级+网格+偏移' },
             { route: 'parent-with-grid-max', label: '父级+网格+最大限制' },
             { route: 'parent-with-outside-controlled', label: '父级+控制组件' },

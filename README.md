@@ -21,6 +21,7 @@ https://github.com/mauricius/vue-draggable-resizable
   - [x] 旋转式手柄样式跟随角度变化
 - [x] 修复纵横比
   - [x] 允许外部传入纵横比
+- [x] 修复放缩 
 
 > 提示:开启旋转后 网格对齐和父容器限制将失效
 
