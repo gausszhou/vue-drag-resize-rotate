@@ -4,6 +4,8 @@ import VueRouter from "vue-router";
 Vue.use(VueRouter);
 
 // 获取 views 文件夹下的所有.vue文件
+// 第一个参数路径  第二个参数是否查询子目录 第三个参数匹配文件名称
+// 估计就是封装了Node.js的readdirSync和readFileSync
 const viewContext = require.context("@/views", true, /.vue$/);
 
 // 遍历生成路由
