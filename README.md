@@ -1,10 +1,10 @@
- <h1 align="center">vue-drag-resize-rotate</h1>
+# vue-drag-resize-rotate
  
-[![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE.md)
+[![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE)
 
 
+## Code History
 
-## 代码历史
 ```
 https://github.com/mauricius/vue-draggable-resizable
   |-https://github.com/tmrcui/vue-draggable-resizable-rotatable 
@@ -12,8 +12,8 @@ https://github.com/mauricius/vue-draggable-resizable
   |-https://github.com/gausszhou/vue-drag-resize-rotate
 ```
 
-## 我的计划
-
+## Todo List
+ 
 - [x] 修复部分正则判断问题和容器大小的1px误差问题
 - [x] 整合自动对齐功能
 - [x] 整合并重构旋转功能
@@ -27,19 +27,20 @@ https://github.com/mauricius/vue-draggable-resizable
 
 由于近期没有工作上的新需求，此基础组件暂停开发
 
-## 在线示例
+## Live Demo
 
-[在线演示地址](https://gausszhou.github.io/vue-drag-resize-rotate)
+[中文在线演示地址](https://gausszhou.github.io/vue-drag-resize-rotate)
 
 
-## 特性说明
+## Features
+
  默认情况下，开启拖拽和调整大小，旋转功能请设置`:rotatable=true`并传入旋转角度`:r="0"`
 
 ## 基本使用
 
 ```js
 // 引入全局自定义组件
-import vdrr from "./components/vdrr"
+import vdrr from "vue-drag-resize-rotate"
 Vue.component('vdrr', vdrr) 
 ```
 
@@ -84,9 +85,11 @@ export default {
 </script>
 ```
 
-### 新增 Porps
+---
 
-#### rotatable
+## 新增 Porps
+
+属性: `rotatable`   
 类型: `Boolean`  
 必须: `false`  
 默认: `true`  
@@ -94,9 +97,10 @@ export default {
 定义组件是否支持旋转
 
 ```html
-<vdrr :rotatable="true">
+<vdrr :rotatable="true" />
 ```
-#### r
+
+属性: `r`   
 类型: `Number`  
 必须: `false`  
 默认: `0`  
@@ -104,11 +108,10 @@ export default {
 定义初始旋转角度
 
 ```html
-<vdrr :r="0">
+<vdrr :r="0" />
 ```
 
-#### snapBorder
-
+属性: `snapBorder`  
 类型: `Boolean`  
 必需: `false`  
 默认: `false`  
@@ -118,8 +121,8 @@ export default {
 ```html
 <vdrr :snap-border="true" />
 ```
-#### outsideAspectRatio
 
+属性: `outsideAspectRatio`  
 类型: `Number`  
 必需: `false`  
 默认: `false`  
@@ -129,43 +132,16 @@ export default {
 ```html
 <vdrr :lock-aspect-ratio="true" :outsideAspectRatio="1.7777" />
 ```
-
-
-### 新增 Events
-
-#### rotating
-必须: `false`  
-返参:
-* `rotate` 旋转的角度
-
-旋转时触发
-```html
-<vdrr :rotating="onRotating">
-```
-
-#### rotatestop
-必须: `false`  
-返参:
-* `rotate` 旋转的角度
-
-旋转结束时触发
-
-```html
-<vdrr :rotatestop="onRotateStop">
-```
-
-### 不太重要的
-
-####  classNameRotatable 
+属性: `classNameRotatable`  
 类型: `String`  
 必须: `false`  
 默认: `rotatable`  
 
 设置组件允许旋转时的类名
 ```html
-<vdrr class-name-rotatable="my-rotatable-class">
+<vdrr class-name-rotatable="my-rotatable-class" />
 ```
-#### classNameRotating
+属性: `classNameRotating`  
 类型: `String`  
 必须: `false`  
 默认: `rotating`  
@@ -173,5 +149,30 @@ export default {
 设置组件旋转时的类名
 
 ```html
-<vdrr class-name-rotating="my-rotating-class">
+<vdrr class-name-rotating="my-rotating-class" />
 ```
+
+## 新增 Events
+
+事件: `rotating`  
+必须: `false`  
+返参:
+* `rotate` 旋转的角度
+
+旋转时触发
+```html
+<vdrr :rotating="onRotating" />
+```
+
+事件: `rotatestop`   
+必须: `false`  
+返参:
+* `rotate` 旋转的角度
+
+旋转结束时触发
+
+```html
+<vdrr :rotatestop="onRotateStop" />
+```
+
+

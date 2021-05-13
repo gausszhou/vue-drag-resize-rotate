@@ -2,7 +2,7 @@ export function isFunction(func) {
   return (typeof func === 'function' || Object.prototype.toString.call(func) === '[object Function]')
 }
 
-// 对其栅格
+// 对齐栅格
 export function snapToGrid(grid, pendingX, pendingY, scale = 1) {
   const x = Math.round((pendingX / scale) / grid[0]) * grid[0]
   const y = Math.round((pendingY / scale) / grid[1]) * grid[1]
@@ -12,7 +12,6 @@ export function snapToGrid(grid, pendingX, pendingY, scale = 1) {
 // 获取rect模型
 export function getSize(el) {
   const rect = el.getBoundingClientRect()
-
   return [
     parseInt(rect.width),
     parseInt(rect.height)
@@ -51,6 +50,7 @@ export function rotatedPoint(originX, originY, offsetX, offsetY, rotate) {
     y: x * sin + y * cos + originY
   }
 }
+
 // 根据相对坐标返回角度，正方形为顺时针
 export function getAngle(x, y) {
   let theta = Math.atan2(y, x) // 正切转弧度
