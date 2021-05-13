@@ -31,34 +31,9 @@
 </template>
 
 <script>
-import { matchesSelectorToParentElements, getComputedSize, addEvent, removeEvent } from './dom';
-import { computeWidth, computeHeight, restrictToBounds, snapToGrid, rotatedPoint, getAngle } from './fns';
-const events = {
-  mouse: {
-    start: 'mousedown',
-    move: 'mousemove',
-    stop: 'mouseup'
-  },
-  touch: {
-    start: 'touchstart',
-    move: 'touchmove',
-    stop: 'touchend'
-  }
-};
-// 禁止用户选取
-const userSelectNone = {
-  userSelect: 'none',
-  MozUserSelect: 'none',
-  WebkitUserSelect: 'none',
-  MsUserSelect: 'none'
-};
-// 用户选中自动
-const userSelectAuto = {
-  userSelect: 'auto',
-  MozUserSelect: 'auto',
-  WebkitUserSelect: 'auto',
-  MsUserSelect: 'auto'
-};
+import { matchesSelectorToParentElements, getComputedSize, addEvent, removeEvent } from '../../utils/dom';
+import { computeWidth, computeHeight, restrictToBounds, snapToGrid, rotatedPoint, getAngle } from '../../utils/fns';
+import { events, userSelectNone, userSelectAuto } from "./option.js"
 let eventsFor = events.mouse;
 export default {
   replace: true,
@@ -273,7 +248,7 @@ export default {
     snapTolerance: {
       type: Number,
       default: 5,
-      validator: function(val) {
+      validator: function (val) {
         return typeof val === 'number';
       }
     },
@@ -295,7 +270,7 @@ export default {
       }
     }
   },
-  data: function() {
+  data: function () {
     return {
       left: this.x,
       top: this.y,
@@ -333,7 +308,198 @@ export default {
       parentY: 0
     };
   },
-  created: function() {
+  computed: {
+    handleStyle() {
+      return (stick, index) => {
+        if (!this.handleInfo.switch) return { display: this.enabled ? 'block' : 'none' };
+        // 新增 当没有开启旋转的时候，旋转手柄不显示
+        if (stick === 'rot' && !this.rotatable) return { display: 'none' };
+        const size = (this.handleInfo.size / this.scaleRatio).toFixed(2);
+        const offset = (this.handleInfo.offset / this.scaleRatio).toFixed(2);
+        const center = (size / 2).toFixed(2);
+        const styleMap = {
+          tl: {
+            top: `${offset}px`,
+            left: `${offset}px`
+          },
+          tm: {
+            top: `${offset}px`,
+            left: `calc(50% - ${center}px)`
+          },
+          tr: {
+            top: `${offset}px`,
+            right: `${offset}px`
+          },
+          mr: {
+            top: `calc(50% - ${center}px)`,
+            right: `${offset}px`
+          },
+          br: {
+            bottom: `${offset}px`,
+            right: `${offset}px`
+          },
+          bm: {
+            bottom: `${offset}px`,
+            right: `calc(50% - ${center}px)`
+          },
+          bl: {
+            bottom: `${offset}px`,
+            left: `${offset}px`
+          },
+          ml: {
+            top: `calc(50% - ${center}px)`,
+            left: `${offset}px`
+          },
+          rot: {
+            top: `-${size * 3}px`,
+            left: `50%`,
+          }
+        };
+        const stickStyle = {
+          width: styleMap[stick].width || `${size}px`,
+          height: styleMap[stick].height || `${size}px`,
+          top: styleMap[stick].top,
+          left: styleMap[stick].left,
+          right: styleMap[stick].right,
+          bottom: styleMap[stick].bottom
+        };
+        // 新增 让控制手柄的鼠标样式跟随旋转角度变化
+        if (stick !== 'rot') {
+          const cursorStyleArray = ['nw-resize', 'n-resize', 'ne-resize', 'e-resize', 'se-resize', 's-resize', 'sw-resize', 'w-resize'];
+          const STEP = 45;
+          const rotate = this.rotate + STEP / 2;
+          const deltaIndex = Math.floor(rotate / STEP);
+          index = (index + deltaIndex) % 8;
+          stickStyle.cursor = cursorStyleArray[index];
+        }
+        stickStyle.display = this.enabled ? 'block' : 'none';
+        return stickStyle;
+      };
+    },
+    style() {
+      return {
+        transform: `translate(${this.left}px, ${this.top}px) rotate(${this.rotate}deg)`,
+        width: this.computedWidth,
+        height: this.computedHeight,
+        zIndex: this.zIndex,
+        fontSize: this.handleInfo.size * 2 + 'px',
+        ...(this.dragging && this.disableUserSelect ? userSelectNone : userSelectAuto)
+      };
+    },
+    // 控制柄显示与否
+    actualHandles() {
+      if (!this.resizable) return [];
+      return this.handles;
+    },
+    //  根据left right 算出元素的宽度
+    computedWidth() {
+      if (this.w === 'auto') {
+        if (!this.widthTouched) {
+          return 'auto';
+        }
+      }
+      return this.width + 'px';
+    },
+    // 根据top bottom 算出元素的宽度
+    computedHeight() {
+      if (this.h === 'auto') {
+        if (!this.heightTouched) {
+          return 'auto';
+        }
+      }
+      return this.height + 'px';
+    }
+  },
+  watch: {
+    active(val) {
+      this.enabled = val;
+      if (val) {
+        this.$emit('activated');
+      } else {
+        this.$emit('deactivated');
+      }
+    },
+    z(val) {
+      if (val >= 0 || val === 'auto') {
+        this.zIndex = val;
+      }
+    },
+    x(val) {
+      if (this.resizing || this.dragging) {
+        return;
+      }
+      if (this.parent) {
+        this.bounds = this.calcDragLimits();
+      }
+      this.moveHorizontally(val);
+    },
+    y(val) {
+      if (this.resizing || this.dragging) {
+        return;
+      }
+      if (this.parent) {
+        this.bounds = this.calcDragLimits();
+      }
+      this.moveVertically(val);
+    },
+    // 新增 监听外部传入参数  旋转角度
+    r(val) {
+      if (val >= 0) {
+        this.rotate = val % 360;
+      }
+    },
+    lockAspectRatio(val) {
+      if (val) {
+        if (this.outsideAspectRatio) {
+          this.aspectFactor = this.outsideAspectRatio;
+        } else {
+          this.aspectFactor = this.width / this.height;
+        }
+      } else {
+        this.aspectFactor = undefined;
+      }
+    },
+    outsideAspectRatio(val) {
+      if (val) {
+        this.aspectFactor = val;
+      }
+    },
+    minWidth(val) {
+      if (val > 0 && val <= this.width) {
+        this.minW = val;
+      }
+    },
+    minHeight(val) {
+      if (val > 0 && val <= this.height) {
+        this.minH = val;
+      }
+    },
+    maxWidth(val) {
+      this.maxW = val;
+    },
+    maxHeight(val) {
+      this.maxH = val;
+    },
+    w(val) {
+      if (this.resizing || this.dragging) {
+        return;
+      }
+      if (this.parent) {
+        this.bounds = this.calcResizeLimits();
+      }
+      this.changeWidth(val);
+    },
+    h(val) {
+      if (this.resizing || this.dragging) {
+        return;
+      }
+      if (this.parent) {
+        this.bounds = this.calcResizeLimits();
+      }
+      this.changeHeight(val);
+    }
+  },
+  created: function () {
     // eslint-disable-next-line 无效的prop：minWidth不能大于maxWidth
     if (this.maxWidth && this.minWidth > this.maxWidth) console.warn('[Vdr warn]: Invalid prop: minWidth cannot be greater than maxWidth');
     // eslint-disable-next-line 无效prop：minHeight不能大于maxHeight'
@@ -354,7 +520,7 @@ export default {
     this.BR = {};
     this.resetBoundsAndMouseState();
   },
-  mounted: function() {
+  mounted: function () {
     if (!this.enableNativeDrag) {
       this.$el.ondragstart = () => false;
     }
@@ -379,7 +545,7 @@ export default {
     //  窗口变化时，检查容器大小
     addEvent(window, 'resize', this.checkParentSize);
   },
-  beforeDestroy: function() {
+  beforeDestroy: function () {
     removeEvent(document.documentElement, 'mousedown', this.deselect);
     removeEvent(document.documentElement, 'touchstart', this.handleUp);
     removeEvent(document.documentElement, 'mousemove', this.move);
@@ -750,8 +916,8 @@ export default {
       let deltaX = mouseX - this.mouseClickPosition.mouseX;
       let deltaY = mouseY - this.mouseClickPosition.mouseY;
       // 考虑放缩
-      deltaX = deltaX/this.scaleRatio
-      deltaY = deltaY/this.scaleRatio
+      deltaX = deltaX / this.scaleRatio
+      deltaY = deltaY / this.scaleRatio
       let diffX, diffY, scale, scaleB, scaleC, newX, newY, newW, newH;
       let Fixed = {}; // 固定点
       let BX = {}; // 高度边选点
@@ -1203,198 +1369,7 @@ export default {
       return [Number(left), Number(top), rotate];
     }
   },
-  computed: {
-    handleStyle() {
-      return (stick, index) => {
-        if (!this.handleInfo.switch) return { display: this.enabled ? 'block' : 'none' };
-        // 新增 当没有开启旋转的时候，旋转手柄不显示
-        if (stick === 'rot' && !this.rotatable) return { display: 'none' };
-        const size = (this.handleInfo.size / this.scaleRatio).toFixed(2);
-        const offset = (this.handleInfo.offset / this.scaleRatio).toFixed(2);
-        const center = (size / 2).toFixed(2);
-        const styleMap = {
-          tl: {
-            top: `${offset}px`,
-            left: `${offset}px`
-          },
-          tm: {
-            top: `${offset}px`,
-            left: `calc(50% - ${center}px)`
-          },
-          tr: {
-            top: `${offset}px`,
-            right: `${offset}px`
-          },
-          mr: {
-            top: `calc(50% - ${center}px)`,
-            right: `${offset}px`
-          },
-          br: {
-            bottom: `${offset}px`,
-            right: `${offset}px`
-          },
-          bm: {
-            bottom: `${offset}px`,
-            right: `calc(50% - ${center}px)`
-          },
-          bl: {
-            bottom: `${offset}px`,
-            left: `${offset}px`
-          },
-          ml: {
-            top: `calc(50% - ${center}px)`,
-            left: `${offset}px`
-          },
-          rot: {
-            top: `-${size * 2.5}px`,
-            left: `50%`,
-            width: `${size * 1.25}px`,
-            height: `${size * 1.25}px`
-          }
-        };
-        const stickStyle = {
-          width: styleMap[stick].width || `${size}px`,
-          height: styleMap[stick].height || `${size}px`,
-          top: styleMap[stick].top,
-          left: styleMap[stick].left,
-          right: styleMap[stick].right,
-          bottom: styleMap[stick].bottom
-        };
-        // 新增 让控制手柄的鼠标样式跟随玄幻角度变化
-        if (stick !== 'rot') {
-          const cursorStyleArray = ['nw-resize', 'n-resize', 'ne-resize', 'e-resize', 'se-resize', 's-resize', 'sw-resize', 'w-resize'];
-          const STEP = 45;
-          const rotate = this.rotate + STEP / 2;
-          const deltaIndex = Math.floor(rotate / STEP);
-          index = (index + deltaIndex) % 8;
-          stickStyle.cursor = cursorStyleArray[index];
-        }
-        stickStyle.display = this.enabled ? 'block' : 'none';
-        return stickStyle;
-      };
-    },
-    style() {
-      return {
-        transform: `translate(${this.left}px, ${this.top}px) rotate(${this.rotate}deg)`,
-        width: this.computedWidth,
-        height: this.computedHeight,
-        zIndex: this.zIndex,
-        ...(this.dragging && this.disableUserSelect ? userSelectNone : userSelectAuto)
-      };
-    },
-    // 控制柄显示与否
-    actualHandles() {
-      if (!this.resizable) return [];
-      return this.handles;
-    },
-    //  根据left right 算出元素的宽度
-    computedWidth() {
-      if (this.w === 'auto') {
-        if (!this.widthTouched) {
-          return 'auto';
-        }
-      }
-      return this.width + 'px';
-    },
-    // 根据top bottom 算出元素的宽度
-    computedHeight() {
-      if (this.h === 'auto') {
-        if (!this.heightTouched) {
-          return 'auto';
-        }
-      }
-      return this.height + 'px';
-    }
-  },
-  watch: {
-    active(val) {
-      this.enabled = val;
-      if (val) {
-        this.$emit('activated');
-      } else {
-        this.$emit('deactivated');
-      }
-    },
-    z(val) {
-      if (val >= 0 || val === 'auto') {
-        this.zIndex = val;
-      }
-    },
-    x(val) {
-      if (this.resizing || this.dragging) {
-        return;
-      }
-      if (this.parent) {
-        this.bounds = this.calcDragLimits();
-      }
-      this.moveHorizontally(val);
-    },
-    y(val) {
-      if (this.resizing || this.dragging) {
-        return;
-      }
-      if (this.parent) {
-        this.bounds = this.calcDragLimits();
-      }
-      this.moveVertically(val);
-    },
-    // 新增 监听外部传入参数  旋转角度
-    r(val) {
-      if (val >= 0) {
-        this.rotate = val % 360;
-      }
-    },
-    lockAspectRatio(val) {
-      if (val) {
-        if (this.outsideAspectRatio) {
-          this.aspectFactor = this.outsideAspectRatio;
-        } else {
-          this.aspectFactor = this.width / this.height;
-        }
-      } else {
-        this.aspectFactor = undefined;
-      }
-    },
-    outsideAspectRatio(val) {
-      if (val) {
-        this.aspectFactor = val;
-      }
-    },
-    minWidth(val) {
-      if (val > 0 && val <= this.width) {
-        this.minW = val;
-      }
-    },
-    minHeight(val) {
-      if (val > 0 && val <= this.height) {
-        this.minH = val;
-      }
-    },
-    maxWidth(val) {
-      this.maxW = val;
-    },
-    maxHeight(val) {
-      this.maxH = val;
-    },
-    w(val) {
-      if (this.resizing || this.dragging) {
-        return;
-      }
-      if (this.parent) {
-        this.bounds = this.calcResizeLimits();
-      }
-      this.changeWidth(val);
-    },
-    h(val) {
-      if (this.resizing || this.dragging) {
-        return;
-      }
-      if (this.parent) {
-        this.bounds = this.calcResizeLimits();
-      }
-      this.changeHeight(val);
-    }
-  }
+
 };
 </script>
 <style scoped>
@@ -1403,6 +1378,7 @@ export default {
   position: absolute;
   box-sizing: border-box;
 }
+
 .handle {
   box-sizing: border-box;
   position: absolute;
@@ -1434,15 +1410,41 @@ export default {
   cursor: se-resize;
 }
 /* 新增 旋转控制柄 */
+
 .handle-rot {
-  position: absolute;
+  position: relative;
   transform: translateX(-50%);
-  border-radius: 50%;
   cursor: grab;
+  display: inline-block;
+  box-sizing: border-box;
+  border: none;
+  text-indent: -9999px;
+  vertical-align: middle;
+}
+.handle-rot:before,
+.handle-rot:after {
+  content: "";
+  box-sizing: inherit;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
 }
 .handle-rot:before {
-  content: '';
-  position: absolute;
-  background-color: #666;
+  /* display: block; */
+  width: 1em;
+  height: 1em;
+  border: 2px solid #333;
+  border-right-color: transparent;
+  border-radius: 50%;
+}
+.handle-rot:after {
+  width: 0px;
+  height: 0px;
+  border: 0.25em solid #333;
+  border-left-color: transparent;
+  border-top-color: transparent;
+  left: 100%;
+  top: 10%;
 }
 </style>
