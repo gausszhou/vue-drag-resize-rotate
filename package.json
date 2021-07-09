@@ -13,9 +13,7 @@
   },
   "keywords": [
     "vue",
-    "drag",
-    "resize",
-    "rotate",
+    "component",
     "draggable",
     "resizable",
     "rotateable"
@@ -25,33 +23,58 @@
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "build:lib": "vue-cli-service build --target lib --name vue-drag-resize-rotate --dest lib src/index.js",
-    "unit": "cross-env BABEL_ENV=test mocha-webpack --webpack-config=webpack.test.js tests/unit/specs/**/*.js",
-    "unit-watch": "cross-env BABEL_ENV=test mocha-webpack --watch --webpack-config=webpack.test.js tests/unit/specs/**/*.js"
+    "unit": "cross-env BABEL_ENV=test mocha-webpack --webpack-config=webpack.test.js tests/unit/specs/*/*.js",
+    "unit-watch": "cross-env BABEL_ENV=test mocha-webpack --watch --webpack-config=webpack.test.js tests/unit/specs/*/*.js",
+    "feature": "cross-env BABEL_ENV=test node_modules/karma/bin/karma start tests/feature/karma.conf.js --single-run",
+    "feature-watch": "cross-env BABEL_ENV=test node_modules/karma/bin/karma start tests/feature/karma.conf.js"
   },
-  "dependencies": {},
-  "devDependencies": {
+  "dependencies": {
     "axios": "^0.21.1",
     "core-js": "^3.6.5",
     "element-ui": "^2.15.0",
     "highlight.js": "^10.6.0",
+    "karma": "^6.3.4",
+    "karma-chai": "^0.1.0",
+    "karma-mocha": "^2.0.1",
+    "karma-webpack": "^5.0.0",
     "markdown-it": "^12.0.4",
     "vue": "^2.6.11",
-    "vue-router": "^3.5.1",
+    "vue-router": "^3.5.1"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.14.6",
     "@vue/cli-plugin-babel": "~4.5.0",
     "@vue/cli-plugin-eslint": "^3.11.0",
     "@vue/cli-service": "^4.3.1",
     "@vue/eslint-config-standard": "^4.0.0",
     "@vue/test-utils": "^1.0.0-beta.29",
+    "babel-eslint": "^10.1.0",
     "babel-plugin-istanbul": "^5.2.0",
     "babel-preset-vue": "^2.0.2",
     "chai": "^4.1.2",
     "cross-env": "^5.2.1",
     "eslint": "^7.27.0",
+    "karma-chrome-launcher": "^3.1.0",
+    "karma-coverage": "^2.0.3",
+    "karma-coverage-istanbul-reporter": "^3.0.3",
+    "karma-sourcemap-loader": "^0.3.8",
+    "karma-spec-reporter": "0.0.32",
     "mocha": "^6.2.0",
     "mocha-webpack": "^2.0.0-beta.0",
-    "sinon": "^7.4.2",
+    "sinon": "^11.1.1",
+    "style-loader": "^1.3.0",
     "vue-template-compiler": "^2.6.11",
     "webpack": "^4.42.1"
+  },
+  "files": [
+    "/dist/*",
+    "/src/*",
+    "*.json",
+    "*.js"
+  ],
+  "engines": {
+    "node": ">= 4.0.0",
+    "npm": ">= 3.0.0"
   },
   "browserslist": [
     "> 1%",

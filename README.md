@@ -37,7 +37,7 @@ https://github.com/mauricius/vue-draggable-resizable
 
 ```js
 // 引入全局自定义组件
-import vdrr from "@/components/vdrr/index.vue"
+import vdrr from "@/components/vdrr"
 Vue.component('vdrr', vdrr) 
 ```
 
