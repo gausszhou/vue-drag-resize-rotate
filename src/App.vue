@@ -2,9 +2,6 @@
   <div id="app">
     <div id="menu" :style="style">
       <el-menu class="el-menu-dom" :default-active="active">
-        <el-menu-item>
-          <h1 class="text-center title">VDRR</h1>
-        </el-menu-item>
         <el-submenu v-for="(item,index) in menuData" :key="index" :index="index+1+''">
           <template slot="title">
             <i :class="item.icon"></i>

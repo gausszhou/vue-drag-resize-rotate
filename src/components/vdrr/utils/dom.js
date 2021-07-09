@@ -1,9 +1,17 @@
 import { isFunction } from "./fns"
 
+// 获取rect模型
+export function getSize(el) {
+  const rect = el.getBoundingClientRect()
+  return [
+    parseInt(rect.width),
+    parseInt(rect.height)
+  ]
+}
+
 // 将选择器与父元素匹配
 export function matchesSelectorToParentElements(el, selector, baseNode) {
   let node = el
-
   const matchesSelectorFunc = [
     'matches',
     'webkitMatchesSelector',
@@ -13,7 +21,6 @@ export function matchesSelectorToParentElements(el, selector, baseNode) {
   ].find(func => isFunction(node[func]))
 
   if (!isFunction(node[matchesSelectorFunc])) return false
-
   do {
     if (node[matchesSelectorFunc](selector)) return true
     if (node === baseNode) return false
@@ -25,7 +32,6 @@ export function matchesSelectorToParentElements(el, selector, baseNode) {
 
 export function getComputedSize($el) {
   const style = window.getComputedStyle($el)
-
   return [
     parseFloat(style.getPropertyValue('width'), 10),
     parseFloat(style.getPropertyValue('height'), 10)
@@ -58,3 +64,4 @@ export function removeEvent(el, event, handler) {
     el['on' + event] = null
   }
 }
+
