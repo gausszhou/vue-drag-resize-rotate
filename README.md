@@ -25,22 +25,19 @@ https://github.com/mauricius/vue-draggable-resizable
 
 > 提示:开启旋转后 网格对齐和父容器限制将失效
 
-由于近期没有工作上的新需求，此基础组件暂停开发
-
 ## Live Demo
 
 [中文在线演示地址](https://gausszhou.github.io/vue-drag-resize-rotate)
-
 
 ## Features
 
  默认情况下，开启拖拽和调整大小，旋转功能请设置`:rotatable=true`并传入旋转角度`:r="0"`
 
-## 基本使用
+## Getting Started
 
 ```js
 // 引入全局自定义组件
-import vdrr from "vue-drag-resize-rotate"
+import vdrr from "@/components/vdrr/index.vue"
 Vue.component('vdrr', vdrr) 
 ```
 
@@ -85,14 +82,12 @@ export default {
 </script>
 ```
 
----
-
 ## 新增 Porps
 
-属性: `rotatable`   
-类型: `Boolean`  
-必须: `false`  
-默认: `true`  
+
+| 属性名    | 数据类型 | 是否必须 | 默认值 |
+| --------- | -------- | -------- | ------ |
+| rotatable | Boolean  | false    | true   |
 
 定义组件是否支持旋转
 
@@ -100,10 +95,9 @@ export default {
 <vdrr :rotatable="true" />
 ```
 
-属性: `r`   
-类型: `Number`  
-必须: `false`  
-默认: `0`  
+| 属性名 | 数据类型 | 是否必须 | 默认值 |
+| ------ | -------- | -------- | ------ |
+| r      | Number   | false    | 0      |
 
 定义初始旋转角度
 
@@ -111,10 +105,12 @@ export default {
 <vdrr :r="0" />
 ```
 
-属性: `snapBorder`  
-类型: `Boolean`  
-必需: `false`  
-默认: `false`  
+
+
+| 属性名     | 数据类型 | 是否必须 | 默认值 |
+| ---------- | -------- | -------- | ------ |
+| snapBorder | Boolean  | false    | false  |
+
 
 定义组件是否开启元素对齐容器的边。
 
@@ -122,29 +118,28 @@ export default {
 <vdrr :snap-border="true" />
 ```
 
-属性: `outsideAspectRatio`  
-类型: `Number`  
-必需: `false`  
-默认: `false`  
+| 属性名             | 数据类型 | 是否必须 | 默认值 |
+| ------------------ | -------- | -------- | ------ |
+| outsideAspectRatio | Number   | false    | false  |
 
 定义组件的纵横比
 
 ```html
 <vdrr :lock-aspect-ratio="true" :outsideAspectRatio="1.7777" />
 ```
-属性: `classNameRotatable`  
-类型: `String`  
-必须: `false`  
-默认: `rotatable`  
+
+| 属性名             | 数据类型 | 是否必须 | 默认值    |
+| ------------------ | -------- | -------- | --------- |
+| classNameRotatable | String   | false    | rotatable |
 
 设置组件允许旋转时的类名
+
 ```html
 <vdrr class-name-rotatable="my-rotatable-class" />
 ```
-属性: `classNameRotating`  
-类型: `String`  
-必须: `false`  
-默认: `rotating`  
+| 属性名            | 数据类型 | 是否必须 | 默认值   |
+| ----------------- | -------- | -------- | -------- |
+| classNameRotating | String   | false    | rotating |
 
 设置组件旋转时的类名
 
@@ -154,25 +149,18 @@ export default {
 
 ## 新增 Events
 
-事件: `rotating`  
-必须: `false`  
-返参:
-* `rotate` 旋转的角度
+| 事件名   | 何时调用       | 是否必须 | 返回值              |
+| -------- | -------------- | -------- | ------------------- |
+| rotating | 正在旋转时触发 | false    | `rotate` 旋转的角度 |
 
-旋转时触发
 ```html
 <vdrr :rotating="onRotating" />
 ```
 
-事件: `rotatestop`   
-必须: `false`  
-返参:
-* `rotate` 旋转的角度
-
-旋转结束时触发
+| 事件名     | 何时调用       | 是否必须 | 返回值              |
+| ---------- | -------------- | -------- | ------------------- |
+| rotatestop | 旋转结束时触发 | false    | `rotate` 旋转的角度 |
 
 ```html
 <vdrr :rotatestop="onRotateStop" />
 ```
-
-

@@ -31,9 +31,9 @@
 </template>
 
 <script>
-import { matchesSelectorToParentElements, getComputedSize, addEvent, removeEvent } from '../../utils/dom';
-import { computeWidth, computeHeight, restrictToBounds, snapToGrid, rotatedPoint, getAngle } from '../../utils/fns';
-import { events, userSelectNone, userSelectAuto } from "./option.js"
+import { matchesSelectorToParentElements, getComputedSize, addEvent, removeEvent } from './utils/dom';
+import { computeWidth, computeHeight, restrictToBounds, snapToGrid, rotatedPoint, getAngle } from './utils/fns';
+import { events, userSelectNone, userSelectAuto } from "./utils/option.js"
 let eventsFor = events.mouse;
 export default {
   replace: true,

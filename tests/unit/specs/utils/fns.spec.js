@@ -1,5 +1,5 @@
 import { expect } from 'chai'
-import { isFunction, snapToGrid } from '@/utils/fns'
+import { isFunction, snapToGrid } from '@/components/vdrr/utils/fns'
 
 describe('fns', function () {
   describe('isFunction', function () {
