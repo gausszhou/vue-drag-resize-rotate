@@ -5,11 +5,12 @@
       <input type="number" v-model="z" />
     </div>
     <div class="container">
-      <vdrr :z="z" style="background-color:#ccc;">
-        <p>
+      <vdrr :z="z" :x="150" :y="150" style="background-color:#ccc;">
+        <div>
           通过
-          <b>:z</b> 属性，控制组件的z-index层级
-        </p>
+          <b>:z属性</b>
+          <p>控制组件的z-index:{{z}}层级</p>
+        </div>
       </vdrr>
       <div
         style="width: 200px; height: 200px; background-color: red; position: absolute; top: 100px; left: 100px; z-index: 1; text-align: center; font-size: 24px"

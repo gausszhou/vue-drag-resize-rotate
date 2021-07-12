@@ -31,7 +31,7 @@
 </template>
 
 <script>
-import { matchesSelectorToParentElements, getComputedSize, addEvent, removeEvent, getSize } from './utils/dom';
+import { matchesSelectorToParentElements, getComputedSize, addEvent, removeEvent } from './utils/dom';
 import { computeWidth, computeHeight, restrictToBounds, snapToGrid, rotatedPoint, getAngle } from './utils/fns';
 import { events, userSelectNone, userSelectAuto } from "./utils/option.js"
 let eventsFor = events.mouse;
@@ -148,12 +148,12 @@ export default {
     },
     maxWidth: {
       type: Number,
-      default: null,
+      default: Infinity,
       validator: val => val >= 0
     },
     maxHeight: {
       type: Number,
-      default: null,
+      default: Infinity,
       validator: val => val >= 0
     },
     x: {
@@ -303,7 +303,7 @@ export default {
       // 新增 保存中心点位置，用于计算旋转的方向矢量
       lastCenterX: 0,
       lastCenterY: 0,
-      //
+      // 父元素左上角的坐标值
       parentX: 0,
       parentY: 0
     };
@@ -448,6 +448,7 @@ export default {
         this.rotate = val % 360;
       }
     },
+    // 锁定纵横比
     lockAspectRatio(val) {
       if (val) {
         if (this.outsideAspectRatio) {
@@ -459,6 +460,7 @@ export default {
         this.aspectFactor = undefined;
       }
     },
+    // 自定义纵横比
     outsideAspectRatio(val) {
       if (val) {
         this.aspectFactor = val;
@@ -653,14 +655,6 @@ export default {
       // 开启旋转时，不在进行边界限制
       if (this.rotatable) {
         return {
-          // minLeft: -9999,
-          // maxLeft: 9999,
-          // minRight: -9999,
-          // maxRight: 9999,
-          // minTop: -9999,
-          // maxTop: 9999,
-          // minBottom: -9999,
-          // maxBottom: 9999,
           minLeft: -this.width / 2,
           maxLeft: this.parentWidth - this.width / 2,
           minRight: this.width / 2,
@@ -683,7 +677,7 @@ export default {
         };
       }
     },
-    // 取消
+    // 取消选择
     deselect(e) {
       const target = e.target || e.srcElement;
       const regex = new RegExp(this.className + '-([trmbl]{2})', '');
@@ -711,14 +705,8 @@ export default {
         return false;
       }
       if (e.stopPropagation) e.stopPropagation();
-      // 锁定纵横比时，将顶点转换为中点 - 不在需要因而将其注释
-      // if (this.lockAspectRatio && !handle.includes('m')) {
-      //   this.handle = 'm' + handle.substring(1)
-      // } else {
-      // this.handle = handle;
-      // }
       this.handle = handle;
-      // 新增
+      // 新增旋转手柄
       if (this.handle === 'rot') {
         this.rotating = true;
       } else {
@@ -738,6 +726,7 @@ export default {
       let centerX = oleft + owidth / 2;
       let centerY = otop + oheight / 2;
       let rotate = this.rotate;
+      // 获取旋转后的坐标
       this.TL = rotatedPoint(centerX, centerY, oleft, otop, rotate);
       this.TR = rotatedPoint(centerX, centerY, oleft + owidth, otop, rotate);
       this.BL = rotatedPoint(centerX, centerY, oleft, otop + oheight, rotate);
@@ -861,7 +850,6 @@ export default {
       this.$emit('rotating', this.rotate);
       // 元素移动
     },
-
     // 元素移动
     async handleDrag(e) {
       const axis = this.axis;
@@ -916,8 +904,8 @@ export default {
       let deltaX = mouseX - this.mouseClickPosition.mouseX;
       let deltaY = mouseY - this.mouseClickPosition.mouseY;
       // 考虑放缩
-      deltaX = deltaX / this.scaleRatio
-      deltaY = deltaY / this.scaleRatio
+      deltaX = deltaX / scaleRatio
+      deltaY = deltaY / scaleRatio
       let diffX, diffY, scale, scaleB, scaleC, newX, newY, newW, newH;
       let Fixed = {}; // 固定点
       let BX = {}; // 高度边选点
@@ -981,6 +969,7 @@ export default {
           default:
             break;
         }
+        // 反推宽高
         newX = Fixed.x + (Vw.x + Vh.x) / 2;
         newY = Fixed.y + (Vw.y + Vh.y) / 2;
         newW = Math.sqrt(Math.pow(Vw.x, 2) + Math.pow(Vw.y, 2));
@@ -1026,6 +1015,7 @@ export default {
         scaleC = (Va.x * Vc.x + Va.y * Vc.y) / (Math.pow(Vc.x, 2) + Math.pow(Vc.y, 2));
         Vw = { x: Vb.x * scaleB, y: Vb.y * scaleB };
         Vh = { x: Vc.x * scaleC, y: Vc.y * scaleC };
+        // 反推宽高
         newX = Fixed.x + (Vw.x + Vh.x) / 2;
         newY = Fixed.y + (Vw.y + Vh.y) / 2;
         newW = Math.sqrt(Math.pow(Vw.x, 2) + Math.pow(Vw.y, 2));
@@ -1033,15 +1023,15 @@ export default {
       }
       this.left = newX - newW / 2;
       this.top = newY - newH / 2;
-      // 存在父容器，内部元素大小不允许超过父容器
+      // 大小限制
+      newW = restrictToBounds(newW, this.minW || 0, this.maxW);
+      newH = restrictToBounds(newH, this.minH || 0, this.maxH);
+      // 父元素限制
       if (this.parent) {
         newW = restrictToBounds(newW, 0, this.parentWidth);
         newH = restrictToBounds(newH, 0, this.parentHeight);
       }
-      // 外部传参限制大小
-      newW = restrictToBounds(newW, this.minW || 0, this.maxW);
-      newH = restrictToBounds(newH, this.minH || 0, this.maxH);
-      // 纵横比
+      // 纵横比限制
       if (this.lockAspectRatio) {
         console.log(this.lockAspectRatio, this.aspectFactor);
         if (newW / newH > this.aspectFactor) {
@@ -1339,7 +1329,7 @@ export default {
       let groupLeft = 0;
       let groupTop = 0;
       for (const item of nodes) {
-        // 修复判断条件
+        // 修复判断条件 split(' ')
         if (item.className !== undefined && item.className.split(' ').includes(this.classNameActive)) {
           activeAll.push(item);
         }
@@ -1362,7 +1352,7 @@ export default {
       const bln = AllLength === 1;
       return { groupWidth, groupHeight, groupLeft, groupTop, bln };
     },
-    // 修复 正则获取left与top
+    // 修复 正则获取left与top  string.match(/[\d|\.]+/g)
     formatTransformVal(string) {
       let [left, top, rotate = 0] = string.match(/[\d|\.]+/g);
       if (top === undefined) top = 0;
@@ -1410,7 +1400,6 @@ export default {
   cursor: se-resize;
 }
 /* 新增 旋转控制柄 */
-
 .handle-rot {
   position: relative;
   transform: translateX(-50%);
@@ -1431,7 +1420,6 @@ export default {
   transform: translate(-50%, -50%);
 }
 .handle-rot:before {
-  /* display: block; */
   width: 1em;
   height: 1em;
   border: 2px solid #333;

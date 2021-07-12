@@ -13,6 +13,6 @@ git commit -m "$time deploy"
 git branch gh-pages
 git checkout  gh-pages
 # 部署到 github gh-pages /
-git push  git@github.com:gausszhou/vue-drag-resize-rotate.git gh-pages -f
+git push  git@github.com:gausszhou/vdrr.vue.git gh-pages -f
 fi
 cd -

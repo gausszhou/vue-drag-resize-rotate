@@ -1,6 +1,6 @@
 <template>
   <div class="view-box">
-    <div id="toolbar" style="padding: 1em">Size: {{ width }} x {{ height }}</div>
+    <div id="toolbar">Size: {{ width }} x {{ height }}</div>
     <div class="container">
       <vdrr :parent="true" :max-width="300" :max-height="300" @resizing="onResizing">
         <p>

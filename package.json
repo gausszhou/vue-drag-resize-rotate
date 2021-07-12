@@ -1,16 +1,12 @@
 {
-  "name": "@gausszhou/vue-drag-resize-rotate",
+  "name": "@gausszhou/vdrr",
   "description": "一个Vue可拖拽组件，支持拉伸，旋转，放缩",
-  "main": "vue-drag-resize-rotate.umd.min",
-  "unpkg": "vue-drag-resize-rotate.umd.min",
-  "version": "0.0.1",
+  "main": "vdrr.umd.min",
+  "unpkg": "vdrr.umd.min",
+  "version": "2.0.1",
   "author": "gausszhou <gausszhou@qq.com>",
   "private": false,
   "license": "MIT",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/gausszhou/vue-drag-resize-rotate.git"
-  },
   "keywords": [
     "vue",
     "component",
@@ -22,21 +18,15 @@
     "dev": "vue-cli-service serve",
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "build:lib": "vue-cli-service build --target lib --name vue-drag-resize-rotate --dest lib src/index.js",
+    "build:lib": "vue-cli-service build --target lib --name vdrr --dest lib src/index.js",
     "unit": "cross-env BABEL_ENV=test mocha-webpack --webpack-config=webpack.test.js tests/unit/specs/*/*.js",
-    "unit-watch": "cross-env BABEL_ENV=test mocha-webpack --watch --webpack-config=webpack.test.js tests/unit/specs/*/*.js",
-    "feature": "cross-env BABEL_ENV=test node_modules/karma/bin/karma start tests/feature/karma.conf.js --single-run",
-    "feature-watch": "cross-env BABEL_ENV=test node_modules/karma/bin/karma start tests/feature/karma.conf.js"
+    "unit-watch": "cross-env BABEL_ENV=test mocha-webpack --watch --webpack-config=webpack.test.js tests/unit/specs/*/*.js"
   },
   "dependencies": {
     "axios": "^0.21.1",
     "core-js": "^3.6.5",
     "element-ui": "^2.15.0",
     "highlight.js": "^10.6.0",
-    "karma": "^6.3.4",
-    "karma-chai": "^0.1.0",
-    "karma-mocha": "^2.0.1",
-    "karma-webpack": "^5.0.0",
     "markdown-it": "^12.0.4",
     "vue": "^2.6.11",
     "vue-router": "^3.5.1"
@@ -54,11 +44,6 @@
     "chai": "^4.1.2",
     "cross-env": "^5.2.1",
     "eslint": "^7.27.0",
-    "karma-chrome-launcher": "^3.1.0",
-    "karma-coverage": "^2.0.3",
-    "karma-coverage-istanbul-reporter": "^3.0.3",
-    "karma-sourcemap-loader": "^0.3.8",
-    "karma-spec-reporter": "0.0.32",
     "mocha": "^6.2.0",
     "mocha-webpack": "^2.0.0-beta.0",
     "sinon": "^11.1.1",
@@ -81,6 +66,10 @@
     "last 2 versions",
     "not dead"
   ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/gausszhou/vue-drag-resize-rotate.git"
+  },
   "bugs": {
     "url": "https://github.com/gausszhou/vue-drag-resize-rotate/issues"
   },

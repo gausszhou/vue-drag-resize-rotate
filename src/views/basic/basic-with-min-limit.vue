@@ -7,12 +7,13 @@
       <input type="number" v-model.number="minHeight" />
     </div>
     <div class="container">
-      <vdrr :min-width="minWidth" :min-height="minHeight">
-        <p>
-          基本组件，可以配置
+      <vdrr :min-width="minWidth" :min-height="minHeight" :w="200" :h="200" @resizing="onResize" @resizestop="onResize">
+        <div>
+          <p>基本组件，可以配置</p>
           <b>minWidth</b> 和
           <b>minHeight</b> 属性
-        </p>
+          <p>w:{{w}},h:{{h}}</p>
+        </div>
       </vdrr>
     </div>
   </div>
@@ -23,8 +24,16 @@ export default {
   data() {
     return {
       minWidth: 200,
-      minHeight: 200
+      minHeight: 200,
+      w: 200,
+      h: 200
     }
+  },
+  methods: {
+    onResize: function (x, y, width, height) {
+      this.w = width
+      this.h = height
+    },
   }
 }
 </script>

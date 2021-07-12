@@ -51,7 +51,7 @@
 #view {
   flex: 1;
   min-width: 500px;
-  padding: 10px 35px 0 35px;
+  padding: 10px 15px 0 15px;
   height: 100vh;
   overflow-y: auto;
   overflow-x: hidden;
@@ -105,31 +105,6 @@
 }
 .ml_10 {
   margin-left: 10px;
-}
-.pattern-contaienr {
-  border: 1px solid #ccc;
-  width: 576px;
-  height: 324px;
-}
-.iconPistion {
-  border-width: 2px;
-  border-style: solid;
-  border-color: #409eff;
-  background-color: rgba(128, 128, 128, 0.5);
-  box-sizing: border-box;
-}
-.iconPistion .icon-slot {
-  font-size: 12px;
-}
-.patternContent {
-  display: flex;
-}
-.patternContent .patternLeft {
-  margin: 10px;
-}
-.patternContent .patternRight {
-  width: 400px;
-  margin: 10px;
 }
 .icon-slot {
   width: 100%;
