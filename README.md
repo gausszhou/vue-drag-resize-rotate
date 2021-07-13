@@ -34,8 +34,8 @@ https://github.com/mauricius/vue-draggable-resizable
 
 ## Getting Started
 
-```js
-npm install https://github.com/gausszhou/vdrr.vue
+```shell
+npm install  https://github.com/gausszhou/vdrr.vue.git
 ```
 
 ```js
@@ -90,47 +90,49 @@ export default {
 | 属性名 | 数据类型 | 默认值 |
 | ------ | -------- | ------ |
 
-定义组件是否支持旋转
 | `rotatable` | `Boolean`  | `false`    | 
 
 ```html
+<!-- 定义组件是否支持旋转  -->
 <vdrr :rotatable="true" />
 ```
-
-
-
+ 
 | `r`      | `Number`  | ` 0`      |
-定义初始旋转角度
 
 ```html
+<!-- 定义初始旋转角度   -->
 <vdrr :r="0" />
 ```
 
-定义组件是否开启元素对齐容器的边。
+
 | `snapBorder` | `Boolean`  | `false`    |
 
 ```html
+<!-- 定义组件是否开启元素对齐容器的边。   -->
 <vdrr :snap-border="true" />
 ```
 
-定义组件的纵横比
+
 | `outsideAspectRatio` | `Number`  | `false`  |
 
 ```html
+<!-- 定义组件的纵横比   -->
 <vdrr :lock-aspect-ratio="true" :outsideAspectRatio="1.7777" />
 ```
 
-设置组件允许旋转时的类名
+
 | `classNameRotatable` | `String`      | `rotatable` |
 
 ```html
+<!-- 设置组件允许旋转时的类名   -->
 <vdrr class-name-rotatable="my-rotatable-class" />
 ```
 
-设置组件旋转时的类名
+
 |`classNameRotating` | `String` |`rotating`|
 
 ```html
+<!-- 设置组件旋转时的类名   -->
 <vdrr class-name-rotating="my-rotating-class" />
 ```
 
@@ -138,7 +140,6 @@ export default {
 
 | 事件名 | 何时触发 | 返回值 |
 | ------ | -------- | ------ |
-
 
 |`rotating` | 正在旋转时触发 | 返回当前旋转的角度|
 
