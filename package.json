@@ -1,8 +1,7 @@
 {
   "name": "@gausszhou/vdrr",
   "description": "一个Vue可拖拽组件，支持拉伸，旋转，放缩",
-  "main": "vdrr.umd.min",
-  "unpkg": "vdrr.umd.min",
+  "main": "lib/vdrr.umd.min",
   "version": "2.0.1",
   "author": "gausszhou <gausszhou@qq.com>",
   "private": false,
