@@ -4,8 +4,8 @@
 
 ~~~js
 <div>
-  <vdrr :parent="true" :grid=[20,20] :x="10" :y="10" :width="200" :height="200">
+  <vue-drag-resize-rotate :parent="true" :grid=[20,20] :x="10" :y="10" :width="200" :height="200">
     <p>You cannot move me or resize me outside my parent. And my edges cannot touch the parent element.</p>
-  </vdrr>
+  </vue-drag-resize-rotate>
 </div>
 ~~~

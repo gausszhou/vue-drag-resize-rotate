@@ -7,7 +7,7 @@
       </label>
     </div>
     <div class="container">
-      <vdrr :handles="enabledHandles" :prevent-deactivation="true" :w="250" :h="250">
+      <vue-drag-resize-rotate :handles="enabledHandles" :prevent-deactivation="true" :w="250" :h="250">
         <p>Enable/disable handles.</p>
         <ul>
           <li
@@ -15,7 +15,7 @@
             :key="handle"
           >{{ handle }} - {{ handles[handle] ? '&check;' : '&cross;' }}</li>
         </ul>
-      </vdrr>
+      </vue-drag-resize-rotate>
     </div>
   </div>
 </template>
@@ -46,7 +46,7 @@ export default {
 
 <style  scoped>
 .vdr ul,
-.vdrr ul {
+.vue-drag-resize-rotate ul {
   margin: 0 0 0 25px;
 }
 </style>

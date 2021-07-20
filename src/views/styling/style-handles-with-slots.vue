@@ -2,7 +2,7 @@
   <div class="view-box">
     <div id="toolbar">具有句柄自定义标记的组件</div>
     <div class="container">
-      <vdrr class-name-handle="my-handle-class">
+      <vue-drag-resize-rotate class-name-handle="my-handle-class">
         <p>The first child will populate the default slot.</p>
         <div slot="tl">😀</div>
         <div slot="tm">😂</div>
@@ -12,7 +12,7 @@
         <div slot="bm">😍</div>
         <div slot="bl">😣</div>
         <div slot="ml">😕</div>
-      </vdrr>
+      </vue-drag-resize-rotate>
     </div>
   </div>
 </template>

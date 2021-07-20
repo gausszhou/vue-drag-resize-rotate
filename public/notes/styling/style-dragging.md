@@ -3,9 +3,9 @@
 在拖动时具有自定义类名的组件，由prop <b>`class-name-dragging` </b>提供。
 
 ~~~js
-<vdrr class-name-dragging="my-dragging-class" class-name="my-class">
+<vue-drag-resize-rotate class-name-dragging="my-dragging-class" class-name="my-class">
   <p>You can provide a default class name for the component when it's dragging using the <b>class-name-dragging</b> prop.</p>
-</vdrr>
+</vue-drag-resize-rotate>
 <style>
 .my-class {
     background-color: green;

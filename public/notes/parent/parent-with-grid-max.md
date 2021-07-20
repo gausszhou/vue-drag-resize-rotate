@@ -4,9 +4,9 @@
 
 ~~~js
 <div>
-  <vdrr :parent="true" :max-width="290" :max-height="290" :grid="[10,20]">
+  <vue-drag-resize-rotate :parent="true" :max-width="290" :max-height="290" :grid="[10,20]">
     <p>Component costrained in parent with <b>maxWidth</b> and <b>maxHeight</b> equal to 290.</p>
-  </vdrr>
+  </vue-drag-resize-rotate>
 </div>
 ~~~
 

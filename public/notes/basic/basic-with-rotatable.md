@@ -9,9 +9,9 @@
       <input type="checkbox" v-model="rotatable" /> Toggle rotatable
     </div>
     <div class="container">
-      <vdrr :rotatable.sync="rotatable">
+      <vue-drag-resize-rotate :rotatable.sync="rotatable">
         <p>Basic component that is {{ rotatable ? 'also' : 'not' }} rotatable.</p>
-      </vdrr>
+      </vue-drag-resize-rotate>
     </div>
   </div>
 </template>

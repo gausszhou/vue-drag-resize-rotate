@@ -3,9 +3,9 @@
     <div id="toolbar">Size: {{ width }} x {{ height }}</div>
     <div class="container">
       <div :style="style">
-        <vdrr :grid="[20,40]" :x="10" :y="20" :maxHeight="290" :maxWidth="290" @resizing="onResizing">
+        <vue-drag-resize-rotate :grid="[20,40]" :x="10" :y="20" :maxHeight="290" :maxWidth="290" @resizing="onResizing">
           <p>Grid 20x40 starting with a 10x20 offset and max height, max width values equal to 290.</p>
-        </vdrr>
+        </vue-drag-resize-rotate>
       </div>
     </div>
   </div>

@@ -9,9 +9,9 @@
       </label>
     </div>
     <div class="container">
-      <vdrr :axis="axis">
+      <vue-drag-resize-rotate :axis="axis">
         <p>Draggable on {{ axis }} axis.</p>
-      </vdrr>
+      </vue-drag-resize-rotate>
     </div>
   </div>
 </template>

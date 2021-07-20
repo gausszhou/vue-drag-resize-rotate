@@ -15,8 +15,8 @@ import http from "./request/http"
 Vue.prototype.$http = http
 
 // 引入全局自定义组件
-import vdrr from "./components/vdrr"
-Vue.component('vdrr', vdrr)
+import VueDragReSizeRotate from "./components/vue-drag-resize-rotate"
+Vue.component('vue-drag-resize-rotate', VueDragReSizeRotate)
 
 Vue.config.productionTip = false
 

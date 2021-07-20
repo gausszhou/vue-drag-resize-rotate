@@ -4,7 +4,7 @@
       <input type="checkbox" v-model="rotatable" /> Toggle rotatable
     </div>
     <div class="container">
-      <vdrr
+      <vue-drag-resize-rotate
         :rotatable="rotatable"
         :r="angle"
         @rotating="rotating"
@@ -14,7 +14,7 @@
       >
         <p v-if="rotatable">现在可以旋转，旋转角度为{{angle}}</p>
         <p v-else>现在不可以旋转</p>
-      </vdrr>
+      </vue-drag-resize-rotate>
     </div>
   </div>
 </template>

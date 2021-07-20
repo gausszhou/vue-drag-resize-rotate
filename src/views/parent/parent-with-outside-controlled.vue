@@ -12,9 +12,18 @@
     </div>
     <div class="container">
       <div :style="style">
-        <vdrr :parent="true" :grid="[20,20]" :x="x" :y="y" :h="h" :w="w" @dragging="onDrag" @resizing="onResize">
+        <vue-drag-resize-rotate
+          :parent="true"
+          :grid="[20,20]"
+          :x="x"
+          :y="y"
+          :h="h"
+          :w="w"
+          @dragging="onDrag"
+          @resizing="onResize"
+        >
           <p>You cannot move me or resize me outside my parent.</p>
-        </vdrr>
+        </vue-drag-resize-rotate>
       </div>
     </div>
   </div>

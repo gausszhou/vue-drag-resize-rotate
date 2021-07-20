@@ -2,15 +2,15 @@
   <div class="view-box">
     <div id="toolbar">
       <input type="checkbox" v-model="ratio" /> Toggle Lock Aspect Ratio
-      <input type="number" v-model="outsideAspectRatio">
+      <input type="number" v-model="outsideAspectRatio" />
     </div>
     <div class="container">
-      <vdrr :lock-aspect-ratio="ratio" :outsideAspectRatio="outsideAspectRatio">
+      <vue-drag-resize-rotate :lock-aspect-ratio="ratio" :outsideAspectRatio="outsideAspectRatio">
         <p>
           Keep aspect ratio using
           <b>:lock-aspect-ratio</b> prop.
         </p>
-      </vdrr>
+      </vue-drag-resize-rotate>
     </div>
   </div>
 </template>
@@ -20,7 +20,7 @@ export default {
   data() {
     return {
       ratio: true,
-      outsideAspectRatio:1.7777
+      outsideAspectRatio: 1.7777
     }
   }
 }

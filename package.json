@@ -1,7 +1,7 @@
 {
-  "name": "@gausszhou/vdrr",
+  "name": "vue-drag-resize-rotate",
   "description": "一个Vue可拖拽组件，支持拉伸，旋转，放缩",
-  "main": "lib/vdrr.umd.min",
+  "main": "lib/vue-drag-reszie-rotate",
   "version": "2.0.1",
   "author": "gausszhou <gausszhou@qq.com>",
   "private": false,
@@ -17,7 +17,7 @@
     "dev": "vue-cli-service serve",
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "build:lib": "vue-cli-service build --target lib --name vdrr --dest lib src/index.js",
+    "build:lib": "vue-cli-service build --target lib --name vue-drag-resize-rotate --dest lib src/index.js",
     "unit": "cross-env BABEL_ENV=test mocha-webpack --webpack-config=webpack.test.js tests/unit/specs/*/*.js",
     "unit-watch": "cross-env BABEL_ENV=test mocha-webpack --watch --webpack-config=webpack.test.js tests/unit/specs/*/*.js"
   },

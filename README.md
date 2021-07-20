@@ -1,4 +1,4 @@
-# vdrr.vue
+# vue-drag-resize-rotate.vue
  
 [![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE)
 
@@ -35,13 +35,13 @@ https://github.com/mauricius/vue-draggable-resizable
 ## Getting Started
 
 ```shell
-npm install  https://github.com/gausszhou/vdrr.vue.git
+npm install  https://github.com/gausszhou/vue-drag-resize-rotate.vue.git
 ```
 
 ```js
 // 引入全局自定义组件
-import vdrr from "@gausszhou/vdrr"
-Vue.component('vdrr', vdrr) 
+import vue-drag-resize-rotate from "@gausszhou/vue-drag-resize-rotate"
+Vue.component('vue-drag-resize-rotate', vue-drag-resize-rotate) 
 ```
 
 ```vue
@@ -51,7 +51,7 @@ Vue.component('vdrr', vdrr)
       <input type="checkbox" v-model="rotatable" /> Toggle rotatable
     </div>
     <div class="container">
-      <vdrr
+      <vue-drag-resize-rotate
         :parent="true"
         :resizable="true"
         @resizing="resizing"
@@ -61,7 +61,7 @@ Vue.component('vdrr', vdrr)
       >
         <p v-if="rotatable">现在可以旋转，旋转角度为{{angle}}</p>
         <p v-else>现在不可以旋转</p>
-      </vdrr>
+      </vue-drag-resize-rotate>
     </div>
   </div>
 </template>
@@ -94,14 +94,14 @@ export default {
 
 ```html
 <!-- 定义组件是否支持旋转  -->
-<vdrr :rotatable="true" />
+<vue-drag-resize-rotate :rotatable="true" />
 ```
  
 | `r`      | `Number`  | ` 0`      |
 
 ```html
 <!-- 定义初始旋转角度   -->
-<vdrr :r="0" />
+<vue-drag-resize-rotate :r="0" />
 ```
 
 
@@ -109,7 +109,7 @@ export default {
 
 ```html
 <!-- 定义组件是否开启元素对齐容器的边。   -->
-<vdrr :snap-border="true" />
+<vue-drag-resize-rotate :snap-border="true" />
 ```
 
 
@@ -117,7 +117,7 @@ export default {
 
 ```html
 <!-- 定义组件的纵横比   -->
-<vdrr :lock-aspect-ratio="true" :outsideAspectRatio="1.7777" />
+<vue-drag-resize-rotate :lock-aspect-ratio="true" :outsideAspectRatio="1.7777" />
 ```
 
 
@@ -125,7 +125,7 @@ export default {
 
 ```html
 <!-- 设置组件允许旋转时的类名   -->
-<vdrr class-name-rotatable="my-rotatable-class" />
+<vue-drag-resize-rotate class-name-rotatable="my-rotatable-class" />
 ```
 
 
@@ -133,7 +133,7 @@ export default {
 
 ```html
 <!-- 设置组件旋转时的类名   -->
-<vdrr class-name-rotating="my-rotating-class" />
+<vue-drag-resize-rotate class-name-rotating="my-rotating-class" />
 ```
 
 ## 新增 Events
@@ -144,10 +144,10 @@ export default {
 |`rotating` | 正在旋转时触发 | 返回当前旋转的角度|
 
 ```html
-<vdrr :rotating="onRotating" />
+<vue-drag-resize-rotate :rotating="onRotating" />
 ```
 
 |`rotatestop`| 旋转结束时触发 | 返回当前旋转的角度|
 ```html
-<vdrr :rotatestop="onRotateStop" />
+<vue-drag-resize-rotate :rotatestop="onRotateStop" />
 ```

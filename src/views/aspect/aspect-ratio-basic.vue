@@ -4,12 +4,12 @@
       <input type="checkbox" v-model="ratio" /> Toggle Lock Aspect Ratio
     </div>
     <div class="container">
-      <vdrr :lock-aspect-ratio="ratio">
+      <vue-drag-resize-rotate :lock-aspect-ratio="ratio">
         <p>
           Keep aspect ratio using
           <b>:lock-aspect-ratio</b> prop.
         </p>
-      </vdrr>
+      </vue-drag-resize-rotate>
     </div>
   </div>
 </template>

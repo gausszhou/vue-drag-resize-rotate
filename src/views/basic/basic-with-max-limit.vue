@@ -7,14 +7,21 @@
       <input type="number" v-model.number="maxHeight" />
     </div>
     <div class="container">
-      <vdrr :max-width="maxWidth" :max-height="maxHeight" :w="200" :h="200" @resizing="onResize" @resizestop="onResize">
+      <vue-drag-resize-rotate
+        :max-width="maxWidth"
+        :max-height="maxHeight"
+        :w="200"
+        :h="200"
+        @resizing="onResize"
+        @resizestop="onResize"
+      >
         <div>
           <p>基本组件，可以配置</p>
           <b>maxWidth</b> 和
           <b>maxHeight</b> 属性
           <p>w:{{w}},h:{{h}}</p>
         </div>
-      </vdrr>
+      </vue-drag-resize-rotate>
     </div>
   </div>
 </template>
