@@ -4,10 +4,10 @@
       <input type="checkbox" v-model="resizable" /> Toggle resizable
     </div>
     <div class="container">
-      <vdrr :resizable="resizable">
+      <vue-drag-resize-rotate :resizable="resizable">
         <p v-if="resizable">现在可以调整大小了</p>
         <p v-else>现在不可以调整大小</p>
-      </vdrr>
+      </vue-drag-resize-rotate>
     </div>
   </div>
 </template>

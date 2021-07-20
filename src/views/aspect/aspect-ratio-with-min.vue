@@ -2,13 +2,13 @@
   <div class="view-box">
     <div id="toolbar">Size: {{ width }} x {{ height }}</div>
     <div class="container">
-      <vdrr :lock-aspect-ratio="true" :minHeight="100" :minWidth="50" @resizing="onResizing">
+      <vue-drag-resize-rotate :lock-aspect-ratio="true" :minHeight="100" :minWidth="50" @resizing="onResizing">
         <p>
           Keep aspect ratio and set
           <b>minHeight</b> to 100 and
           <b>minWidth</b> to 50.
         </p>
-      </vdrr>
+      </vue-drag-resize-rotate>
     </div>
   </div>
 </template>

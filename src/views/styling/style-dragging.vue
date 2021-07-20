@@ -2,12 +2,12 @@
   <div class="view-box">
     <div id="toolbar">拖动时具有自定义类名的组件</div>
     <div class="container">
-      <vdrr class-name-dragging="my-dragging-class" class-name="my-class">
+      <vue-drag-resize-rotate class-name-dragging="my-dragging-class" class-name="my-class">
         <p>
           你也可以设置组件处于拖拽式的类名
           <b>class-name-dragging</b>
         </p>
-      </vdrr>
+      </vue-drag-resize-rotate>
     </div>
   </div>
 </template>

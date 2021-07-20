@@ -2,7 +2,7 @@
   <div class="view-box">
     <div id="toolbar">位置冲突检测</div>
     <div class="container">
-      <vdrr
+      <vue-drag-resize-rotate
         :w="200"
         :h="200"
         :parent="true"
@@ -13,8 +13,8 @@
         :isConflictCheck="true"
         :rotatable="true"
         style="background-color: rgb(174, 213, 129);"
-      ></vdrr>
-      <vdrr
+      ></vue-drag-resize-rotate>
+      <vue-drag-resize-rotate
         :w="200"
         :h="200"
         :parent="true"
@@ -25,7 +25,7 @@
         :isConflictCheck="true"
         :rotatable="true"
         style="background-color: rgb(129, 212, 250);"
-      ></vdrr>
+      ></vue-drag-resize-rotate>
     </div>
   </div>
 </template>

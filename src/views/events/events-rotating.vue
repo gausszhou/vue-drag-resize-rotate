@@ -2,13 +2,21 @@
   <div class="view-box">
     <div id="toolbar">调整旋转角度触发事件rotating和rotatestop</div>
     <div class="container">
-      <vdrr :w="200" :h="200" :x="0" :y="0" :rotatable="true" @rotating="onRotating" @rotatestop="onRotateStop">
+      <vue-drag-resize-rotate
+        :w="200"
+        :h="200"
+        :x="0"
+        :y="0"
+        :rotatable="true"
+        @rotating="onRotating"
+        @rotatestop="onRotateStop"
+      >
         <p>
           {{ rotating ? '你正在旋转' : '这个角度刚刚好' }}
           <br />
           Rotate: {{rotate}}
         </p>
-      </vdrr>
+      </vue-drag-resize-rotate>
     </div>
   </div>
 </template>

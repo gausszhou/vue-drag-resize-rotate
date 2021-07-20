@@ -8,7 +8,7 @@
       </label>
     </div>
     <div class="container">
-      <vdrr
+      <vue-drag-resize-rotate
         class-name-active="my-active-class"
         v-for="element in elements"
         :key="element.id"
@@ -21,7 +21,7 @@
         @dragstop="(left, top) => dragstop(element.id, left, top)"
       >
         <p>{{ element.text }}</p>
-      </vdrr>
+      </vue-drag-resize-rotate>
     </div>
   </div>
 </template>

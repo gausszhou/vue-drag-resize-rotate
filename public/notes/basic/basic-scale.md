@@ -1,9 +1,9 @@
 # 允许放缩 
 
-> 放缩时，建议保持父元素盒子和vdrr放缩值保持一致
+> 放缩时，建议保持父元素盒子和vue-drag-resize-rotate放缩值保持一致
 
 ```html
-<vdrr :scaleRatio="scaleRatio">
+<vue-drag-resize-rotate :scaleRatio="scaleRatio">
 ```
 ```js
     containerStyle() {
@@ -19,7 +19,7 @@
       <el-input-number size="mini" v-model="scaleRatio" :step=".1" :min=".1" :max="10" />scaleRatio
     </div>
     <div class="container" :style="containerStyle()">
-      <vdrr
+      <vue-drag-resize-rotate
         :rotatable="rotatable"
         :x="position.x"
         :y="position.y"
@@ -35,7 +35,7 @@
         <p>位置为({{position.x}},{{position.y}})</p>
         <p>大小为({{position.w}},{{position.h}})</p>
         <p>角度为{{angle}}</p>
-      </vdrr>
+      </vue-drag-resize-rotate>
     </div>
   </div>
 </template>

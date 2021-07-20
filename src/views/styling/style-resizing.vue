@@ -2,12 +2,12 @@
   <div class="view-box">
     <div id="toolbar">调整大小时具有自定义类名的组件</div>
     <div class="container">
-      <vdrr class-name-resizing="my-resizing-class" class-name="my-class">
+      <vue-drag-resize-rotate class-name-resizing="my-resizing-class" class-name="my-class">
         <p>
           同样组件处于被拉伸时，设置类名
           <b>class-name-resizing</b> prop.
         </p>
-      </vdrr>
+      </vue-drag-resize-rotate>
     </div>
   </div>
 </template>

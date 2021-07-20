@@ -3,9 +3,9 @@
 拖动组件时会发出`dragging(x,y)`事件。 拖动停止时会发生`dragstop(x,y)`事件。
 
 ```html
-<vdrr :w="200" :h="200" @dragging="onDrag" @dragstop="onDragStop">
+<vue-drag-resize-rotate :w="200" :h="200" @dragging="onDrag" @dragstop="onDragStop">
   <p>{{ dragging ? 'You are dragging me crazy' : 'Standing still' }}</p>
-</vdrr>
+</vue-drag-resize-rotate>
 
 <script>
 export default () => ({

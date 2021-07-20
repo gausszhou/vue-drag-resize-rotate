@@ -2,13 +2,13 @@
   <div class="view-box">
     <div id="toolbar">组件插槽</div>
     <div class="container">
-      <vdrr>
+      <vue-drag-resize-rotate>
         <p>基本组件内插入表单</p>
         <form @submit.stop.prevent="onSubmit">
           <input type="text" name="input" value="Hello" />
           <button type="submit">Submit</button>
         </form>
-      </vdrr>
+      </vue-drag-resize-rotate>
     </div>
   </div>
 </template>

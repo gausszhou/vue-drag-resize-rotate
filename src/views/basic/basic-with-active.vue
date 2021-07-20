@@ -5,18 +5,18 @@
       <input type="checkbox" v-model="active2" /> Toggle Active2
     </div>
     <div class="container">
-      <vdrr :active.sync="active1">
+      <vue-drag-resize-rotate :active.sync="active1">
         <p>
           外部组件通过控制
           <b>:active</b> prop来控制组件的激活状态
         </p>
-      </vdrr>
-      <vdrr :active.sync="active2">
+      </vue-drag-resize-rotate>
+      <vue-drag-resize-rotate :active.sync="active2">
         <p>
           外部组件通过控制
           <b>:active</b> prop来控制组件的激活状态
         </p>
-      </vdrr>
+      </vue-drag-resize-rotate>
     </div>
   </div>
 </template>

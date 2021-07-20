@@ -3,7 +3,7 @@
 具有句柄自定义标记的组件，由[VueJS named slots](https://vuejs.org/v2/guide/components-slots.html#Named-Slots)提供（例如`slot =“tl”`）。
 
 ~~~js
-<vdrr class-name-handle="emoji-handles">
+<vue-drag-resize-rotate class-name-handle="emoji-handles">
   <p>The first child will populate the default slot.</p>
 
   <div slot="tl">😀</div>
@@ -14,6 +14,6 @@
   <div slot="bm">😀</div>
   <div slot="bl">😀</div>
   <div slot="ml">😀</div>
-</vdrr>
+</vue-drag-resize-rotate>
 ~~~
 

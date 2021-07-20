@@ -31,10 +31,39 @@
 </template>
 
 <script>
+
 import { matchesSelectorToParentElements, getComputedSize, addEvent, removeEvent } from './utils/dom';
 import { computeWidth, computeHeight, restrictToBounds, snapToGrid, rotatedPoint, getAngle } from './utils/fns';
-import { events, userSelectNone, userSelectAuto } from "./utils/option.js"
+
+export const events = {
+  mouse: {
+    start: 'mousedown',
+    move: 'mousemove',
+    stop: 'mouseup'
+  },
+  touch: {
+    start: 'touchstart',
+    move: 'touchmove',
+    stop: 'touchend'
+  }
+};
+// 禁止用户选取
+export const userSelectNone = {
+  userSelect: 'none',
+  MozUserSelect: 'none',
+  WebkitUserSelect: 'none',
+  MsUserSelect: 'none'
+};
+// 用户选中自动
+export const userSelectAuto = {
+  userSelect: 'auto',
+  MozUserSelect: 'auto',
+  WebkitUserSelect: 'auto',
+  MsUserSelect: 'auto'
+};
+
 let eventsFor = events.mouse;
+
 export default {
   replace: true,
   name: 'vue-drag-resize-rotate',

@@ -4,8 +4,8 @@
 
 ```js
 <template>
-<vdrr>
+<vue-drag-resize-rotate>
   <p>你可以拖着我，按照自己的意愿调整大小。</p>
-</vdrr>
+</vue-drag-resize-rotate>
 </template>
 ```

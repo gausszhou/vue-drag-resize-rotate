@@ -5,7 +5,7 @@
   <div class="view-box">
     <div id="toolbar"></div>
     <div class="container">
-      <vdrr :parent="true" w="auto" h="auto">随便填一点东西</vdrr>
+      <vue-drag-resize-rotate :parent="true" w="auto" h="auto">随便填一点东西</vue-drag-resize-rotate>
     </div>
   </div>
 </template>

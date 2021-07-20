@@ -4,9 +4,9 @@
 
 ~~~js
 <template>
-<vdrr class-name-resizing="my-resizing-class" class-name="my-class">
+<vue-drag-resize-rotate class-name-resizing="my-resizing-class" class-name="my-class">
   <p>You can provide a default class name for the component when it's resizing using the <b>class-name-resizing</b> prop.</p>
-</vdrr>
+</vue-drag-resize-rotate>
 </template>
 <style>
 .my-class {

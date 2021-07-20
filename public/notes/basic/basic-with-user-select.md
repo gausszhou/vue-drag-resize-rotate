@@ -7,13 +7,13 @@
       <input type="checkbox" v-model="disableUserSelect" /> Toggle disableUserSelect
     </div>
     <div class="container">
-      <vdrr :parent="true" :disableUserSelect="disableUserSelect">
+      <vue-drag-resize-rotate :parent="true" :disableUserSelect="disableUserSelect">
         <p>
           You can {{ disableUserSelect ? 'not' : '' }} select text inside the component by putting
           <b>:disableUserSelect</b>
           prop equal to {{ disableUserSelect }}.
         </p>
-      </vdrr>
+      </vue-drag-resize-rotate>
     </div>
   </div>
 </template>

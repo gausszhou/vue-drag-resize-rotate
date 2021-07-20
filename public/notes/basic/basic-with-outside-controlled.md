@@ -4,9 +4,9 @@
 提供回调以将状态与父进程同步。
 
 ~~~js
-<vdrr :x="x" :y="y" :w="w" :h="h" @resizing="onResize" @dragging="onDrag">
+<vue-drag-resize-rotate :x="x" :y="y" :w="w" :h="h" @resizing="onResize" @dragging="onDrag">
   <p>Basic controlled component.</p>
-</vdrr>
+</vue-drag-resize-rotate>
 
 methods: {
   onDrag(left, top) {

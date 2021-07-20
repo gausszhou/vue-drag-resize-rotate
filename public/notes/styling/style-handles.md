@@ -5,9 +5,9 @@
 __记得为句柄类设置`position：absolute`__
 
 ~~~js
-<vdrr class-name-handle="my-handle-class">
+<vue-drag-resize-rotate class-name-handle="my-handle-class">
   <p>You can provide a default class name for handle using the <b>class-name-handle</b> prop.</p>
-</vdrr>
+</vue-drag-resize-rotate>
 <style>
 .my-handle-class {
     position: absolute;

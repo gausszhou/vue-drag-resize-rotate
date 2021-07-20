@@ -1,10 +1,10 @@
 
-import vdrr from './components/vdrr/index.vue'
+import VueDragReSizeRotate from './components/vue-drag-resize-rotate/index.vue'
 
 export function install(Vue) {
   if (install.installed) return
   install.installed = true
-  Vue.component('vdrr', vdrr)
+  Vue.component('vue-drag-resize-rotate', VueDragReSizeRotate)
 }
 
 const plugin = {
@@ -21,4 +21,4 @@ if (GlobalVue) {
   GlobalVue.use(plugin)
 }
 
-export default vdrr
+export default VueDragReSizeRotate

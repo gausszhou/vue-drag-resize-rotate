@@ -2,12 +2,12 @@
   <div class="view-box">
     <div id="toolbar">活动状态下具有自定义类名的组件</div>
     <div class="container">
-      <vdrr class-name-active="my-active-class" class-name="my-class">
+      <vue-drag-resize-rotate class-name-active="my-active-class" class-name="my-class">
         <p>
           You can provide a default class name for the component when it's active using the
           <b>class-name-active</b> prop.
         </p>
-      </vdrr>
+      </vue-drag-resize-rotate>
     </div>
   </div>
 </template>

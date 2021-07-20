@@ -3,9 +3,9 @@
     <div id="toolbar">父级限制+网格+偏移</div>
     <div class="container">
       <div :style="style">
-        <vdrr :parent="true" :grid="[20,20]" :x="10" :y="10" :h="400" :w="400">
+        <vue-drag-resize-rotate :parent="true" :grid="[20,20]" :x="10" :y="10" :h="400" :w="400">
           <p>You cannot move me or resize me outside my parent. And my edges cannot touch the parent element.</p>
-        </vdrr>
+        </vue-drag-resize-rotate>
       </div>
     </div>
   </div>

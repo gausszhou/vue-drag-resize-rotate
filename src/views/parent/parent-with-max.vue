@@ -2,13 +2,13 @@
   <div class="view-box">
     <div id="toolbar">Size: {{ width }} x {{ height }}</div>
     <div class="container">
-      <vdrr :parent="true" :max-width="300" :max-height="300" @resizing="onResizing">
+      <vue-drag-resize-rotate :parent="true" :max-width="300" :max-height="300" @resizing="onResizing">
         <p>
           Component costrained in parent with
           <b>maxWidth</b> and
           <b>maxHeight</b> equal to 300.
         </p>
-      </vdrr>
+      </vue-drag-resize-rotate>
     </div>
   </div>
 </template>

@@ -11,9 +11,9 @@
       <input type="number" v-model.number="h" />
     </div>
     <div class="container">
-      <vdrr :x="x" :y="y" :w="w" :h="h" @resizing="onResize" @dragging="onDrag">
+      <vue-drag-resize-rotate :x="x" :y="y" :w="w" :h="h" @resizing="onResize" @dragging="onDrag">
         <p>Basic controlled component.</p>
-      </vdrr>
+      </vue-drag-resize-rotate>
     </div>
   </div>
 </template>

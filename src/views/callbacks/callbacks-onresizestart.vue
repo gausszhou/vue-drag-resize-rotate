@@ -7,7 +7,7 @@
       </p>
     </div>
     <div class="container">
-      <vdrr :on-resize-start="onResizeStart"></vdrr>
+      <vue-drag-resize-rotate :on-resize-start="onResizeStart"></vue-drag-resize-rotate>
     </div>
   </div>
 </template>

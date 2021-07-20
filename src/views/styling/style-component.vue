@@ -2,12 +2,12 @@
   <div class="view-box">
     <div id="toolbar">具有自定义类名的组件</div>
     <div class="container">
-      <vdrr class-name="my-class">
+      <vue-drag-resize-rotate class-name="my-class">
         <p>
           你可以给组件设置一个类名，覆盖其默认类名
           <b>class-name</b>
         </p>
-      </vdrr>
+      </vue-drag-resize-rotate>
     </div>
   </div>
 </template>
