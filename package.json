@@ -1,11 +1,15 @@
 {
-  "name": "vue-drag-resize-rotate",
-  "description": "一个Vue可拖拽组件，支持拉伸，旋转，放缩",
-  "main": "lib/vue-drag-reszie-rotate",
+  "name": "@gausszhou/vue-drag-resize-rotate",
   "version": "2.0.1",
+  "main": "lib/vue-drag-reszie-rotate.umd.min.js",
+  "unpkg": "lib/vue-drag-reszie-rotate.umd.min.js",
   "author": "gausszhou <gausszhou@qq.com>",
+  "description": "一个Vue可拖拽组件，支持拉伸，旋转，放缩",
   "private": false,
   "license": "MIT",
+  "publishConfig": {
+    "access": "public"
+  },
   "keywords": [
     "vue",
     "component",
@@ -13,24 +17,34 @@
     "resizable",
     "rotateable"
   ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/gausszhou/vue-drag-resize-rotate.git"
+  },
+  "bugs": {
+    "url": "https://github.com/gausszhou/vue-drag-resize-rotate/issues"
+  },
+  "homepage": "https://github.com/gausszhou/vue-drag-resize-rotate#readme",
+  "directories": {
+    "lib": "lib",
+    "test": "tests"
+  },
   "scripts": {
     "dev": "vue-cli-service serve",
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "build:lib": "vue-cli-service build --target lib --name vue-drag-resize-rotate --dest lib src/index.js",
-    "unit": "cross-env BABEL_ENV=test mocha-webpack --webpack-config=webpack.test.js tests/unit/specs/*/*.js",
-    "unit-watch": "cross-env BABEL_ENV=test mocha-webpack --watch --webpack-config=webpack.test.js tests/unit/specs/*/*.js"
+    "unit": "cross-env BABEL_ENV=test mocha-webpack --webpack-config=webpack.test.js tests/unit/specs/*/*.js"
   },
-  "dependencies": {
+  "dependencies": {},
+  "devDependencies": {
     "axios": "^0.21.1",
     "core-js": "^3.6.5",
     "element-ui": "^2.15.0",
     "highlight.js": "^10.6.0",
     "markdown-it": "^12.0.4",
     "vue": "^2.6.11",
-    "vue-router": "^3.5.1"
-  },
-  "devDependencies": {
+    "vue-router": "^3.5.1",
     "@babel/core": "^7.14.6",
     "@vue/cli-plugin-babel": "~4.5.0",
     "@vue/cli-plugin-eslint": "^3.11.0",
@@ -64,17 +78,5 @@
     "> 1%",
     "last 2 versions",
     "not dead"
-  ],
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/gausszhou/vue-drag-resize-rotate.git"
-  },
-  "bugs": {
-    "url": "https://github.com/gausszhou/vue-drag-resize-rotate/issues"
-  },
-  "homepage": "https://github.com/gausszhou/vue-drag-resize-rotate#readme",
-  "directories": {
-    "lib": "lib",
-    "test": "tests"
-  }
+  ]
 }
