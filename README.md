@@ -2,13 +2,15 @@
  
 [![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE)
 
-## Code History
+## History
 
-```
+```shell
+# 主要参考
 https://github.com/mauricius/vue-draggable-resizable
-  |-https://github.com/tmrcui/vue-draggable-resizable-rotatable 
-  |-https://github.com/gorkys/vue-draggable-resizable-gorkys
-  |-https://github.com/gausszhou/vue-drag-resize-rotate
+# 次要参考
+https://github.com/gorkys/vue-draggable-resizable-gorkys
+https://github.com/tmrcui/vue-draggable-resizable-rotatable   
+  
 ```
 
 ## Todo List
@@ -32,16 +34,19 @@ https://github.com/mauricius/vue-draggable-resizable
 
  默认情况下，开启拖拽和调整大小，旋转功能请设置`:rotatable=true`并传入旋转角度`:r="0"`
 
-## Getting Started
+## Started
 
 ```shell
 npm install  https://github.com/gausszhou/vue-drag-resize-rotate.vue.git
 ```
 
 ```js
+// 引入样式
+import "@gausszhou/vue-drag-resize-rotate/vue-drag-resize-rotate.css"
 // 引入全局自定义组件
-import vue-drag-resize-rotate from "@gausszhou/vue-drag-resize-rotate"
-Vue.component('vue-drag-resize-rotate', vue-drag-resize-rotate) 
+import vueDragResizeRotate from "@gausszhou/vue-drag-resize-rotate"
+Vue.component('vue-drag-resize-rotate', vueDragResizeRotate) 
+
 ```
 
 ```vue
@@ -85,7 +90,7 @@ export default {
 </script>
 ```
 
-## 新增 Porps
+## Porps
 
 | 属性名 | 数据类型 | 默认值 |
 | ------ | -------- | ------ |
@@ -136,7 +141,7 @@ export default {
 <vue-drag-resize-rotate class-name-rotating="my-rotating-class" />
 ```
 
-## 新增 Events
+## Events
 
 | 事件名 | 何时触发 | 返回值 |
 | ------ | -------- | ------ |

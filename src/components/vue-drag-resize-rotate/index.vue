@@ -1430,7 +1430,6 @@ export default {
 }
 /* 新增 旋转控制柄 */
 .handle-rot {
-  position: relative;
   transform: translateX(-50%);
   cursor: grab;
   display: inline-block;
