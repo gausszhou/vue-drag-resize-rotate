@@ -1,4 +1,4 @@
-# vue-drag-resize-rotate.vue
+# vue-drag-resize-rotate
  
 [![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE)
 
@@ -37,7 +37,7 @@ https://github.com/tmrcui/vue-draggable-resizable-rotatable
 ## Started
 
 ```shell
-npm install  https://github.com/gausszhou/vue-drag-resize-rotate.vue.git
+npm install  @gausszhou/vue-drag-resize-rotate
 ```
 
 ```js
