@@ -29,6 +29,7 @@
     "lib": "lib",
     "test": "tests"
   },
+  
   "scripts": {
     "dev": "vue-cli-service serve",
     "serve": "vue-cli-service serve",
