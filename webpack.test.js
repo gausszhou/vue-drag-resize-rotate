@@ -1,50 +1,58 @@
-var path = require('path')
-var webpack = require('webpack')
-const { VueLoaderPlugin } = require('vue-loader')
+var path = require("path");
+var webpack = require("webpack");
+const { VueLoaderPlugin } = require("vue-loader");
 
 function resolve(dir) {
-  return path.join(__dirname, dir)
+  return path.join(__dirname, dir);
 }
 
 module.exports = {
-  mode: 'development',
+  mode: "development",
   resolve: {
-    extensions: ['.js', '.vue'],
+    extensions: [".js", ".vue"],
     alias: {
-      vue$: 'vue/dist/vue.esm.js',
-      '@': resolve('src')
+      vue$: "vue/dist/vue.esm.js",
+      "@": resolve("src")
     }
   },
   module: {
     rules: [
       {
         test: /\.(js|vue)$/,
-        loader: 'eslint-loader',
-        enforce: 'pre',
-        include: [resolve('src'), resolve('test')]
+        loader: "eslint-loader",
+        enforce: "pre",
+        include: [resolve("src"), resolve("test")]
       },
       {
         test: /\.vue$/,
-        loader: ['vue-loader']
+        loader: ["vue-loader"]
       },
       {
         test: /\.css$/,
-        loader: ['style-loader', 'css-loader']
+        loader: ["style-loader", "css-loader"]
+      },
+      {
+        test: /\.less$/,
+        loader: ["style-loader", "less-loader"]
+      },
+      {
+        test: /\.svg/,
+        use: ["file-loader"]
       },
       {
         test: /\.js$/,
-        loader: ['babel-loader'],
-        include: [resolve('src'), resolve('test')]
+        loader: ["babel-loader"],
+        include: [resolve("src"), resolve("test")]
       }
     ]
   },
-  devtool: 'inline-source-map',
+  devtool: "inline-source-map",
   plugins: [
     new VueLoaderPlugin(),
     new webpack.DefinePlugin({
-      'process.env': {
+      "process.env": {
         NODE_ENV: '"test"'
       }
     })
   ]
-}
+};
