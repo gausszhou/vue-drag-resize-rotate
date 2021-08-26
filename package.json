@@ -1,6 +1,6 @@
 {
   "name": "@gausszhou/vue-drag-resize-rotate",
-  "version": "2.0.4",
+  "version": "2.0.5",
   "main": "lib/vue-drag-reszie-rotate.js",
   "unpkg": "lib/vue-drag-reszie-rotate.js",
   "author": "gausszhou <gausszhou@qq.com>",
