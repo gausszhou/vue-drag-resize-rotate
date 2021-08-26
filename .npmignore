@@ -5,6 +5,8 @@ node_modules
 /tests/unit/coverage/*
 /tests/feat/coverage/*
 /src
+src
+src/
 # local env files
 .env.local
 .env.*.local
