@@ -1,8 +1,8 @@
 {
   "name": "@gausszhou/vue-drag-resize-rotate",
-  "version": "2.0.5",
-  "main": "lib/vue-drag-reszie-rotate.js",
-  "unpkg": "lib/vue-drag-reszie-rotate.js",
+  "version": "2.0.8",
+  "main": "lib/vue-drag-resize-rotate.js",
+  "unpkg": "lib/vue-drag-resize-rotate.js",
   "author": "gausszhou <gausszhou@qq.com>",
   "description": "一个Vue可拖拽组件，支持拉伸，旋转，放缩",
   "private": false,

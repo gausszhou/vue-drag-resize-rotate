@@ -1396,6 +1396,7 @@ export default {
   touch-action: none;
   position: absolute;
   box-sizing: border-box;
+  border: 1px dashed;
 }
 
 .handle {

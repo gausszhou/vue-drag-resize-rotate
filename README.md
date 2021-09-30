@@ -2,16 +2,6 @@
  
 [![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE) [![Npm Package](https://img.shields.io/npm/v/@gausszhou/vue-drag-resize-rotate.svg)](Package)
 
-## CodeReference
-
-```shell
-# 主要参考
-https://github.com/mauricius/vue-draggable-resizable
-# 次要参考
-https://github.com/gorkys/vue-draggable-resizable-gorkys
-https://github.com/tmrcui/vue-draggable-resizable-rotatable   
-```
-
 ## TodoList
  
 - [x] 修复部分正则判断问题和容器大小的1px误差问题
@@ -41,8 +31,6 @@ npm install  @gausszhou/vue-drag-resize-rotate
 ```
 
 ```js
-// 引入样式
-import "@gausszhou/vue-drag-resize-rotate/vue-drag-resize-rotate.css"
 // 引入全局自定义组件
 import vueDragResizeRotate from "@gausszhou/vue-drag-resize-rotate"
 Vue.component('vue-drag-resize-rotate', vueDragResizeRotate) 
@@ -56,6 +44,10 @@ Vue.component('vue-drag-resize-rotate', vueDragResizeRotate)
     </div>
     <div class="container">
       <vue-drag-resize-rotate
+        :w="100"
+        :h="100"
+        :x="0"
+        :y="0"
         :parent="true"
         :draggable="true"
         :resizable="true"
@@ -70,20 +62,58 @@ Vue.component('vue-drag-resize-rotate', vueDragResizeRotate)
 </template>
 
 <script>
+import vueDragResizeRotate from "@gausszhou/vue-drag-resize-rotate";
 // 当然你也可以在需要的时候在单个组件内引入
 export default {
+  components: {
+    vueDragResizeRotate,
+  },
   data() {
     return {
-      rotatable:true,
-      angle: 0
-    }
+      rotatable: true,
+      angle: 0,
+    };
   },
   methods: {
-    resizing(x, y, w, h) {},
+    resizing(x, y, w, h) {
+      console.log(x, y, w, h);
+    },
     rotating(val) {
-      this.angle = val
-    }
+      this.angle = val;
+    },
   },
-}
+};
 </script>
+
+<style>
+#toolbar {
+  left: 0;
+  top: 0;
+  height: 24px;
+  padding: 5px;
+  border: 1px solid #999;
+  border-bottom: none;
+  background-color: #CCC;
+  z-index: 999;
+}
+
+.container {
+  width: 100%;
+  height: 600px;
+  border: 1px solid #000;
+  position: relative;
+  box-sizing: border-box
+}
+
+</style>
+```
+
+## CodeReference
+
+```shell
+# 主要参考
+https://github.com/mauricius/vue-draggable-resizable
+# 次要参考
+https://github.com/gorkys/vue-draggable-resizable-gorkys
+https://github.com/tmrcui/vue-draggable-resizable-rotatable   
 ```
