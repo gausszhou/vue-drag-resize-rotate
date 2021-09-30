@@ -8,7 +8,7 @@ plugins.push(new VueLoaderPlugin());
 plugins.push(new UglifyJsPlugin())
 
 module.exports = {
-  mode:"development",
+  mode:"production",
   entry:path.resolve(__dirname, 'src/index'),
   output: {
     path: path.resolve(__dirname, 'lib'),
