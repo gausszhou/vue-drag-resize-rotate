@@ -32,8 +32,8 @@ module.exports = {
         loader: ["style-loader", "css-loader"]
       },
       {
-        test: /\.less$/,
-        loader: ["style-loader", "less-loader"]
+        test: /\.scss$/,
+        loader: ["style-loader","css-loader","sass-loader"]
       },
       {
         test: /\.svg/,

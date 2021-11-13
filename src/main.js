@@ -8,11 +8,11 @@ Vue.use(ElementUI)
 import 'element-ui/lib/theme-chalk/index.css'
 
 // 引入公共样式
-import "./style/index.css"
+import "./style/index.scss"
 
-// 引入HTTP接口
-import http from "./request/http"
-Vue.prototype.$http = http
+// 引入API接口
+import api from "./api"
+Vue.use(api)
 
 // 引入全局自定义组件
 import VueDragReSizeRotate from "./components/vue-drag-resize-rotate"

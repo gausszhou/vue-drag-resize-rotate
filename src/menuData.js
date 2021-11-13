@@ -1,4 +1,4 @@
-export const menuData = [
+export default [
   {
     label: '基本  (新增)',
     icon: 'el-icon-menu',

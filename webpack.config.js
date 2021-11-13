@@ -1,19 +1,15 @@
 const  path = require('path');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const { VueLoaderPlugin } = require('vue-loader');
-
-let plugins = [];
-
-plugins.push(new VueLoaderPlugin());
-plugins.push(new UglifyJsPlugin())
+const PackageJSON = require("./package.json")
 
 module.exports = {
   mode:"production",
   entry:path.resolve(__dirname, 'src/index'),
   output: {
     path: path.resolve(__dirname, 'lib'),
-    library: 'vue-drag-resize-rotate',
-    filename: 'vue-drag-resize-rotate.js',
+    // library: 'vue-drag-resize-rotate', // 
+    filename: PackageJSON.main,
     libraryTarget: 'umd'
   },
   module: {
@@ -32,9 +28,15 @@ module.exports = {
       {
         test: /\.css$/,
         use: ['style-loader', 'css-loader']
+      },
+      {
+        test: /\.scss$/,
+        use: ['style-loader', 'css-loader','sass-loader']
       }
     ]
   },
-  plugins: plugins
-
+  plugins: [
+    new VueLoaderPlugin(),
+    new UglifyJsPlugin()
+  ]
 };

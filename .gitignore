@@ -1,10 +1,9 @@
 .DS_Store
-node_modules
-/dist
-/docs
+node_modules/
+dist/
+lib/
 /tests/unit/coverage/*
-/tests/feat/coverage/*
-/src/style/less/*.css
+package-lock.json
 # local env files
 .env.local
 .env.*.local
