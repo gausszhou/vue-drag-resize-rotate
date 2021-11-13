@@ -2,7 +2,7 @@
   <div class="view-box">
     <div id="toolbar">
       <label>
-        同时拖动多个内部元素
+        同时拖动多个内部元素(50个)
         <input type="checkbox" name="sync" v-model="sync" />
         Synchronize (Use
         <b>ctrl</b>
@@ -39,7 +39,7 @@ export default {
       prevOffsetX: 0,
       prevOffsetY: 0,
       elements: [],
-      count: 20,
+      count: 50,
       batchable: false
     };
   },
