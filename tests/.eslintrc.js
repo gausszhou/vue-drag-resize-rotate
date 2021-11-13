@@ -1,10 +1,9 @@
 module.exports = {
   env: {
-    mocha: true
+    jest: true
   },
   globals: {
     expect: true
-    // 'sinon': true
   },
   parserOptions: {
     parser: "babel-eslint",
