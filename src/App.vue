@@ -24,7 +24,7 @@
       <router-view />
       <div class="markdown-render" id="write" v-html="markdownHTML"></div>
     </div>
-    <GithubBadge></GithubBadge>
+    <GithubBadge url="https://github.com/gausszhou/vue-drag-resize-rotate"></GithubBadge>
   </div>
 </template>
 

@@ -2,30 +2,30 @@
   <div class="view-box">
     <div id="toolbar">
       <label>
-        同时拖动多个内部元素(50个)
+        同时拖动多个内部元素(20个)
         <input type="checkbox" name="sync" v-model="sync" />
         Synchronize (Use
         <b>ctrl</b>
         Key)
       </label>
     </div>
-    <div class="container">
-      <vue-drag-resize-rotate
-        class-name-active="my-active-class"
-        ref="vdrr"
-        v-for="element in elements"
-        :key="element.id"
-        :id="element.id"
-        :x="element.x"
-        :y="element.y"
-        :w="200"
-        :h="200"
-        :resizable="false"
-        @dragging="(left, top) => dragging(element.id, left, top)"
-        @dragstop="(left, top) => dragstop(element.id, left, top)"
-      >
-        <p>{{ element.text }}</p>
-      </vue-drag-resize-rotate>
+    <div class="container">      
+        <vue-drag-resize-rotate
+          class-name-active="my-active-class"
+          ref="vdrr"
+          v-for="element in elements"
+          :key="element.id"
+          :id="element.id"
+          :x="element.x"
+          :y="element.y"
+          :w="200"
+          :h="200"
+          :resizable="false"
+          @dragging="(left, top) => dragging(element.id, left, top)"
+          @dragstop="(left, top) => dragstop(element.id, left, top)"
+        >
+          <p>{{ element.text }}</p>
+        </vue-drag-resize-rotate>
     </div>
   </div>
 </template>
@@ -38,9 +38,9 @@ export default {
       draggingId: null,
       prevOffsetX: 0,
       prevOffsetY: 0,
-      elements: [],
-      count: 50,
-      batchable: false
+      count: 20,
+      batchable: false,
+      elements:[]
     };
   },
   computed: {
@@ -76,8 +76,8 @@ export default {
       }
     },
     dragging(id, left, top) {
-      this.draggingId = id;
       if (!this.sync) return;
+      this.draggingId = id;
       const offsetX = left - this.draggingElement.x;
       const offsetY = top - this.draggingElement.y;
       const deltaX = this.deltaX(offsetX);

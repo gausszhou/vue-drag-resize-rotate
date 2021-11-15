@@ -31,80 +31,79 @@
 </template>
 
 <script>
-
-import { matchesSelectorToParentElements, getComputedSize, addEvent, removeEvent } from './utils/dom';
-import { computeWidth, computeHeight, restrictToBounds, snapToGrid, rotatedPoint, getAngle } from './utils/fns';
+import { matchesSelectorToParentElements, getComputedSize, addEvent, removeEvent } from "./utils/dom";
+import { computeWidth, computeHeight, restrictToBounds, snapToGrid, rotatedPoint, getAngle } from "./utils/fns";
 
 export const events = {
   mouse: {
-    start: 'mousedown',
-    move: 'mousemove',
-    stop: 'mouseup'
+    start: "mousedown",
+    move: "mousemove",
+    stop: "mouseup"
   },
   touch: {
-    start: 'touchstart',
-    move: 'touchmove',
-    stop: 'touchend'
+    start: "touchstart",
+    move: "touchmove",
+    stop: "touchend"
   }
 };
 // 禁止用户选取
 export const userSelectNone = {
-  userSelect: 'none',
-  MozUserSelect: 'none',
-  WebkitUserSelect: 'none',
-  MsUserSelect: 'none'
+  userSelect: "none",
+  MozUserSelect: "none",
+  WebkitUserSelect: "none",
+  MsUserSelect: "none"
 };
 // 用户选中自动
 export const userSelectAuto = {
-  userSelect: 'auto',
-  MozUserSelect: 'auto',
-  WebkitUserSelect: 'auto',
-  MsUserSelect: 'auto'
+  userSelect: "auto",
+  MozUserSelect: "auto",
+  WebkitUserSelect: "auto",
+  MsUserSelect: "auto"
 };
 
 let eventsFor = events.mouse;
 
 export default {
   replace: true,
-  name: 'vue-drag-resize-rotate',
+  name: "vue-drag-resize-rotate",
   props: {
     className: {
       type: String,
-      default: 'vdr'
+      default: "vdr"
     },
     classNameDraggable: {
       type: String,
-      default: 'draggable'
+      default: "draggable"
     },
     classNameResizable: {
       type: String,
-      default: 'resizable'
+      default: "resizable"
     },
     // 新增开启旋转时的自定义类名
     classNameRotatable: {
       type: String,
-      default: 'rotatable'
+      default: "rotatable"
     },
     classNameDragging: {
       type: String,
-      default: 'dragging'
+      default: "dragging"
     },
     classNameResizing: {
       type: String,
-      default: 'resizing'
+      default: "resizing"
     },
     // 新增组件处于旋转时的自定义类名
     classNameRotating: {
       type: String,
-      default: 'rotating'
+      default: "rotating"
     },
     classNameActive: {
       type: String,
-      default: 'active'
+      default: "active"
     },
     classNameHandle: {
       type: String,
-      default: 'handle'
+      default: "handle"
     },
     disableUserSelect: {
       type: Boolean,
@@ -149,20 +148,20 @@ export default {
       type: [Number, String],
       default: 200,
       validator: val => {
-        if (typeof val === 'number') {
+        if (typeof val === "number") {
           return val > 0;
         }
-        return val === 'auto';
+        return val === "auto";
       }
     },
     h: {
       type: [Number, String],
       default: 200,
       validator: val => {
-        if (typeof val === 'number') {
+        if (typeof val === "number") {
           return val > 0;
         }
-        return val === 'auto';
+        return val === "auto";
       }
     },
     minWidth: {
@@ -195,8 +194,8 @@ export default {
     },
     z: {
       type: [String, Number],
-      default: 'auto',
-      validator: val => (typeof val === 'string' ? val === 'auto' : val >= 0)
+      default: "auto",
+      validator: val => (typeof val === "string" ? val === "auto" : val >= 0)
     },
     // 新增 初始旋转角度
     r: {
@@ -206,9 +205,9 @@ export default {
     // 新增 旋转手柄 rot
     handles: {
       type: Array,
-      default: () => ['tl', 'tm', 'tr', 'mr', 'br', 'bm', 'bl', 'ml', 'rot'],
+      default: () => ["tl", "tm", "tr", "mr", "br", "bm", "bl", "ml", "rot"],
       validator: val => {
-        const s = new Set(['tl', 'tm', 'tr', 'mr', 'br', 'bm', 'bl', 'ml', 'rot']);
+        const s = new Set(["tl", "tm", "tr", "mr", "br", "bm", "bl", "ml", "rot"]);
         return new Set(val.filter(h => s.has(h))).size === val.length;
       }
     },
@@ -222,8 +221,8 @@ export default {
     },
     axis: {
       type: String,
-      default: 'both',
-      validator: val => ['x', 'y', 'both'].includes(val)
+      default: "both",
+      validator: val => ["x", "y", "both"].includes(val)
     },
     grid: {
       type: Array,
@@ -277,15 +276,15 @@ export default {
     snapTolerance: {
       type: Number,
       default: 5,
-      validator: function (val) {
-        return typeof val === 'number';
+      validator: function(val) {
+        return typeof val === "number";
       }
     },
     // 缩放比例
     scaleRatio: {
       type: Number,
       default: 1,
-      validator: val => typeof val === 'number'
+      validator: val => typeof val === "number"
     },
     // handle是否缩放
     handleInfo: {
@@ -299,7 +298,7 @@ export default {
       }
     }
   },
-  data: function () {
+  data: function() {
     return {
       left: this.x,
       top: this.y,
@@ -340,9 +339,9 @@ export default {
   computed: {
     handleStyle() {
       return (stick, index) => {
-        if (!this.handleInfo.switch) return { display: this.enabled ? 'block' : 'none' };
+        if (!this.handleInfo.switch) return { display: this.enabled ? "block" : "none" };
         // 新增 当没有开启旋转的时候，旋转手柄不显示
-        if (stick === 'rot' && !this.rotatable) return { display: 'none' };
+        if (stick === "rot" && !this.rotatable) return { display: "none" };
         const size = (this.handleInfo.size / this.scaleRatio).toFixed(2);
         const offset = (this.handleInfo.offset / this.scaleRatio).toFixed(2);
         const center = (size / 2).toFixed(2);
@@ -381,7 +380,7 @@ export default {
           },
           rot: {
             top: `-${size * 3}px`,
-            left: `50%`,
+            left: `50%`
           }
         };
         const stickStyle = {
@@ -393,15 +392,24 @@ export default {
           bottom: styleMap[stick].bottom
         };
         // 新增 让控制手柄的鼠标样式跟随旋转角度变化
-        if (stick !== 'rot') {
-          const cursorStyleArray = ['nw-resize', 'n-resize', 'ne-resize', 'e-resize', 'se-resize', 's-resize', 'sw-resize', 'w-resize'];
+        if (stick !== "rot") {
+          const cursorStyleArray = [
+            "nw-resize",
+            "n-resize",
+            "ne-resize",
+            "e-resize",
+            "se-resize",
+            "s-resize",
+            "sw-resize",
+            "w-resize"
+          ];
           const STEP = 45;
           const rotate = this.rotate + STEP / 2;
           const deltaIndex = Math.floor(rotate / STEP);
           index = (index + deltaIndex) % 8;
           stickStyle.cursor = cursorStyleArray[index];
         }
-        stickStyle.display = this.enabled ? 'block' : 'none';
+        stickStyle.display = this.enabled ? "block" : "none";
         return stickStyle;
       };
     },
@@ -411,7 +419,7 @@ export default {
         width: this.computedWidth,
         height: this.computedHeight,
         zIndex: this.zIndex,
-        fontSize: this.handleInfo.size * 2 + 'px',
+        fontSize: this.handleInfo.size * 2 + "px",
         ...(this.dragging && this.disableUserSelect ? userSelectNone : userSelectAuto)
       };
     },
@@ -422,35 +430,30 @@ export default {
     },
     //  根据left right 算出元素的宽度
     computedWidth() {
-      if (this.w === 'auto') {
+      if (this.w === "auto") {
         if (!this.widthTouched) {
-          return 'auto';
+          return "auto";
         }
       }
-      return this.width + 'px';
+      return this.width + "px";
     },
     // 根据top bottom 算出元素的宽度
     computedHeight() {
-      if (this.h === 'auto') {
+      if (this.h === "auto") {
         if (!this.heightTouched) {
-          return 'auto';
+          return "auto";
         }
       }
-      return this.height + 'px';
+      return this.height + "px";
     }
   },
   watch: {
     active(val) {
       this.enabled = val;
       if (val) {
-        this.$emit('activated');
+        this.$emit("activated");
       } else {
-        this.$emit('deactivated');
-      }
-    },
-    z(val) {
-      if (val >= 0 || val === 'auto') {
-        this.zIndex = val;
+        this.$emit("deactivated");
       }
     },
     x(val) {
@@ -470,6 +473,11 @@ export default {
         this.bounds = this.calcDragLimits();
       }
       this.moveVertically(val);
+    },
+    z(val) {
+      if (val >= 0 || val === "auto") {
+        this.zIndex = val;
+      }
     },
     // 新增 监听外部传入参数  旋转角度
     r(val) {
@@ -530,19 +538,21 @@ export default {
       this.changeHeight(val);
     }
   },
-  created: function () {
+  created: function() {
     // eslint-disable-next-line 无效的prop：minWidth不能大于maxWidth
-    if (this.maxWidth && this.minWidth > this.maxWidth) console.warn('[Vdr warn]: Invalid prop: minWidth cannot be greater than maxWidth');
+    if (this.maxWidth && this.minWidth > this.maxWidth)
+      console.warn("[Vdr warn]: Invalid prop: minWidth cannot be greater than maxWidth");
     // eslint-disable-next-line 无效prop：minHeight不能大于maxHeight'
-    if (this.maxWidth && this.minHeight > this.maxHeight) console.warn('[Vdr warn]: Invalid prop: minHeight cannot be greater than maxHeight');
+    if (this.maxWidth && this.minHeight > this.maxHeight)
+      console.warn("[Vdr warn]: Invalid prop: minHeight cannot be greater than maxHeight");
     this.elmX = 0;
     this.elmY = 0;
     this.elmW = 0;
     this.elmH = 0;
     this.lastCenterX = 0;
     this.lastCenterY = 0;
-    this.fixedXName = '';
-    this.fixedYName = '';
+    this.fixedXName = "";
+    this.fixedYName = "";
     this.fixedX = 0;
     this.fixedY = 0;
     this.TL = {};
@@ -551,7 +561,7 @@ export default {
     this.BR = {};
     this.resetBoundsAndMouseState();
   },
-  mounted: function () {
+  mounted: function() {
     if (!this.enableNativeDrag) {
       this.$el.ondragstart = () => false;
     }
@@ -559,31 +569,31 @@ export default {
     this.parentWidth = parentWidth;
     this.parentHeight = parentHeight;
     const [width, height] = getComputedSize(this.$el);
-    this.aspectFactor = (this.w !== 'auto' ? this.w : width) / (this.h !== 'auto' ? this.h : height);
+    this.aspectFactor = (this.w !== "auto" ? this.w : width) / (this.h !== "auto" ? this.h : height);
     if (this.outsideAspectRatio) {
       this.aspectFactor = this.outsideAspectRatio;
     }
-    this.width = this.w !== 'auto' ? this.w : width;
-    this.height = this.h !== 'auto' ? this.h : height;
+    this.width = this.w !== "auto" ? this.w : width;
+    this.height = this.h !== "auto" ? this.h : height;
     this.right = this.parentWidth - this.width - this.left;
     this.bottom = this.parentHeight - this.height - this.top;
 
     // 绑定data-*属性
     this.settingAttribute();
     // 监听取消操作
-    addEvent(document.documentElement, 'mousedown', this.deselect);
-    addEvent(document.documentElement, 'touchend touchcancel', this.deselect);
+    addEvent(document.documentElement, "mousedown", this.deselect);
+    addEvent(document.documentElement, "touchend touchcancel", this.deselect);
     //  窗口变化时，检查容器大小
-    addEvent(window, 'resize', this.checkParentSize);
+    addEvent(window, "resize", this.checkParentSize);
   },
-  beforeDestroy: function () {
-    removeEvent(document.documentElement, 'mousedown', this.deselect);
-    removeEvent(document.documentElement, 'touchstart', this.handleUp);
-    removeEvent(document.documentElement, 'mousemove', this.move);
-    removeEvent(document.documentElement, 'touchmove', this.move);
-    removeEvent(document.documentElement, 'mouseup', this.handleUp);
-    removeEvent(document.documentElement, 'touchend touchcancel', this.deselect);
-    removeEvent(window, 'resize', this.checkParentSize);
+  beforeDestroy: function() {
+    removeEvent(document.documentElement, "mousedown", this.deselect);
+    removeEvent(document.documentElement, "touchstart", this.handleUp);
+    removeEvent(document.documentElement, "mousemove", this.move);
+    removeEvent(document.documentElement, "touchmove", this.move);
+    removeEvent(document.documentElement, "mouseup", this.handleUp);
+    removeEvent(document.documentElement, "touchend touchcancel", this.deselect);
+    removeEvent(window, "resize", this.checkParentSize);
   },
   methods: {
     // 重置边界和鼠标状态
@@ -618,9 +628,12 @@ export default {
         const rect = this.$el.parentNode.getBoundingClientRect();
         this.parentX = rect.x;
         this.parentY = rect.y;
-        return [Math.round(parseFloat(style.getPropertyValue('width'), 10)), Math.round(parseFloat(style.getPropertyValue('height'), 10))];
+        return [
+          Math.round(parseFloat(style.getPropertyValue("width"), 10)),
+          Math.round(parseFloat(style.getPropertyValue("height"), 10))
+        ];
       }
-      if (typeof this.parent === 'string') {
+      if (typeof this.parent === "string") {
         const parentNode = document.querySelector(this.parent);
         if (!(parentNode instanceof HTMLElement)) {
           throw new Error(`The selector ${this.parent} does not match any element`);
@@ -657,8 +670,8 @@ export default {
         }
         if (!this.enabled) {
           this.enabled = true;
-          this.$emit('activated');
-          this.$emit('update:active', true);
+          this.$emit("activated");
+          this.$emit("update:active", true);
         }
         if (this.draggable) {
           this.dragging = true;
@@ -702,19 +715,20 @@ export default {
           minTop: this.top % this.grid[1],
           maxTop: Math.floor((this.parentHeight - this.height - this.top) / this.grid[1]) * this.grid[1] + this.top,
           minBottom: this.bottom % this.grid[1],
-          maxBottom: Math.floor((this.parentHeight - this.height - this.bottom) / this.grid[1]) * this.grid[1] + this.bottom
+          maxBottom:
+            Math.floor((this.parentHeight - this.height - this.bottom) / this.grid[1]) * this.grid[1] + this.bottom
         };
       }
     },
     // 取消选择
     deselect(e) {
       const target = e.target || e.srcElement;
-      const regex = new RegExp(this.className + '-([trmbl]{2})', '');
+      const regex = new RegExp(this.className + "-([trmbl]{2})", "");
       if (!this.$el.contains(target) && !regex.test(target.className)) {
         if (this.enabled && !this.preventDeactivation) {
           this.enabled = false;
-          this.$emit('deactivated');
-          this.$emit('update:active', false);
+          this.$emit("deactivated");
+          this.$emit("update:active", false);
         }
         removeEvent(document.documentElement, eventsFor.move, this.move);
       }
@@ -736,7 +750,7 @@ export default {
       if (e.stopPropagation) e.stopPropagation();
       this.handle = handle;
       // 新增旋转手柄
-      if (this.handle === 'rot') {
+      if (this.handle === "rot") {
         this.rotating = true;
       } else {
         this.resizing = true;
@@ -837,7 +851,7 @@ export default {
           limits.minTop = -(bottom + maxH);
           limits.minBottom = -(top + maxH);
         }
-        if (this.lockAspectRatio && (maxW && maxH)) {
+        if (this.lockAspectRatio && maxW && maxH) {
           limits.minLeft = Math.min(limits.minLeft, -(right + maxW));
           limits.minTop = Math.min(limits.minTop, -(maxH + bottom));
           limits.minRight = Math.min(limits.minRight, -left - maxW);
@@ -858,7 +872,7 @@ export default {
     },
     // 获取鼠标或者触摸点的坐标
     getMouseCoordinate(e) {
-      if (e.type.indexOf('touch') !== -1) {
+      if (e.type.indexOf("touch") !== -1) {
         return {
           x: e.changedTouches[0].clientX,
           y: e.changedTouches[0].clientY
@@ -876,7 +890,7 @@ export default {
       const x = mouseX - this.lastCenterX;
       const y = mouseY - this.lastCenterY;
       this.rotate = (getAngle(x, y) + 90) % 360;
-      this.$emit('rotating', this.rotate);
+      this.$emit("rotating", this.rotate);
       // 元素移动
     },
     // 元素移动
@@ -886,9 +900,11 @@ export default {
       const bounds = this.bounds;
       const mouseClickPosition = this.mouseClickPosition;
       // 水平移动
-      const tmpDeltaX = axis && axis !== 'y' ? mouseClickPosition.mouseX - (e.touches ? e.touches[0].pageX : e.pageX) : 0;
+      const tmpDeltaX =
+        axis && axis !== "y" ? mouseClickPosition.mouseX - (e.touches ? e.touches[0].pageX : e.pageX) : 0;
       // 垂直移动
-      const tmpDeltaY = axis && axis !== 'x' ? mouseClickPosition.mouseY - (e.touches ? e.touches[0].pageY : e.pageY) : 0;
+      const tmpDeltaY =
+        axis && axis !== "x" ? mouseClickPosition.mouseY - (e.touches ? e.touches[0].pageY : e.pageY) : 0;
       const [deltaX, deltaY] = snapToGrid(grid, tmpDeltaX, tmpDeltaY, this.scaleRatio);
       const left = restrictToBounds(mouseClickPosition.left - deltaX, bounds.minLeft, bounds.maxLeft);
       const top = restrictToBounds(mouseClickPosition.top - deltaY, bounds.minTop, bounds.maxTop);
@@ -902,7 +918,7 @@ export default {
       this.right = right;
       this.bottom = bottom;
       await this.snapCheck();
-      this.$emit('dragging', this.left, this.top);
+      this.$emit("dragging", this.left, this.top);
     },
     // 外部传参改动x
     moveHorizontally(val) {
@@ -933,8 +949,8 @@ export default {
       let deltaX = mouseX - this.mouseClickPosition.mouseX;
       let deltaY = mouseY - this.mouseClickPosition.mouseY;
       // 考虑放缩
-      deltaX = deltaX / scaleRatio
-      deltaY = deltaY / scaleRatio
+      deltaX = deltaX / scaleRatio;
+      deltaY = deltaY / scaleRatio;
       let diffX, diffY, scale, scaleB, scaleC, newX, newY, newW, newH;
       let Fixed = {}; // 固定点
       let BX = {}; // 高度边选点
@@ -945,9 +961,9 @@ export default {
       let Vw = {}; // 宽度向量
       let Vh = {}; // 高度向量
       // 拖动中点
-      if (handle.includes('m')) {
+      if (handle.includes("m")) {
         switch (handle) {
-          case 'tm':
+          case "tm":
             diffX = deltaX + (TL.x + TR.x) / 2;
             diffY = deltaY + (TL.y + TR.y) / 2;
             Fixed = BL;
@@ -959,7 +975,7 @@ export default {
             Vw = { x: CX.x - Fixed.x, y: CX.y - Fixed.y };
             Vh = { x: Vb.x * scale, y: Vb.y * scale };
             break;
-          case 'bm':
+          case "bm":
             diffX = deltaX + (BL.x + BR.x) / 2;
             diffY = deltaY + (BL.y + BR.y) / 2;
             Fixed = TL;
@@ -971,7 +987,7 @@ export default {
             Vw = { x: CX.x - Fixed.x, y: CX.y - Fixed.y };
             Vh = { x: Vb.x * scale, y: Vb.y * scale };
             break;
-          case 'ml':
+          case "ml":
             diffX = deltaX + (TL.x + BL.x) / 2;
             diffY = deltaY + (TL.y + BL.y) / 2;
             Fixed = BR;
@@ -983,7 +999,7 @@ export default {
             Vh = { x: CX.x - Fixed.x, y: CX.y - Fixed.y };
             Vw = { x: Vb.x * scale, y: Vb.y * scale };
             break;
-          case 'mr':
+          case "mr":
             diffX = deltaX + (TR.x + TR.x) / 2;
             diffY = deltaY + (TR.y + TR.y) / 2;
             Fixed = BL;
@@ -1006,28 +1022,28 @@ export default {
       } else {
         // 拖动顶点
         switch (handle) {
-          case 'tl':
+          case "tl":
             diffX = deltaX + TL.x;
             diffY = deltaY + TL.y;
             Fixed = BR;
             BX = BL; // 高度 TL BL
             CX = TR; // 宽度 TL TR
             break;
-          case 'tr':
+          case "tr":
             diffX = deltaX + TR.x;
             diffY = deltaY + TR.y;
             Fixed = BL;
             BX = BR;
             CX = TL;
             break;
-          case 'bl':
+          case "bl":
             diffX = deltaX + BL.x;
             diffY = deltaY + BL.y;
             Fixed = TR;
             BX = TL;
             CX = BR;
             break;
-          case 'br':
+          case "br":
             diffX = deltaX + BR.x;
             diffY = deltaY + BR.y;
             Fixed = TL;
@@ -1071,11 +1087,15 @@ export default {
       }
       this.width = newW;
       this.height = newH;
-      this.$emit('resizing', this.left, this.top, this.width, this.height);
+      this.$emit("resizing", this.left, this.top, this.width, this.height);
     },
     changeWidth(val) {
       const [newWidth, _] = snapToGrid(this.grid, val, 0, this.scale);
-      const right = restrictToBounds(this.parentWidth - newWidth - this.left, this.bounds.minRight, this.bounds.maxRight);
+      const right = restrictToBounds(
+        this.parentWidth - newWidth - this.left,
+        this.bounds.minRight,
+        this.bounds.maxRight
+      );
       let bottom = this.bottom;
       if (this.lockAspectRatio) {
         bottom = this.bottom - (this.right - right) / this.aspectFactor;
@@ -1089,7 +1109,11 @@ export default {
     },
     changeHeight(val) {
       const [_, newHeight] = snapToGrid(this.grid, 0, val, this.scale);
-      const bottom = restrictToBounds(this.parentHeight - newHeight - this.top, this.bounds.minBottom, this.bounds.maxBottom);
+      const bottom = restrictToBounds(
+        this.parentHeight - newHeight - this.top,
+        this.bounds.minBottom,
+        this.bounds.maxBottom
+      );
       let right = this.right;
       if (this.lockAspectRatio) {
         right = this.right - (this.bottom - bottom) * this.aspectFactor;
@@ -1105,7 +1129,7 @@ export default {
     async handleUp(e) {
       this.handle = null;
       // 初始化辅助线数据
-      const temArr = new Array(3).fill({ display: false, position: '', origin: '', lineLength: '' });
+      const temArr = new Array(3).fill({ display: false, position: "", origin: "", lineLength: "" });
       const refLine = { vLine: [], hLine: [] };
       for (const i in refLine) {
         refLine[i] = JSON.parse(JSON.stringify(temArr));
@@ -1117,18 +1141,18 @@ export default {
       if (this.resizing) {
         this.resizing = false;
         await this.conflictCheck();
-        this.$emit('refLineParams', refLine);
-        this.$emit('resizestop', this.left, this.top, this.width, this.height);
+        this.$emit("refLineParams", refLine);
+        this.$emit("resizestop", this.left, this.top, this.width, this.height);
       }
       if (this.dragging) {
         this.dragging = false;
         await this.conflictCheck();
-        this.$emit('refLineParams', refLine);
-        this.$emit('dragstop', this.left, this.top);
+        this.$emit("refLineParams", refLine);
+        this.$emit("dragstop", this.left, this.top);
       }
       if (this.rotating) {
         this.rotating = false;
-        this.$emit('rotatestop', this.rotate);
+        this.$emit("rotatestop", this.rotate);
       }
       this.resetBoundsAndMouseState();
       removeEvent(document.documentElement, eventsFor.move, this.move);
@@ -1137,9 +1161,9 @@ export default {
     // 设置属性
     settingAttribute() {
       // 设置冲突检测
-      this.$el.setAttribute('data-is-check', `${this.isConflictCheck}`);
+      this.$el.setAttribute("data-is-check", `${this.isConflictCheck}`);
       // 设置对齐元素
-      this.$el.setAttribute('data-is-snap', `${this.snap}`);
+      this.$el.setAttribute("data-is-snap", `${this.snap}`);
     },
     // 冲突检测
     conflictCheck() {
@@ -1152,26 +1176,38 @@ export default {
         for (const item of nodes) {
           if (
             item.className !== undefined &&
-            !item.className.split(' ').includes(this.classNameActive) &&
-            item.getAttribute('data-is-check') !== null &&
-            item.getAttribute('data-is-check') !== 'false'
+            !item.className.split(" ").includes(this.classNameActive) &&
+            item.getAttribute("data-is-check") !== null &&
+            item.getAttribute("data-is-check") !== "false"
           ) {
             const tw = item.offsetWidth;
             const th = item.offsetHeight;
             // 正则获取left与right
             const [tl, tt] = this.formatTransformVal(item.style.transform);
             // 左上角与右下角重叠
-            const tfAndBr = (top >= tt && left >= tl && tt + th > top && tl + tw > left) || (top <= tt && left < tl && top + height > tt && left + width > tl);
+            const tfAndBr =
+              (top >= tt && left >= tl && tt + th > top && tl + tw > left) ||
+              (top <= tt && left < tl && top + height > tt && left + width > tl);
             // 右上角与左下角重叠
-            const brAndTf = (left <= tl && top >= tt && left + width > tl && top < tt + th) || (top < tt && left > tl && top + height > tt && left < tl + tw);
+            const brAndTf =
+              (left <= tl && top >= tt && left + width > tl && top < tt + th) ||
+              (top < tt && left > tl && top + height > tt && left < tl + tw);
             // 下边与上边重叠
-            const bAndT = (top <= tt && left >= tl && top + height > tt && left < tl + tw) || (top >= tt && left <= tl && top < tt + th && left > tl + tw);
+            const bAndT =
+              (top <= tt && left >= tl && top + height > tt && left < tl + tw) ||
+              (top >= tt && left <= tl && top < tt + th && left > tl + tw);
             // 上边与下边重叠（宽度不一样）
-            const tAndB = (top <= tt && left >= tl && top + height > tt && left < tl + tw) || (top >= tt && left <= tl && top < tt + th && left > tl + tw);
+            const tAndB =
+              (top <= tt && left >= tl && top + height > tt && left < tl + tw) ||
+              (top >= tt && left <= tl && top < tt + th && left > tl + tw);
             // 左边与右边重叠
-            const lAndR = (left >= tl && top >= tt && left < tl + tw && top < tt + th) || (top > tt && left <= tl && left + width > tl && top < tt + th);
+            const lAndR =
+              (left >= tl && top >= tt && left < tl + tw && top < tt + th) ||
+              (top > tt && left <= tl && left + width > tl && top < tt + th);
             // 左边与右边重叠（高度不一样）
-            const rAndL = (top <= tt && left >= tl && top + height > tt && left < tl + tw) || (top >= tt && left <= tl && top < tt + th && left + width > tl);
+            const rAndL =
+              (top <= tt && left >= tl && top + height > tt && left < tl + tw) ||
+              (top >= tt && left <= tl && top < tt + th && left + width > tl);
             // 如果冲突，就将回退到移动前的位置
             if (tfAndBr || brAndTf || bAndT || tAndB || lAndR || rAndL) {
               this.top = this.mouseClickPosition.top;
@@ -1194,7 +1230,7 @@ export default {
         let activeTop = this.top;
         let activeBottom = this.top + height;
         // 初始化辅助线数据
-        const temArr = new Array(3).fill({ display: false, position: '', origin: '', lineLength: '' });
+        const temArr = new Array(3).fill({ display: false, position: "", origin: "", lineLength: "" });
         const refLine = { vLine: [], hLine: [] };
         for (const i in refLine) {
           refLine[i] = JSON.parse(JSON.stringify(temArr));
@@ -1220,9 +1256,9 @@ export default {
         for (const item of nodes) {
           if (
             item.className !== undefined &&
-            !item.className.split(' ').includes(this.classNameActive) &&
-            item.getAttribute('data-is-snap') !== null &&
-            item.getAttribute('data-is-snap') !== 'false'
+            !item.className.split(" ").includes(this.classNameActive) &&
+            item.getAttribute("data-is-snap") !== null &&
+            item.getAttribute("data-is-snap") !== "false"
           ) {
             // 获取位置，角度
             const [l, t, rotate] = this.formatTransformVal(item.style.transform);
@@ -1327,12 +1363,12 @@ export default {
               const arrTem = [0, 1, 0, 1, 2, 2, 0, 1, 0, 1, 2, 2];
               for (let i = 0; i <= arrTem.length; i++) {
                 // 前6为Y辅助线,后6为X辅助线
-                const xory = i < 6 ? 'y' : 'x';
-                const horv = i < 6 ? 'hLine' : 'vLine';
+                const xory = i < 6 ? "y" : "x";
+                const horv = i < 6 ? "hLine" : "vLine";
                 if (tem.display[i]) {
                   const { origin, length } = this.calcLineValues(tem.value[xory][arrTem[i]]);
                   refLine[horv][arrTem[i]].display = tem.display[i];
-                  refLine[horv][arrTem[i]].position = tem.position[i] + 'px';
+                  refLine[horv][arrTem[i]].position = tem.position[i] + "px";
                   refLine[horv][arrTem[i]].origin = origin;
                   refLine[horv][arrTem[i]].lineLength = length;
                 }
@@ -1340,13 +1376,13 @@ export default {
             }
           }
         }
-        this.$emit('refLineParams', refLine);
+        this.$emit("refLineParams", refLine);
       }
     },
     // 计算参考线
     calcLineValues(arr) {
-      const length = Math.max(...arr) - Math.min(...arr) + 'px';
-      const origin = Math.min(...arr) + 'px';
+      const length = Math.max(...arr) - Math.min(...arr) + "px";
+      const origin = Math.min(...arr) + "px";
       return { length, origin };
     },
     async getActiveAll(nodes) {
@@ -1359,7 +1395,7 @@ export default {
       let groupTop = 0;
       for (const item of nodes) {
         // 修复判断条件 split(' ')
-        if (item.className !== undefined && item.className.split(' ').includes(this.classNameActive)) {
+        if (item.className !== undefined && item.className.split(" ").includes(this.classNameActive)) {
           activeAll.push(item);
         }
       }
@@ -1387,8 +1423,7 @@ export default {
       if (top === undefined) top = 0;
       return [Number(left), Number(top), rotate];
     }
-  },
-
+  }
 };
 </script>
 <style scoped>

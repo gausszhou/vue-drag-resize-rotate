@@ -16,7 +16,7 @@ git config --local user.name "gausszhou"
 git config --local user.email gausszhou@qq.com
 
 git add .
-time=$(date "+%Y-%m-%d-%H")
+time=$(date "+%Y-%m-%d %H:%m")
 git commit -m "$time deploy"
 git branch gh-pages
 git checkout  gh-pages

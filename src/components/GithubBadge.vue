@@ -1,12 +1,18 @@
 <template>
   <div class="github">
-    <a href="https://github.com/gausszhou/vue-drag-resize-rotate" target="__blank">Github</a>
+    <a :href="url">Github</a>
   </div>
 </template>
 
 <script>
-export default {
 
+export default {
+  props:{
+    url:{
+      type:String,
+      default: "https://github.com/gausszhou/"
+    }
+  }
 }
 </script>
 
@@ -22,12 +28,13 @@ export default {
     135deg,
     transparent 0%,
     transparent 50%,
-    #409eff77 50%,
-    #409eff77 100%
+    #43b984 50%,
+    #43b984 100%
   );
 }
+
 .github a {
-  font-size: 14px;
+  font-size: 16px;
   margin-left: 36px;
   margin-top: 36px;
   transform: rotate(-45deg);
@@ -35,7 +42,17 @@ export default {
   text-decoration: none;
   color: black;
 }
-.github a:hover {
-  color: green;
+
+.github:hover{
+    background-image: linear-gradient(
+    135deg,
+    transparent 0%,
+    transparent 50%,
+    #34445c 50%,
+    #34445c 100%
+  );
+}
+.github:hover a {
+  color: #fff;
 }
 </style>

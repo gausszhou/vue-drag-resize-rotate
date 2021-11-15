@@ -97,7 +97,8 @@ export default [
     label: '应用',
     icon: 'el-icon-star-off',
     children: [
-      { route: 'application-multiple-drag', label: '同时拖动多个元素' }
+      { route: 'application-multiple-drag-20', label: '同时拖动多个元素(20)' },
+      { route: 'application-multiple-drag-50', label: '同时拖动多个元素(50)' },
     ]
   },
 ]
