@@ -451,6 +451,7 @@ export default {
     active(val) {
       this.enabled = val;
       if (val) {
+        this.updateParentSize();
         this.$emit("activated");
       } else {
         this.$emit("deactivated");
@@ -620,6 +621,12 @@ export default {
         this.parentWidth = newParentWidth;
         this.parentHeight = newParentHeight;
       }
+    },
+    // 更新获取父元素宽高
+    updateParentSize() {
+      const [parentWidth, parentHeight] = this.getParentSize();
+      this.parentWidth = parentWidth;
+      this.parentHeight = parentHeight;
     },
     // 获取父元素大小
     getParentSize() {
@@ -942,8 +949,8 @@ export default {
       let { x: mouseX, y: mouseY } = this.getMouseCoordinate(e);
       // 在非旋转且有父容器限制的时候，直接限制mouse参与计算的坐标值
       if (!this.rotatable && this.parent) {
-        mouseX = restrictToBounds(mouseX, this.parentX, this.parentX + this.parentWidth);
-        mouseY = restrictToBounds(mouseY, this.parentY, this.parentY + this.parentHeight);
+        mouseX = restrictToBounds(mouseX, this.parentX, (this.parentX + this.parentWidth * scaleRatio));
+        mouseY = restrictToBounds(mouseY, this.parentY, (this.parentY + this.parentHeight * scaleRatio));
       }
       // 获取鼠标移动的坐标差
       let deltaX = mouseX - this.mouseClickPosition.mouseX;
