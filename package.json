@@ -1,14 +1,10 @@
 {
   "name": "@gausszhou/vue-drag-resize-rotate",
   "version": "2.0.10",
-  "files": [
-    "/lib/*.js"
-  ],
-  "main": "lib/vue-drag-resize-rotate.js",
-  "unpkg": "lib/vue-drag-resize-rotate.js",
-  "export": "lib/vue-drag-resize-rotate.js",
-  "author": "gausszhou <gausszhou@qq.com>",
   "description": "一个Vue组件，支持拖拽，拉伸，旋转，放缩，自动对齐",
+  "author": "gausszhou <gausszhou@qq.com>",
+  "main": "lib/vue-drag-resize-rotate.js",
+  "export": "lib/vue-drag-resize-rotate.js",
   "private": false,
   "publishConfig": {
     "access": "public"
@@ -25,20 +21,12 @@
     "type": "git",
     "url": "https://github.com/gausszhou/vue-drag-resize-rotate.git"
   },
-  "bugs": {
-    "url": "https://github.com/gausszhou/vue-drag-resize-rotate/issues"
-  },
   "homepage": "https://github.com/gausszhou/vue-drag-resize-rotate#readme",
-  "directories": {
-    "lib": "lib",
-    "test": "tests"
-  },
   "scripts": {
     "dev": "vue-cli-service serve",
-    "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "lib": "webpack",
-    "unit": "cross-env BABEL_ENV=test mocha-webpack --webpack-config=webpack.test.js tests/unit/spec/*/*.js"
+    "build:lib": "webpack --config=webpack.lib.js",
+    "test": "jest"
   },
   "dependencies": {},
   "devDependencies": {
@@ -52,20 +40,19 @@
     "babel-eslint": "^10.1.0",
     "babel-plugin-istanbul": "^5.2.0",
     "babel-preset-vue": "^2.0.2",
+    "chai": "^4.3.6",
     "core-js": "^3.6.5",
-    "cross-env": "^5.2.1",
     "element-ui": "^2.15.0",
     "eslint": "^6.8.0",
     "eslint-plugin-vue": "^7.15.1",
-    "highlight.js": "^10.6.0",
     "jest": "^27.3.1",
     "markdown-it": "^12.0.4",
+    "markdown-it-prism": "^2.2.3",
     "node-sass": "^4.14.1",
     "sass-loader": "^8.0.2",
     "style-loader": "^1.3.0",
     "uglifyjs-webpack-plugin": "^2.2.0",
     "vue": "^2.6.11",
-    "vue-moveable": "^1.8.11",
     "vue-router": "^3.5.1",
     "vue-template-compiler": "^2.6.11",
     "webpack": "^4.46.0",

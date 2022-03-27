@@ -8,15 +8,5 @@ module.exports = {
   trailingComma: "none",
   bracketSpacing: true,
   arrowParens: "avoid",
-  htmlWhitespaceSensitivity: "ignore",
-  parsers: {
-    ".jsx": "flow",
-    ".scss": "scss",
-    ".ts": "typescript",
-    ".less": "css",
-    ".vue": "vue",
-    ".nvue": "vue",
-    ".ux": "vue",
-    ".yml": "yaml"
-  }
+  htmlWhitespaceSensitivity: "ignore"
 };

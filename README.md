@@ -3,11 +3,11 @@
 [![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE) [![Npm Package](https://img.shields.io/npm/v/@gausszhou/vue-drag-resize-rotate.svg)](https://www.npmjs.com/package/@gausszhou/vue-drag-resize-rotate)
 
 
-## 踩坑提示
+## Tips
 
 > 同时拖动的元素达到50+以上业务的请绕道
 
-## TodoList
+## Todo List
  
 - [x] 修复部分正则判断问题和容器大小的1px误差问题
 - [x] 整合自动对齐功能
@@ -18,10 +18,12 @@
   - [x] 允许外部传入纵横比
 - [x] 修复放缩 
 - [ ] 重构代码
+  - [ ] 抽离逻辑
+  - [ ] 优化性能
 
-> 提示:开启旋转后 网格对齐和父容器限制将失效，待重构代码，会有Break Change！！！
+> 提示:开启旋转后 网格对齐和父容器限制将失效，待重构代码，会有 Breaking Change！！！
 
-## LiveDemo
+## Live Demo
 
 [中文在线演示地址](https://gausszhou.github.io/vue-drag-resize-rotate)
 
@@ -48,7 +50,7 @@ Vue.component('vue-drag-resize-rotate', VueDragResizeRotate)
       <input type="checkbox" v-model="rotatable" /> Toggle rotatable
     </div>
     <div class="container">
-      <VueDragResizeRotate
+      <vue-drag-resize-rotate
         :w="100"
         :h="100"
         :x="0"
@@ -61,7 +63,7 @@ Vue.component('vue-drag-resize-rotate', VueDragResizeRotate)
         @rotating="rotating"
         :r="angle"
       >
-      </VueDragResizeRotate>
+      </vue-drag-resize-rotate>
     </div>
   </div>
 </template>
@@ -113,7 +115,7 @@ export default {
 </style>
 ```
 
-## CodeReference
+## Code Reference
 
 ```shell
 # 主要参考

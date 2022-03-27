@@ -4,7 +4,7 @@
 
 由于`ctrl`事件处理程序的注册方式，请确保在开始拖动元素之前单击容器内的任何位置。
 
-```js
+```vue
 <template>
   <div class="view-box">
     <div id="toolbar">
@@ -16,7 +16,7 @@
         Key)
       </label>
     </div>
-    <div class="container">      
+    <div class="container">
         <vue-drag-resize-rotate
           class-name-active="my-active-class"
           ref="vdrr"
@@ -124,5 +124,3 @@ export default {
 
 <style></style>
 ```
-
-

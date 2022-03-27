@@ -24,15 +24,16 @@
       <router-view />
       <div class="markdown-render" id="write" v-html="markdownHTML"></div>
     </div>
-    <GithubBadge url="https://github.com/gausszhou/vue-drag-resize-rotate"></GithubBadge>
+    <github-badge url="https://github.com/gausszhou/vue-drag-resize-rotate"></github-badge>
   </div>
 </template>
 
 <script>
 import MarkdownIt from "markdown-it";
 import hljs from "highlight.js";
-import GithubBadge from "@/components/GithubBadge.vue";
-import menuData from "./menuData";
+import 'highlight.js/styles/github.css';
+import GithubBadge from "@/components/github-badge";
+import menuData from "./menu";
 
 export default {
   name: "app",
@@ -103,26 +104,11 @@ export default {
         linkify: true,
         typographer: true,
         highlight: function(str, lang) {
-          // 此处判断是否有添加代码语言
           if (lang && hljs.getLanguage(lang)) {
             try {
-              // 得到经过highlight.js之后的html代码
-              const preCode = hljs.highlight(lang, str, true).value;
-              // 以换行进行分割
-              const lines = preCode.split(/\n/).slice(0, -1);
-              // 添加自定义行号
-              let html = lines
-                .map((item, index) => {
-                  return '<li><span class="line-num" data-line="' + (index + 1) + '"></span>' + item + "</li>";
-                })
-                .join("");
-              html = "<ol>" + html + "</ol>";
-              // 添加代码语言
-              if (lines.length) {
-                html += '<b class="name">' + lang + "</b>";
-              }
-              return '<pre class="hljs"><code>' + html + "</code></pre>";
-            } catch (__) {}
+              let preCode = hljs.highlight(lang, str, true).value;
+              return preCode;
+            } catch (e) {}
           }
         }
       });

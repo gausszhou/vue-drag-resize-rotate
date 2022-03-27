@@ -5,7 +5,7 @@ import {
   snapToGrid,
   restrictToBounds,
   rotatedPoint
-} from "@/components/vue-drag-resize-rotate/utils/fns";
+} from "../../src/components/vue-drag-resize-rotate/utils/fns";
 
 describe("fns", function() {
   describe("isFunction", function() {
