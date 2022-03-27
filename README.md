@@ -21,7 +21,7 @@
   - [ ] 抽离逻辑
   - [ ] 优化性能
 
-> 提示:开启旋转后 网格对齐和父容器限制将失效，待重构代码，会有 Breaking Change！！！
+> 提示: 开启旋转后 网格对齐和父容器限制将失效，待重构代码，会有 Breaking Change！！！
 
 ## Live Demo
 
@@ -31,7 +31,7 @@
 
  默认情况下，开启拖拽和调整大小，如要开启旋转功能，请设置`:rotatable=true`并传入旋转角度比如`:r="0"`
 
-## Started
+## Quick Start
 
 ```shell
 npm install  @gausszhou/vue-drag-resize-rotate
@@ -118,9 +118,7 @@ export default {
 ## Code Reference
 
 ```shell
-# 主要参考
 https://github.com/mauricius/vue-draggable-resizable
-# 次要参考
 https://github.com/gorkys/vue-draggable-resizable-gorkys
 https://github.com/tmrcui/vue-draggable-resizable-rotatable   
 ```
