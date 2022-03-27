@@ -2,7 +2,7 @@
 
 在父级中使用的组件，<b>`lock-aspect-ratio` </b> prop用于在调整大小期间保持组件的宽高比。
 
-~~~js
+```js
 <template>
   <div class="view-box">
     <div id="toolbar"></div>

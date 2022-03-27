@@ -1,6 +1,6 @@
 # 自适应大小
 
-```js
+```html
 <template>
   <div class="view-box">
     <div id="toolbar">自适应大小</div>
@@ -9,7 +9,6 @@
     </div>
   </div>
 </template>
-
 ```
 
 

@@ -45,39 +45,35 @@ Vue.component('vue-drag-resize-rotate', VueDragResizeRotate)
 
 ```vue
 <template>
-  <div class="view-box">
-    <div id="toolbar">
-      <input type="checkbox" v-model="rotatable" /> Toggle rotatable
-    </div>
-    <div class="container">
-      <vue-drag-resize-rotate
-        :w="100"
-        :h="100"
-        :x="0"
-        :y="0"
-        :parent="true"
-        :draggable="true"
-        :resizable="true"
-        :rotatable="rotatable"
-        @resizing="resizing"
-        @rotating="rotating"
-        :r="angle"
-      >
-      </vue-drag-resize-rotate>
-    </div>
+  <div class="container">
+    <vue-drag-resize-rotate
+      :w="100"
+      :h="100"
+      :x="0"
+      :y="0"
+      :parent="true"
+      :draggable="true"
+      :resizable="true"
+      :rotatable="true"
+      @resizing="resizing"
+      @rotating="rotating"
+      :r="0"
+    >
+    {{angle}}
+    </vue-drag-resize-rotate>
   </div>
 </template>
 
 <script>
-import VueDragResizeRotate from "@gausszhou/vue-drag-resize-rotate";
 // 当然你也可以在需要的时候在单个组件内引入
+import VueDragResizeRotate from "@gausszhou/vue-drag-resize-rotate";
+
 export default {
   components: {
     VueDragResizeRotate,
   },
   data() {
     return {
-      rotatable: true,
       angle: 0,
     };
   },
@@ -85,34 +81,12 @@ export default {
     resizing(x, y, w, h) {
       console.log(x, y, w, h);
     },
-    rotating(val) {
-      this.angle = val;
+    rotating(angle) {
+      console.log(angle)
     },
   },
 };
 </script>
-
-<style>
-#toolbar {
-  left: 0;
-  top: 0;
-  height: 24px;
-  padding: 5px;
-  border: 1px solid #999;
-  border-bottom: none;
-  background-color: #CCC;
-  z-index: 999;
-}
-
-.container {
-  width: 100%;
-  height: 600px;
-  border: 1px solid #000;
-  position: relative;
-  box-sizing: border-box
-}
-
-</style>
 ```
 
 ## Code Reference
