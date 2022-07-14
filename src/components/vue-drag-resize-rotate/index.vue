@@ -342,6 +342,7 @@ export default {
         if (!this.handleInfo.switch) return { display: this.enabled ? "block" : "none" };
         // 新增 当没有开启旋转的时候，旋转手柄不显示
         if (stick === "rot" && !this.rotatable) return { display: "none" };
+        if(stick !== "rot" && !this.resizable) return { display: "none" };
         const size = (this.handleInfo.size / this.scaleRatio).toFixed(2);
         const offset = (this.handleInfo.offset / this.scaleRatio).toFixed(2);
         const center = (size / 2).toFixed(2);
@@ -425,7 +426,7 @@ export default {
     },
     // 控制柄显示与否
     actualHandles() {
-      if (!this.resizable) return [];
+      if (!this.resizable && !this.rotatable) return [];
       return this.handles;
     },
     //  根据left right 算出元素的宽度
