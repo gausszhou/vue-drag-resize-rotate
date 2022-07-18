@@ -276,7 +276,7 @@ export default {
     snapTolerance: {
       type: Number,
       default: 5,
-      validator: function(val) {
+      validator: function (val) {
         return typeof val === "number";
       }
     },
@@ -298,7 +298,7 @@ export default {
       }
     }
   },
-  data: function() {
+  data: function () {
     return {
       left: this.x,
       top: this.y,
@@ -338,11 +338,11 @@ export default {
   },
   computed: {
     handleStyle() {
-      return (stick, index) => {
+      return stick => {
         if (!this.handleInfo.switch) return { display: this.enabled ? "block" : "none" };
         // 新增 当没有开启旋转的时候，旋转手柄不显示
         if (stick === "rot" && !this.rotatable) return { display: "none" };
-        if(stick !== "rot" && !this.resizable) return { display: "none" };
+        if (stick !== "rot" && !this.resizable) return { display: "none" };
         const size = (this.handleInfo.size / this.scaleRatio).toFixed(2);
         const offset = (this.handleInfo.offset / this.scaleRatio).toFixed(2);
         const center = (size / 2).toFixed(2);
@@ -392,6 +392,17 @@ export default {
           right: styleMap[stick].right,
           bottom: styleMap[stick].bottom
         };
+        const mapStick2Index = {
+          tl: 0,
+          tm: 1,
+          tr: 2,
+          mr: 3,
+          br: 4,
+          bm: 5,
+          bl: 6,
+          ml: 7,
+          rot: 8
+        };
         // 新增 让控制手柄的鼠标样式跟随旋转角度变化
         if (stick !== "rot") {
           const cursorStyleArray = [
@@ -407,7 +418,7 @@ export default {
           const STEP = 45;
           const rotate = this.rotate + STEP / 2;
           const deltaIndex = Math.floor(rotate / STEP);
-          index = (index + deltaIndex) % 8;
+          let index = (mapStick2Index[stick] + deltaIndex) % 8;
           stickStyle.cursor = cursorStyleArray[index];
         }
         stickStyle.display = this.enabled ? "block" : "none";
@@ -540,7 +551,7 @@ export default {
       this.changeHeight(val);
     }
   },
-  created: function() {
+  created: function () {
     // eslint-disable-next-line 无效的prop：minWidth不能大于maxWidth
     if (this.maxWidth && this.minWidth > this.maxWidth)
       console.warn("[Vdr warn]: Invalid prop: minWidth cannot be greater than maxWidth");
@@ -563,7 +574,7 @@ export default {
     this.BR = {};
     this.resetBoundsAndMouseState();
   },
-  mounted: function() {
+  mounted: function () {
     if (!this.enableNativeDrag) {
       this.$el.ondragstart = () => false;
     }
@@ -588,7 +599,7 @@ export default {
     //  窗口变化时，检查容器大小
     addEvent(window, "resize", this.checkParentSize);
   },
-  beforeDestroy: function() {
+  beforeDestroy: function () {
     removeEvent(document.documentElement, "mousedown", this.deselect);
     removeEvent(document.documentElement, "touchstart", this.handleUp);
     removeEvent(document.documentElement, "mousemove", this.move);
@@ -950,8 +961,8 @@ export default {
       let { x: mouseX, y: mouseY } = this.getMouseCoordinate(e);
       // 在非旋转且有父容器限制的时候，直接限制mouse参与计算的坐标值
       if (!this.rotatable && this.parent) {
-        mouseX = restrictToBounds(mouseX, this.parentX, (this.parentX + this.parentWidth * scaleRatio));
-        mouseY = restrictToBounds(mouseY, this.parentY, (this.parentY + this.parentHeight * scaleRatio));
+        mouseX = restrictToBounds(mouseX, this.parentX, this.parentX + this.parentWidth * scaleRatio);
+        mouseY = restrictToBounds(mouseY, this.parentY, this.parentY + this.parentHeight * scaleRatio);
       }
       // 获取鼠标移动的坐标差
       let deltaX = mouseX - this.mouseClickPosition.mouseX;
