@@ -1,6 +1,6 @@
 {
   "name": "@gausszhou/vue-drag-resize-rotate",
-  "version": "2.0.13",
+  "version": "2.0.14",
   "description": "一个Vue组件，支持拖拽，拉伸，旋转，放缩，自动对齐",
   "author": "gausszhou <gausszhou@qq.com>",
   "main": "lib/vue-drag-resize-rotate.js",
