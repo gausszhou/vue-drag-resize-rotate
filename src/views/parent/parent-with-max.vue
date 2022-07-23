@@ -5,8 +5,10 @@
       <vue-drag-resize-rotate :parent="true" :max-width="300" :max-height="300" @resizing="onResizing">
         <p>
           Component costrained in parent with
-          <b>maxWidth</b> and
-          <b>maxHeight</b> equal to 300.
+          <b>maxWidth</b>
+          and
+          <b>maxHeight</b>
+          equal to 300.
         </p>
       </vue-drag-resize-rotate>
     </div>
@@ -19,16 +21,13 @@ export default {
     return {
       width: 200,
       height: 200
-    }
+    };
   },
   methods: {
     onResizing(x, y, width, height) {
-      this.width = width
-      this.height = height
+      this.width = width;
+      this.height = height;
     }
   }
-}
+};
 </script>
-
-<style>
-</style>

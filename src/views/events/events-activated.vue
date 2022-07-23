@@ -14,18 +14,15 @@ export default {
   data() {
     return {
       active: false
-    }
+    };
   },
   methods: {
     onActivated() {
-      this.active = true
+      this.active = true;
     },
     onDeactivated() {
-      this.active = false
+      this.active = false;
     }
   }
-}
+};
 </script>
-
-<style>
-</style>

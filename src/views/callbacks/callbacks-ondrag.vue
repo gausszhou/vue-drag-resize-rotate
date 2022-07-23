@@ -3,7 +3,8 @@
     <div id="toolbar">
       <p :style="style">
         I turn red when
-        <i>onDrag</i> is called. Callback then prevents draging.
+        <i>onDrag</i>
+        is called. Callback then prevents draging.
       </p>
     </div>
     <div class="container">
@@ -11,24 +12,21 @@
     </div>
   </div>
 </template>
-    
-<script> 
+
+<script>
 export default {
   data() {
     return {
       style: {
-        color: 'black'
+        color: "black"
       }
-    }
+    };
   },
   methods: {
     onDrag(e) {
-      this.style.color = 'red'
-      return false
+      this.style.color = "red";
+      return false;
     }
   }
-}
+};
 </script>
-
-<style>
-</style>

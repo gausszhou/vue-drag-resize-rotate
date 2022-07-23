@@ -1,13 +1,17 @@
 <template>
   <div class="view-box">
     <div id="toolbar">
-      <input type="checkbox" v-model="disableUserSelect1" /> Toggle disableUserSelect1
-      <input type="checkbox" v-model="disableUserSelect2" /> Toggle disableUserSelect2
+      <input type="checkbox" v-model="disableUserSelect1" />
+      Toggle disableUserSelect1
+      <input type="checkbox" v-model="disableUserSelect2" />
+      Toggle disableUserSelect2
     </div>
     <div class="container">
       <vue-drag-resize-rotate :parent="true" :disableUserSelect="disableUserSelect1">
         <p>
-          你 {{ disableUserSelect1 ? '不可以' : '可以' }} 选择组件内部的的文字，不妨双击试试!!!
+          你
+          {{ disableUserSelect1 ? "不可以" : "可以" }}
+          选择组件内部的的文字，不妨双击试试!!!
           <br />
           <b>:disableUserSelect</b>
           prop equal to {{ disableUserSelect1 }}.
@@ -15,7 +19,9 @@
       </vue-drag-resize-rotate>
       <vue-drag-resize-rotate :parent="true" :disableUserSelect="disableUserSelect2">
         <p>
-          你 {{ disableUserSelect2 ? '不可以' : '可以' }} 选择组件内部的的文字，不妨双击试试!!!
+          你
+          {{ disableUserSelect2 ? "不可以" : "可以" }}
+          选择组件内部的的文字，不妨双击试试!!!
           <br />
           <b>:disableUserSelect</b>
           prop equal to {{ disableUserSelect2 }}.
@@ -30,11 +36,8 @@ export default {
   data() {
     return {
       disableUserSelect1: false,
-      disableUserSelect2: false,
-    }
+      disableUserSelect2: false
+    };
   }
-}
+};
 </script>
-
-<style>
-</style>

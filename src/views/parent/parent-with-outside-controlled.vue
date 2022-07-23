@@ -14,7 +14,7 @@
       <div :style="style">
         <vue-drag-resize-rotate
           :parent="true"
-          :grid="[20,20]"
+          :grid="[20, 20]"
           :x="x"
           :y="y"
           :h="h"
@@ -38,17 +38,17 @@ export default {
       w: 100,
       h: 100,
       style: {
-        position: 'relative',
-        backgroundColor: '#808080',
-        background: 'linear-gradient(-90deg, rgba(0, 0, 0, .1) 1px, transparent 1px), linear-gradient(rgba(0, 0, 0, .1) 1px, transparent 1px)',
-        backgroundSize: '20px 20px, 20px 20px',
-        backgroundPosition: '10px 10px',
-        width: '100%',
-        height: '100%',
-        boxSizing: 'border-box'
+        position: "relative",
+        backgroundColor: "#808080",
+        background:
+          "linear-gradient(-90deg, rgba(0, 0, 0, .1) 1px, transparent 1px), linear-gradient(rgba(0, 0, 0, .1) 1px, transparent 1px)",
+        backgroundSize: "20px 20px, 20px 20px",
+        backgroundPosition: "10px 10px",
+        width: "100%",
+        height: "100%",
+        boxSizing: "border-box"
       }
-
-    }
+    };
   },
   methods: {
     onDrag(left, top) {
@@ -56,14 +56,11 @@ export default {
       this.y = top;
     },
     onResize(left, top, width, height) {
-      this.x = left
-      this.y = top
-      this.w = width
-      this.h = height
+      this.x = left;
+      this.y = top;
+      this.w = width;
+      this.h = height;
     }
   }
-}
+};
 </script>
-
-<style>
-</style>

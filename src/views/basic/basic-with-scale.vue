@@ -1,7 +1,7 @@
 <template>
   <div class="view-box">
     <div id="toolbar">
-      <el-input-number size="mini" v-model="scaleRatio" :step=".1" :min=".1" :max="10" />
+      <el-input-number size="mini" v-model="scaleRatio" :step="0.1" :min="0.1" :max="10" />
       <span class="ml_10">scaleRatio</span>
     </div>
     <div class="container" :style="containerStyle()">
@@ -18,9 +18,9 @@
         :parent="true"
         :scaleRatio="scaleRatio"
       >
-        <p>位置为({{position.x}},{{position.y}})</p>
-        <p>大小为({{position.w}},{{position.h}})</p>
-        <p>角度为{{angle}}</p>
+        <p>位置为({{ position.x }},{{ position.y }})</p>
+        <p>大小为({{ position.w }},{{ position.h }})</p>
+        <p>角度为{{ angle }}</p>
       </vue-drag-resize-rotate>
     </div>
   </div>
@@ -39,22 +39,22 @@ export default {
       },
       angle: 0,
       scaleRatio: 1
-    }
+    };
   },
   methods: {
     rotating(val) {
-      this.angle = val
+      this.angle = val;
     },
     resizing(x, y, w, h) {
-      this.position = { x, y, w, h }
+      this.position = { x, y, w, h };
     },
     containerStyle() {
       return {
         transform: `scale(${this.scaleRatio})`
-      }
+      };
     }
-  },
-}
+  }
+};
 </script>
 
 <style scoped>

@@ -17,9 +17,11 @@
       >
         <div>
           <p>基本组件，可以配置</p>
-          <b>maxWidth</b> 和
-          <b>maxHeight</b> 属性
-          <p>w:{{w}},h:{{h}}</p>
+          <b>maxWidth</b>
+          和
+          <b>maxHeight</b>
+          属性
+          <p>w:{{ w }},h:{{ h }}</p>
         </div>
       </vue-drag-resize-rotate>
     </div>
@@ -34,13 +36,13 @@ export default {
       maxHeight: 300,
       w: 200,
       h: 200
-    }
+    };
   },
   methods: {
     onResize: function (x, y, width, height) {
-      this.w = width
-      this.h = height
-    },
+      this.w = width;
+      this.h = height;
+    }
   }
-}
+};
 </script>

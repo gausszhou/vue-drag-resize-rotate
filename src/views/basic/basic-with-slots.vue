@@ -14,16 +14,11 @@
 </template>
 
 <script>
-
 export default {
-
   methods: {
     onSubmit(e) {
-      alert("You just submitted the form!")
+      alert("You just submitted the form!");
     }
   }
-}
+};
 </script>
-
-<style>
-</style>

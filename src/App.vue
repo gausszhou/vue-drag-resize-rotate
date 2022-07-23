@@ -30,7 +30,7 @@
 <script>
 import MarkdownIt from "markdown-it";
 import hljs from "highlight.js";
-import 'highlight.js/styles/github.css';
+import "highlight.js/styles/github.css";
 import GithubBadge from "@/components/github-badge";
 import menuData from "./menu.js";
 
@@ -102,7 +102,7 @@ export default {
         html: true,
         linkify: true,
         typographer: true,
-        highlight: function(str, lang) {
+        highlight: function (str, lang) {
           if (lang && hljs.getLanguage(lang)) {
             try {
               let preCode = hljs.highlight(lang, str, true).value;

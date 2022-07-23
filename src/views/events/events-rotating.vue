@@ -12,9 +12,9 @@
         @rotatestop="onRotateStop"
       >
         <p>
-          {{ rotating ? '你正在旋转' : '这个角度刚刚好' }}
+          {{ rotating ? "你正在旋转" : "这个角度刚刚好" }}
           <br />
-          Rotate: {{rotate}}
+          Rotate: {{ rotate }}
         </p>
       </vue-drag-resize-rotate>
     </div>
@@ -31,20 +31,17 @@ export default {
       width: 200,
       height: 200,
       rotate: 0
-    }
+    };
   },
   methods: {
     onRotating: function (degree) {
-      this.resizing = true
-      this.rotate = degree
+      this.resizing = true;
+      this.rotate = degree;
     },
     onRotateStop: function (degree) {
-      this.resizing = false
-      this.rotate = degree
+      this.resizing = false;
+      this.rotate = degree;
     }
   }
-}
+};
 </script>
-
-<style>
-</style>

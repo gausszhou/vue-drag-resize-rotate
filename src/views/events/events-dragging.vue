@@ -4,7 +4,7 @@
     <div class="container">
       <vue-drag-resize-rotate :w="200" :h="200" :r="0" @dragging="onDrag" @dragstop="onDragStop">
         <p>
-          {{ dragging ? '你正在拖动' : '我就待在这里' }}
+          {{ dragging ? "你正在拖动" : "我就待在这里" }}
           <br />
           X: {{ x }} / Y: {{ y }}
         </p>
@@ -20,23 +20,20 @@ export default {
       dragging: false,
       x: 0,
       y: 0
-    }
+    };
   },
   beforeDestroy: function () {
-    clearTimeout(this.timer)
+    clearTimeout(this.timer);
   },
   methods: {
     onDrag: function (x, y) {
-      this.dragging = true
-      this.x = x
-      this.y = y
+      this.dragging = true;
+      this.x = x;
+      this.y = y;
     },
     onDragStop: function (x, y) {
-      this.dragging = false
+      this.dragging = false;
     }
   }
-}
+};
 </script>
-
-<style>
-</style>

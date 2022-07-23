@@ -611,7 +611,14 @@ export default {
   methods: {
     // 重置边界和鼠标状态
     resetBoundsAndMouseState() {
-      this.mouseClickPosition = { mouseX: 0, mouseY: 0, x: 0, y: 0, w: 0, h: 0 };
+      this.mouseClickPosition = {
+        mouseX: 0,
+        mouseY: 0,
+        x: 0,
+        y: 0,
+        w: 0,
+        h: 0
+      };
       this.bounds = {
         minLeft: null,
         maxLeft: null,
@@ -1150,7 +1157,12 @@ export default {
     async handleUp(e) {
       this.handle = null;
       // 初始化辅助线数据
-      const temArr = new Array(3).fill({ display: false, position: "", origin: "", lineLength: "" });
+      const temArr = new Array(3).fill({
+        display: false,
+        position: "",
+        origin: "",
+        lineLength: ""
+      });
       const refLine = { vLine: [], hLine: [] };
       for (const i in refLine) {
         refLine[i] = JSON.parse(JSON.stringify(temArr));
@@ -1251,7 +1263,12 @@ export default {
         let activeTop = this.top;
         let activeBottom = this.top + height;
         // 初始化辅助线数据
-        const temArr = new Array(3).fill({ display: false, position: "", origin: "", lineLength: "" });
+        const temArr = new Array(3).fill({
+          display: false,
+          position: "",
+          origin: "",
+          lineLength: ""
+        });
         const refLine = { vLine: [], hLine: [] };
         for (const i in refLine) {
           refLine[i] = JSON.parse(JSON.stringify(temArr));

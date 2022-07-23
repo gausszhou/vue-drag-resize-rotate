@@ -1,5 +1,5 @@
 const glob = require("glob");
-const fs = require("fs");
+const fs = require("fs-extra");
 const path = require("path");
 
 (async () => {
@@ -16,7 +16,7 @@ const path = require("path");
         componentName
       };
     } else {
-      console.log(componentName + "组件 没有对应文档")
+      console.log("[info] " + componentName + "组件 没有对应文档");
       return "";
     }
   });
@@ -25,9 +25,12 @@ const path = require("path");
       const { vue, md, componentName } = item;
       let vueContent = fs.readFileSync(vue).toString();
       let mdContent = fs.readFileSync(md).toString();
-      let mergeContent = mdContent + "\r\n```html\r\n"+ vueContent + "```\r\n"
+      let mergeContent = mdContent + "\r\n```html\r\n" + vueContent + "\r```\r\n";
       let filePath = path.join(target, componentName) + ".md";
-      fs.writeFileSync(filePath,mergeContent)
+      let floderpath = path.dirname(filePath)
+      if(!fs.existsSync(floderpath)) fs.mkdirSync(floderpath,{ recursive: true })
+      fs.writeFileSync(filePath, mergeContent)
+      
     }
   });
 

@@ -26,22 +26,19 @@ export default {
       y: 0,
       w: 100,
       h: 100
-    }
+    };
   },
   methods: {
     onDrag(left, top) {
-      this.x = left
-      this.y = top
+      this.x = left;
+      this.y = top;
     },
     onResize(left, top, width, height) {
-      this.x = left
-      this.y = top
-      this.w = width
-      this.h = height
+      this.x = left;
+      this.y = top;
+      this.w = width;
+      this.h = height;
     }
   }
-}
+};
 </script>
-
-<style>
-</style>

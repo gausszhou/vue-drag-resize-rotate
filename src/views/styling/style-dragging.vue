@@ -12,12 +12,6 @@
   </div>
 </template>
 
-<script>
-export default {
-
-}
-</script>
-
 <style scoped>
 .my-class {
   border: 1px solid red;

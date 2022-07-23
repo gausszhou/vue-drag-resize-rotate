@@ -5,18 +5,13 @@
       <vue-drag-resize-rotate class-name-resizing="my-resizing-class" class-name="my-class">
         <p>
           同样组件处于被拉伸时，设置类名
-          <b>class-name-resizing</b> prop.
+          <b>class-name-resizing</b>
+          prop.
         </p>
       </vue-drag-resize-rotate>
     </div>
   </div>
 </template>
-
-<script>
-export default {
-
-}
-</script>
 
 <style scoped>
 .my-class {

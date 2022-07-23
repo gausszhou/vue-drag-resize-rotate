@@ -30,8 +30,14 @@ export default [
       { route: "grid-20x20", label: "网格20x20" },
       { route: "grid-20x40", label: "网格20x40" },
       { route: "grid-20x20-with-offset-10x10", label: "网格20x20+偏移10x10" },
-      { route: "grid-20x40-with-offset-10x20-min", label: "网格20x40+偏移10x20+最小限制" },
-      { route: "grid-20x40-with-offset-10x20-max", label: "网格20x40+偏移10x20+最大限制" }
+      {
+        route: "grid-20x40-with-offset-10x20-min",
+        label: "网格20x40+偏移10x20+最小限制"
+      },
+      {
+        route: "grid-20x40-with-offset-10x20-max",
+        label: "网格20x40+偏移10x20+最大限制"
+      }
     ]
   },
   {
@@ -54,7 +60,10 @@ export default [
       { route: "aspect-ratio-basic", label: "锁定纵横比 " },
       { route: "aspect-ratio-with-min", label: "纵横比+最小限制 " },
       { route: "aspect-ratio-with-max", label: "纵横比+最大限制 " },
-      { route: "aspect-ratio-costrained-in-parent", label: "纵横比+父级容器限制 " },
+      {
+        route: "aspect-ratio-costrained-in-parent",
+        label: "纵横比+父级容器限制 "
+      },
       { route: "aspect-ratio-with-grid", label: "纵横比+对齐网格 " },
       { route: "aspect-ratio-with-grid-offset", label: "在偏移的网格上对齐 " },
       { route: "aspect-ratio-with-grid-parent", label: "在父级中对齐网格 " },

@@ -1,7 +1,8 @@
 <template>
   <div class="view-box">
     <div id="toolbar">
-      <input type="checkbox" v-model="resizable" /> Toggle resizable
+      <input type="checkbox" v-model="resizable" />
+      Toggle resizable
     </div>
     <div class="container">
       <vue-drag-resize-rotate :resizable="resizable">
@@ -17,10 +18,7 @@ export default {
   data() {
     return {
       resizable: false
-    }
+    };
   }
-}
+};
 </script>
-
-<style>
-</style>

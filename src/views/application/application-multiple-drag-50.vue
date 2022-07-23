@@ -9,23 +9,23 @@
         Key)
       </label>
     </div>
-    <div class="container">      
-        <vue-drag-resize-rotate
-          class-name-active="my-active-class"
-          ref="vdrr"
-          v-for="element in elements"
-          :key="element.id"
-          :id="element.id"
-          :x="element.x"
-          :y="element.y"
-          :w="200"
-          :h="200"
-          :resizable="false"
-          @dragging="(left, top) => dragging(element.id, left, top)"
-          @dragstop="(left, top) => dragstop(element.id, left, top)"
-        >
-          <p>{{ element.text }}</p>
-        </vue-drag-resize-rotate>
+    <div class="container">
+      <vue-drag-resize-rotate
+        class-name-active="my-active-class"
+        ref="vdrr"
+        v-for="element in elements"
+        :key="element.id"
+        :id="element.id"
+        :x="element.x"
+        :y="element.y"
+        :w="200"
+        :h="200"
+        :resizable="false"
+        @dragging="(left, top) => dragging(element.id, left, top)"
+        @dragstop="(left, top) => dragstop(element.id, left, top)"
+      >
+        <p>{{ element.text }}</p>
+      </vue-drag-resize-rotate>
     </div>
   </div>
 </template>
@@ -40,11 +40,11 @@ export default {
       prevOffsetY: 0,
       count: 50,
       batchable: false,
-      elements:[]
+      elements: []
     };
   },
   computed: {
-    draggingElement: function() {
+    draggingElement: function () {
       if (!this.draggingId) return;
       return this.elements.find(el => el.id === this.draggingId);
     }
@@ -114,5 +114,3 @@ export default {
   }
 };
 </script>
-
-<style></style>

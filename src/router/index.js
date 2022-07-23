@@ -9,31 +9,32 @@ Vue.use(VueRouter);
 const viewContext = require.context("@/views", true, /.vue$/);
 
 // 遍历生成路由
-let routerArr = []
+let routerArr = [];
 viewContext.keys().forEach(value => {
-  const path = value.substr(value.indexOf('/'), value.lastIndexOf('.') - 1)
-  const componentLocation = value.substr(value.indexOf('.') + 1, value.lastIndexOf('.') - 1)
-  const componentName = componentLocation.substr(componentLocation.lastIndexOf('/') + 1)
+  const path = value.substr(value.indexOf("/"), value.lastIndexOf(".") - 1);
+  const componentLocation = value.substr(value.indexOf(".") + 1, value.lastIndexOf(".") - 1);
+  const componentName = componentLocation.substr(componentLocation.lastIndexOf("/") + 1);
   routerArr.push({
     path: path,
     name: componentName,
     component: () => import(/* webpackChunkName: "alarm" */ `../views${componentLocation}`)
-  })
-})
+  });
+});
 
 //合并公共路由以及重定向规则
-const routes = [{
-  path: '/',
-  redirect: { name: 'basic-basic-component' }
-},
-...routerArr,
-{
-  path: '*',
-  component: () => import('@/views/404.vue'),
-}
+const routes = [
+  {
+    path: "/",
+    redirect: { name: "basic-basic-component" }
+  },
+  ...routerArr,
+  {
+    path: "*",
+    component: () => import("@/views/404.vue")
+  }
 ];
 
-// 路径自动获取函数(部署Gitee项目时需要) 
+// 路径自动获取函数(部署Gitee项目时需要)
 function getAbsolutePath() {
   let path = location.pathname;
   return path.substring(0, path.lastIndexOf("/") + 1);

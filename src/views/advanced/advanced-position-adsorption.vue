@@ -11,7 +11,7 @@
         :min-height="200"
         :snap="true"
         :snapTolerance="20"
-        style="background-color: rgb(174, 213, 129);"
+        style="background-color: rgb(174, 213, 129)"
       ></vue-drag-resize-rotate>
       <vue-drag-resize-rotate
         :w="200"
@@ -22,7 +22,7 @@
         :min-height="200"
         :snap="true"
         :snapTolerance="20"
-        style="background-color: rgb(129, 212, 250);"
+        style="background-color: rgb(129, 212, 250)"
       ></vue-drag-resize-rotate>
     </div>
   </div>
