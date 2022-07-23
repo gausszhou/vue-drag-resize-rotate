@@ -2,10 +2,11 @@
 
 设置`:snap="true"`开启吸附功能和设置`:snapTolerance="20"`可控制吸附判断距离
 
-```js
+
+```html
 <template>
   <div class="view-box">
-    <div id="toolbar"></div>
+    <div id="toolbar">位置吸附对齐</div>
     <div class="container">
       <vue-drag-resize-rotate
         :w="200"
@@ -32,5 +33,4 @@
     </div>
   </div>
 </template>
-
 ```

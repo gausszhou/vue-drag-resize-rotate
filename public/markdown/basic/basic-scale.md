@@ -2,21 +2,13 @@
 
 > 放缩时，建议保持父元素盒子和vue-drag-resize-rotate放缩值保持一致
 
-```html
-<vue-drag-resize-rotate :scaleRatio="scaleRatio">
-```
-```js
-    containerStyle() {
-      return {
-        transform: `scale(${this.scaleRatio})`
-      }
-    }
-```
+
 ```html
 <template>
   <div class="view-box">
     <div id="toolbar">
-      <el-input-number size="mini" v-model="scaleRatio" :step=".1" :min=".1" :max="10" />scaleRatio
+      <el-input-number size="mini" v-model="scaleRatio" :step=".1" :min=".1" :max="10" />
+      <span class="ml_10">scaleRatio</span>
     </div>
     <div class="container" :style="containerStyle()">
       <vue-drag-resize-rotate
@@ -72,8 +64,11 @@ export default {
 </script>
 
 <style scoped>
+#toolbar {
+  display: flex;
+  align-items: center;
+}
 .container {
   transform-origin: left top;
 }
-</style>
-```
+</style>```

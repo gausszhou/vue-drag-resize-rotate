@@ -8,8 +8,8 @@ export default [
       { route: "basic-with-min-limit", label: "最小宽高限制" },
       { route: "basic-with-max-limit", label: "最大宽高限制" },
       { route: "basic-with-slots", label: "组件插槽 " },
-      { route: "basic-with-active", label: ":active属性控制活动状态" },
-      { route: "basic-prevent-deactivation", label: ":prevent-deactivation阻止失活" },
+      { route: "basic-with-active", label: "控制是否处于活动状态" },
+      { route: "basic-prevent-deactivation", label: "阻止失活" },
       { route: "basic-with-draggable", label: "是否允许拖动位置" },
       { route: "basic-with-resizable", label: "是否允许调整大小" },
       { route: "basic-with-rotatable", label: "是否允许旋转角度  (新增)" },
@@ -20,7 +20,7 @@ export default [
       { route: "basic-with-handles", label: "控制拉伸手柄的数量" },
       { route: "basic-with-axis", label: "限制运动轴" },
       { route: "basic-with-user-select", label: "限制用户选择" },
-      { route: "basic-scale", label: "放缩  (新增)" }
+      { route: "basic-with-scale", label: "放缩  (新增)" }
     ]
   },
   {

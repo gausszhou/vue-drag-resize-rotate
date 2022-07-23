@@ -1,12 +1,10 @@
 node_modules/
 dist/
 lib/
+public/markdown/
 
 # macos hidden files
 .DS_Store
-
-# npm files
-package-lock.json
 
 # compress files
 *.zip
@@ -14,7 +12,6 @@ package-lock.json
 
 # local env files
 .env.local
-.env.*.local
 
 # Log files
 npm-debug.log*

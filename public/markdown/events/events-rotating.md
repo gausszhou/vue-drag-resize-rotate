@@ -1,11 +1,20 @@
 # 旋转角度和旋转事件
 
-```js
+
+```html
 <template>
   <div class="view-box">
-    <div id="toolbar"></div>
+    <div id="toolbar">调整旋转角度触发事件rotating和rotatestop</div>
     <div class="container">
-      <vue-drag-resize-rotate :w="200" :h="200" :x="0" :y="0" :rotatable="true" @rotating="onRotating" @rotatestop="onRotateStop">
+      <vue-drag-resize-rotate
+        :w="200"
+        :h="200"
+        :x="0"
+        :y="0"
+        :rotatable="true"
+        @rotating="onRotating"
+        @rotatestop="onRotateStop"
+      >
         <p>
           {{ rotating ? '你正在旋转' : '这个角度刚刚好' }}
           <br />
@@ -33,7 +42,7 @@ export default {
       this.resizing = true
       this.rotate = degree
     },
-    onRotateStop: function () {
+    onRotateStop: function (degree) {
       this.resizing = false
       this.rotate = degree
     }
@@ -41,4 +50,5 @@ export default {
 }
 </script>
 
-```
+<style>
+</style>```

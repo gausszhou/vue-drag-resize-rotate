@@ -18,13 +18,12 @@
         </el-submenu>
       </el-menu>
     </div>
-    <!-- 路由视图 -->
     <div id="view">
       <div class="drag-bar" ref="dragBar"></div>
       <router-view />
       <div class="markdown-render" id="write" v-html="markdownHTML"></div>
     </div>
-    <github-badge url="https://github.com/gausszhou/vue-drag-resize-rotate"></github-badge>
+    <GithubBadge url="https://github.com/gausszhou/vue-drag-resize-rotate" />
   </div>
 </template>
 
@@ -33,7 +32,7 @@ import MarkdownIt from "markdown-it";
 import hljs from "highlight.js";
 import 'highlight.js/styles/github.css';
 import GithubBadge from "@/components/github-badge";
-import menuData from "./menu";
+import menuData from "./menu.js";
 
 export default {
   name: "app",

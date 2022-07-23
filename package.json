@@ -4,7 +4,7 @@
   "description": "一个Vue组件，支持拖拽，拉伸，旋转，放缩，自动对齐",
   "author": "gausszhou <gausszhou@qq.com>",
   "main": "lib/vue-drag-resize-rotate.js",
-  "export": "lib/vue-drag-resize-rotate.js",
+  "export": "lib/bundle.js",
   "private": false,
   "publishConfig": {
     "access": "public"
@@ -26,8 +26,8 @@
   },
   "homepage": "https://github.com/gausszhou/vue-drag-resize-rotate#readme",
   "scripts": {
-    "dev": "vue-cli-service serve",
-    "build": "vue-cli-service build",
+    "dev": "node prebuild.js && vue-cli-service serve",
+    "build": "node prebuild.js && vue-cli-service build",
     "build:lib": "webpack --config=webpack.lib.js",
     "test": "jest"
   },
@@ -50,6 +50,7 @@
     "element-ui": "^2.15.0",
     "eslint": "^6.8.0",
     "eslint-plugin-vue": "^7.15.1",
+    "glob": "^8.0.3",
     "jest": "^27.3.1",
     "markdown-it": "^12.0.4",
     "node-sass": "^4.14.1",

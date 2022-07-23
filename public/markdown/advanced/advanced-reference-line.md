@@ -2,10 +2,11 @@
 
 返回参数是一个Object,里面包含`vLine`与`hLine`，具体使用参考下面代码。
 
-```js
+
+```html
 <template>
   <div class="view-box">
-    <div id="toolbar"></div>
+    <div id="toolbar">对齐时出现辅助线</div>
     <div class="container">
       <vue-drag-resize-rotate
         :w="200"
@@ -79,7 +80,7 @@ export default {
   },
   methods: {
     getRefLineParams(params) {
-      console.log(params)
+      // console.log(params)
       const { vLine, hLine } = params
       this.vLine = vLine
       this.hLine = hLine
@@ -101,6 +102,4 @@ export default {
   height: 1px;
 }
 </style>
-
-
 ```

@@ -2,6 +2,7 @@
 
 一个基本组件，内部有一个表单。 输入应该是可聚焦的，按钮应该是可点击的。
 
+
 ```html
 <template>
   <div class="view-box">
@@ -19,7 +20,9 @@
 </template>
 
 <script>
+
 export default {
+
   methods: {
     onSubmit(e) {
       alert("You just submitted the form!")
@@ -27,4 +30,6 @@ export default {
   }
 }
 </script>
-```
+
+<style>
+</style>```

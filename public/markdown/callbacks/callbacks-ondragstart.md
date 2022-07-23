@@ -1,15 +1,40 @@
-# onDragStart回调的基本组件
+# onDragStart 回调的基本组件
 
 一个基本组件，带有<b>`onDragStart` </b> prop，它接受一个在拖动开始时被调用的函数（单击或触摸元素）。 如果函数返回`false`，则取消操作。 您可以使用此功能来防止事件冒泡。
 
-~~~js
-<vue-drag-resize-rotate :on-drag-start="onDragStartCallback">
-  <p>Passing a callback to the component that gets called as soon as the component is clicked.</p>
-</vue-drag-resize-rotate>
 
-function onDragStartCallback(ev){
-   ...
-   // return false; — for cancel
+```html
+<template>
+  <div class="view-box">
+    <div id="toolbar">
+      <p :style="style">
+        I turn red when
+        <i>onDragStart</i> is called. Callback then prevents activation.
+      </p>
+    </div>
+    <div class="container">
+      <vue-drag-resize-rotate :on-drag-start="onDragStart"></vue-drag-resize-rotate>
+    </div>
+  </div>
+</template>
+
+<script>
+export default {
+  data() {
+    return {
+      style: {
+        color: 'black'
+      }
+    }
+  },
+  methods: {
+    onDragStart(e) {
+      this.style.color = 'red'
+      return false
+    }
+  }
 }
-~~~
+</script>
 
+<style>
+</style>```

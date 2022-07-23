@@ -2,9 +2,33 @@
 
 一个基本组件，带有<b>`prevent-deactivation` </b> prop，以避免在外部点击时解除活动状态。
 
-~~~js
-<vue-drag-resize-rotate :prevent-deactivation="true">
-  <p>Prevents the deactivation of the component by providing the <b>:prevent-deactivation</b> prop.</p>
-</vue-drag-resize-rotate>
-~~~
 
+```html
+<template>
+  <div class="view-box">
+    <div id="toolbar">外部点击不会失活</div>
+    <div class="container">
+      <vue-drag-resize-rotate :prevent-deactivation="true">
+        <p>
+          设置
+          <b>:prevent-deactivation</b> 属性，让组件不能取消激活状态
+        </p>
+      </vue-drag-resize-rotate>
+      <vue-drag-resize-rotate :prevent-deactivation="true">
+        <p>
+          设置
+          <b>:prevent-deactivation</b> 属性，让组件不能取消激活状态
+        </p>
+      </vue-drag-resize-rotate>
+    </div>
+  </div>
+</template>
+
+<script>
+export default {
+
+}
+</script>
+
+<style>
+</style>```

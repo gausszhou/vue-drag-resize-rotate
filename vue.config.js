@@ -5,10 +5,10 @@ module.exports = {
   lintOnSave: false,
   // 配置相对路径
   publicPath: process.env.NODE_ENV === "production" ? "./" : "/",
-  // false 取消生成map文件 
+  // 受否生成SourceMap
   productionSourceMap: false,
-  // false 去除文件哈希值
-  filenameHashing: false,
+  // 是否生成文件哈希值
+  filenameHashing: true,
   // 这里编写webpack配置
   configureWebpack: {
     output: {

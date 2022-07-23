@@ -103,7 +103,7 @@
   p,
   blockquote,
   ul,
-  ol,
+  ol,pre
   dl,
   table {
     margin: 0.8em 0;
@@ -203,7 +203,6 @@
   }
 
   code {
-    background-color: #f3f4f4;
     padding: 0 2px 0 2px;
     font-size: 16px;
   }
@@ -231,8 +230,7 @@
     font-size: 100%;
     line-height: 1.45;
     background-color: #f7f7f7;
-    border: 0;
-    border-radius: 3px;
+    border: 1px solid #ccc;
     color: #777777;
     margin-top: 0 !important;
   }

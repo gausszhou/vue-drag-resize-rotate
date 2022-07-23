@@ -4,82 +4,26 @@
 
 __记得为句柄类设置`position：absolute`__
 
-~~~js
-<vue-drag-resize-rotate class-name-handle="my-handle-class">
-  <p>You can provide a default class name for handle using the <b>class-name-handle</b> prop.</p>
-</vue-drag-resize-rotate>
-<style>
-.my-handle-class {
-    position: absolute;
-    background-color: pink;
-    border: 1px solid black;
-    border-radius: 50%;
-    height: 14px;
-    width: 14px;
-    box-model: border-box;
-    -webkit-transition: all 300ms linear;
-    -ms-transition: all 300ms linear;
-    transition: all 300ms linear;
-}
+```html
+<template>
+  <div class="view-box">
+    <div id="toolbar">具有自定义类名称句柄的组件</div>
+    <div class="container">
+      <vue-drag-resize-rotate class-name-handle="my-handle-class">
+        <p>
+          You can provide a default class name for the handle using the
+          <b>class-name-handle</b> prop.
+        </p>
+      </vue-drag-resize-rotate>
+    </div>
+  </div>
+</template>
 
-.my-handle-class-tl {
-  top: -14px;
-  left: -14px;
-  cursor: nw-resize;
-}
+<script>
+export default {
 
-.my-handle-class-tm {
-  top: -14px;
-  left: 50%;
-  margin-left: -7px;
-  cursor: n-resize;
 }
+</script>
 
-.my-handle-class-tr {
-  top: -14px;
-  right: -14px;
-  cursor: ne-resize;
-}
-
-.my-handle-class-ml {
-  top: 50%;
-  margin-top: -7px;
-  left: -14px;
-  cursor: w-resize;
-}
-
-.my-handle-class-mr {
-  top: 50%;
-  margin-top: -7px;
-  right: -14px;
-  cursor: e-resize;
-}
-
-.my-handle-class-bl {
-  bottom: -14px;
-  left: -14px;
-  cursor: sw-resize;
-}
-
-.my-handle-class-bm {
-  bottom: -14px;
-  left: 50%;
-  margin-left: -7px;
-  cursor: s-resize;
-}
-
-.my-handle-class-br {
-  bottom: -14px;
-  right: -14px;
-  cursor: se-resize;
-}
-
-.my-handle-class-tl:hover,
-.my-handle-class-tr:hover,
-.my-handle-class-bl:hover,
-.my-handle-class-br:hover {
-    background-color: red;
-    transform: scale(1.4);
-}
-</style>
-~~~
+<style >
+</style>```
