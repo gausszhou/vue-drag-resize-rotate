@@ -1,7 +1,7 @@
 {
   "name": "@gausszhou/vue-drag-resize-rotate",
   "version": "2.0.14",
-  "description": "A Component for Vue.js",
+  "description": "A Component for Vue.js 2.0",
   "author": "gausszhou <gausszhou@qq.com>",
   "main": "lib/bundle.js",
   "export": "lib/bundle.js",
@@ -30,6 +30,7 @@
     "build": "node prebuild.js && vue-cli-service build",
     "build:lib": "webpack --config=webpack.lib.js",
     "format": "prettier --write src/**/*.{vue,js}",
+    "lint": "vue-cli-service lint",
     "test": "jest"
   },
   "dependencies": {},
