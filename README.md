@@ -3,7 +3,7 @@
 [![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE) [![Npm Package](https://img.shields.io/npm/v/@gausszhou/vue-drag-resize-rotate.svg)](https://www.npmjs.com/package/@gausszhou/vue-drag-resize-rotate)
 
 <p align='center'>
-简体中文 | <a href="https://github.com/gausszhou/vue-drag-resize-rotate/blob/main/README.en.md">English</a>
+简体中文 | <a href="https://github.com/gausszhou/vue-drag-resize-rotate/blob/master/README.en.md">English</a>
 </p>
 
 ## 友情提示
