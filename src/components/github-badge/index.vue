@@ -1,6 +1,6 @@
 <template>
-  <div class="github">
-    <a :href="url">Github</a>
+  <div class="github-badge">
+    <a :href="url" :target="target">Github</a>
   </div>
 </template>
 
@@ -9,14 +9,18 @@ export default {
   props: {
     url: {
       type: String,
-      default: "https://github.com/gausszhou/"
+      default: ""
+    },
+    target: {
+      type: String,
+      default: "__blank"
     }
   }
 };
 </script>
 
 <style scoped>
-.github {
+.github-badge {
   position: fixed;
   right: 0;
   bottom: 0;
@@ -26,7 +30,7 @@ export default {
   background-image: linear-gradient(135deg, transparent 0%, transparent 50%, #43b984 50%, #43b984 100%);
 }
 
-.github a {
+.github-badge a {
   font-size: 16px;
   margin-left: 36px;
   margin-top: 36px;
@@ -36,10 +40,10 @@ export default {
   color: black;
 }
 
-.github:hover {
+.github-badge:hover {
   background-image: linear-gradient(135deg, transparent 0%, transparent 50%, #34445c 50%, #34445c 100%);
 }
-.github:hover a {
+.github-badge:hover a {
   color: #fff;
 }
 </style>

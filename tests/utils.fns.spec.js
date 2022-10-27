@@ -1,14 +1,14 @@
 // 编写单元测试
-import { expect } from "chai";
+import {describe,it, test, expect } from "vitest";
 import {
   isFunction,
   snapToGrid,
   restrictToBounds,
   rotatedPoint
-} from "../../src/components/vue-drag-resize-rotate/utils/fns";
+} from "../src/components/vue-drag-resize-rotate/utils/fns";
 
 describe("fns", function() {
-  describe("isFunction", function() {
+  describe("fns isFunction", function() {
     it("isFunction，只有在输入函数时，才返回true", function() {
       expect(isFunction(true)).to.be.false;
       expect(isFunction(null)).to.be.false;

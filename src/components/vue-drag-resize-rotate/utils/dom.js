@@ -31,6 +31,7 @@ export function getComputedSize($el) {
   const style = window.getComputedStyle($el);
   return [parseFloat(style.getPropertyValue("width"), 10), parseFloat(style.getPropertyValue("height"), 10)];
 }
+
 // 添加事件
 export function addEvent(el, event, handler) {
   if (!el) {

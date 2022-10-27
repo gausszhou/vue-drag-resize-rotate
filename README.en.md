@@ -3,19 +3,19 @@
 [![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE) [![Npm Package](https://img.shields.io/npm/v/@gausszhou/vue-drag-resize-rotate.svg)](https://www.npmjs.com/package/@gausszhou/vue-drag-resize-rotate)
 
 <p align='center'>
-简体中文 | <a href="https://github.com/gausszhou/vue-drag-resize-rotate/blob/main/README.en.md">English</a>
+<a href="https://github.com/gausszhou/vue-drag-resize-rotate/blob/main/README.md">简体中文</a> | English
 </p>
 
-## 友情提示
+## Tips
 
-> 同时拖动的元素达到50+以上业务的请绕道
+> Please detour if the elements dragged at the same time reach more than 50+ businesses
 
 
-## 在线演示
+## Online demo
 
-[中文在线演示地址](https://gausszhou.github.io/vue-drag-resize-rotate)
+[Chinese online demo address](https://gausszhou.github.io/vue-drag-resize-rotate)
 
-## 快速上手
+## Getting started
 
 ```bash
 npm install  @gausszhou/vue-drag-resize-rotate
@@ -37,7 +37,7 @@ npm install  @gausszhou/vue-drag-resize-rotate
       @rotating="rotating"
       :r="0"
     >
-    {{angle}}
+    {{ angle }}
     </vue-drag-resize-rotate>
   </div>
 </template>
@@ -66,23 +66,23 @@ export default {
 </script>
 ```
 
-## 代办事项
+## Todo list
  
-- [x] 修复部分正则判断问题和容器大小的1px误差问题
-- [x] 整合自动对齐功能
-- [x] 整合并重构旋转功能
-  - [x] 实现旋转，旋转时可拉伸大小，且对顶点不动
-  - [x] 旋转式手柄样式跟随角度变化
-- [x] 修复纵横比
-  - [x] 允许外部传入纵横比
-- [x] 修复放缩 
-- [ ] 重构代码
-  - [ ] 抽离逻辑
-  - [ ] 优化性能
+- [x] Fixed some regular judgment problems and 1px error of container size
+- [x] Integrate auto-align function
+- [x] Integrate and refactor rotation function
+   - [x] realizes rotation, can stretch the size when rotating, and does not move to the vertex
+   - [x] Rotary handle style follows angle changes
+- [x] fix aspect ratio
+   - [x] allow external incoming aspect ratio
+- [x] fix zoom
+- [ ] rebuild code
+   - [ ] Extract logic
+   - [ ] Optimized performance
 
-> 提示: 开启旋转后 网格对齐和父容器限制将失效，待重构代码，会有 Breaking Change！！！
+> Tip: After turning on the rotation, the grid alignment and parent container restrictions will be invalid, and there will be Breaking Changes to be refactored! ! !
 
-## 参考资料
+## References
 
 ```shell
 https://github.com/mauricius/vue-draggable-resizable

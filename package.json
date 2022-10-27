@@ -27,11 +27,11 @@
   "homepage": "https://github.com/gausszhou/vue-drag-resize-rotate#readme",
   "scripts": {
     "dev": "node prebuild.js && vue-cli-service serve",
+    "test": "vitest run --coverage",
     "build": "node prebuild.js && vue-cli-service build",
-    "build:umd": "webpack --config=webpack.config.js",
-    "format": "prettier --write src/**/*.{vue,js}",
+    "build:lib": "webpack --config=webpack.config.js",
     "lint": "vue-cli-service lint",
-    "test": "jest"
+    "format": "prettier --write src/**/*.{vue,js}"
   },
   "dependencies": {},
   "peerDependencies": {
@@ -39,6 +39,7 @@
   },
   "devDependencies": {
     "@babel/core": "^7.14.6",
+    "@vitest/coverage-istanbul": "^0.24.3",
     "@vue/cli-plugin-babel": "~4.5.0",
     "@vue/cli-plugin-eslint": "^3.11.0",
     "@vue/cli-service": "^4.3.1",
@@ -61,6 +62,7 @@
     "sass-loader": "^8.0.2",
     "style-loader": "^2.0.0",
     "uglifyjs-webpack-plugin": "^2.2.0",
+    "vitest": "^0.24.3",
     "vue": "^2.6.11",
     "vue-router": "^3.5.1",
     "vue-template-compiler": "^2.6.11",
@@ -75,5 +77,11 @@
     "> 1%",
     "last 2 versions",
     "not dead"
-  ]
+  ],
+  "babel" : {
+    "presets": [
+      "@vue/cli-plugin-babel/preset"
+    ]
+  }
+  
 }

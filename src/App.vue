@@ -32,7 +32,7 @@ import MarkdownIt from "markdown-it";
 import hljs from "highlight.js";
 import "highlight.js/styles/github.css";
 import GithubBadge from "@/components/github-badge";
-import menuData from "./menu.js";
+import menuData from "./data/menu.js";
 
 export default {
   name: "app",

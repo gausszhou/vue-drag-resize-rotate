@@ -1,8 +1,9 @@
 node_modules/
+public/markdown/
 dist/
 lib/
-public/markdown/
 
+package-lock.json
 # macos hidden files
 .DS_Store
 
