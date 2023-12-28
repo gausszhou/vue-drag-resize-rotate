@@ -1,6 +1,6 @@
 {
   "name": "@gausszhou/vue-drag-resize-rotate",
-  "version": "2.0.14",
+  "version": "2.0.15",
   "description": "A Component for Vue.js 2.0",
   "author": "gausszhou <gausszhou@qq.com>",
   "main": "lib/bundle.umd.js",
