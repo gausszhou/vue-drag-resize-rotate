@@ -33,7 +33,6 @@
     "lint": "vue-cli-service lint",
     "format": "prettier --write src/**/*.{vue,js}"
   },
-  "dependencies": {},
   "peerDependencies": {
     "vue": "^2.6.11"
   },
@@ -55,10 +54,11 @@
     "eslint-plugin-vue": "^7.15.1",
     "fs-extra": "^10.1.0",
     "glob": "^8.0.3",
+    "highlight.js": "^11.11.1",
     "jest": "^27.3.1",
     "markdown-it": "^12.0.4",
-    "node-sass": "^4.14.1",
     "prettier": "^2.7.1",
+    "sass": "^1.89.0",
     "sass-loader": "^8.0.2",
     "style-loader": "^2.0.0",
     "uglifyjs-webpack-plugin": "^2.2.0",
@@ -78,10 +78,9 @@
     "last 2 versions",
     "not dead"
   ],
-  "babel" : {
+  "babel": {
     "presets": [
       "@vue/cli-plugin-babel/preset"
     ]
   }
-  
 }
